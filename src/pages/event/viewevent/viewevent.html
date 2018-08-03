@@ -1,0 +1,121 @@
+
+<ion-header >
+
+    <ion-navbar color= "navbar">
+      <ion-title>        
+         <!-- <span class="title"> {{(dataArtikel?.title | slice:0:33) + (dataArtikel?.title.length > 30 ? '...' : '')}}</span>  -->
+        <span class="firstline">Event</span> 
+        </ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content> 
+    <div padding>
+      <h2 text-justify text-wrap>
+          <a class="title">{{dataEvent?.title}}</a>         
+      </h2>
+      <h6 text-justify text-wrap>
+          <a class="date">by {{dataEvent?.user}}, {{dataEvent?.created_at | date: "dd MMM yyyy"}}</a>    
+      </h6>
+      
+    </div>  
+    <div>
+        <ion-slides pager>
+            <ion-slide class="text-center slider-item" [ngStyle]="{'background-image': 'url(' + BASE_URL+dataEvent?.picture +')'}">        
+            <div class="slide-text">              
+            </div>
+          </ion-slide>
+        </ion-slides>
+    </div>
+    <div>
+        <ion-card class ="full-card">
+            <ion-grid padding-left>
+                <ion-row>                                        
+                   <h2 ion-text color="navbar"> <b>Lokasi Event</b></h2>
+                </ion-row>
+                <ion-row>  
+                    <h5 class="">{{dataEvent?.lokasi}}</h5>                                                     
+                </ion-row>
+                <ion-row>  
+                    <h5 class="">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</h5>                                                     
+                </ion-row>
+              </ion-grid>                 
+        </ion-card>
+    </div> 
+    <div>
+        <ion-card class ="full-card">
+            <ion-grid padding-left>
+                <ion-row>                                        
+                   <h2 ion-text color="navbar"> <b>Tanggal pelaksanaan</b></h2>
+                </ion-row>
+                <ion-row>
+                    <h5 class="">{{dataEvent?.tanggalpelaksanaan| date: "EEE, dd MMM yyyy pukul HH:mm "}}</h5>                                                     
+                </ion-row>
+              </ion-grid>                 
+        </ion-card>
+    </div> 
+    <div>
+      
+     <ion-card class="full-card-isi">
+          <p padding text-justify [innerHTML]="dataEvent?.description"></p>
+          <div class="center" text-center *ngIf="dataEvent?.link">
+              <button class="centerbutton" (click)="openWebView(dataEvent?.link)" ion-button text-center>
+                  <ion-icon padding-right name="ios-link" ></ion-icon>
+                  Link Pendaftaran
+                </button> 
+          </div>
+                    
+     </ion-card>
+    
+    </div>    
+    <div>
+      <ion-card class="full-card">
+          <ion-toolbar *ngIf="userLoggedIn == true" >        
+              <ion-input (input)="onInput($event)"  placeholder="Tulis Komentar Anda"></ion-input>     
+              <ion-buttons end>
+                  <button ion-button icon-only (click)="addComment()">
+                    <ion-icon name="add"></ion-icon>
+                  </button>
+              </ion-buttons>
+        </ion-toolbar>
+        <ion-toolbar *ngIf="userLoggedIn == false">        
+            <ion-input (input)="onInput($event)"  placeholder="Harus Login Terlebih Dahulu" disabled></ion-input>     
+            <ion-buttons end>
+                <button ion-button icon-only (click)="addComment()">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+            </ion-buttons>
+      </ion-toolbar>
+      </ion-card>
+    </div>
+    <div>
+        <ion-item class="full-card-commentcard">
+            <ion-col class="jumlah">
+                <span ion-text color="primary"><strong>Comments</strong></span>                                         
+            </ion-col> 
+            <div class="full-card-commentcard" *ngFor="let data of dataComments">                         
+                    <ion-row class="nopaddingleft">             
+                        <ion-item>
+                            <ion-avatar item-start>
+                              <img *ngIf="data?.dataUser?.photo" src="{{BASE_URL+data?.dataUser?.photo}}">
+                              <img *ngIf="!data?.dataUser?.photo" src="assets/imgs/logo/usericon.png">
+                            </ion-avatar>                                             
+                           <ion-row>      
+                                  <h5 class="wisatawan"><b>Wisatawan</b></h5>             
+                                  <h5 class="paddingleftword"><b>{{(data?.dataUser?.nama.length>25)? (data?.dataUser?.nama | slice:0:25)+'..':(data?.dataUser?.nama) }}</b></h5>
+                            </ion-row>                  
+                             <ion-row>
+                                  <h6>{{data?.isi_comment}}</h6>                                    
+                                </ion-row>
+                              <ion-row>
+                                  <a class="tanggal">{{data?.created_date | date: "dd MMMM yyyy, HH:mm"}}</a>                  
+                              </ion-row>
+                          </ion-item>                                        
+                    </ion-row>                      
+            </div>    
+        </ion-item>
+    </div>
+    
+  </ion-content>
+  

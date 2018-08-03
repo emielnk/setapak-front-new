@@ -1,0 +1,142 @@
+
+<ion-header >
+    <ion-navbar color= "navbar">
+        <ion-title>
+            <span class="twoline">Review Pesanan</span>
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+
+<ion-content>
+  <div padding-bottom>
+      <ion-card class ="full-card-textreview">
+          <h3 ion-text color="text-green">Silahkan review detail pemesanan anda sebelum proses pembayaran</h3>                 
+      </ion-card>
+      <ion-card class ="full-card-homenamecard">
+          <ion-grid>           
+              <ion-row >             
+                  <ion-item>
+                      <ion-avatar item-start>
+                        <img src="{{BASE_URL+datahomestay?.mainphoto}}" class="avatarhomestay">
+                      </ion-avatar>
+                      <h6><b color="primary">{{datahomestay?.nama_homestay}}</b></h6> 
+                      <a class ="alamat">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                
+                    </ion-item>                                        
+              </ion-row>
+            </ion-grid>                  
+      </ion-card>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid>           
+              <ion-row>
+                  <ion-col>
+                    <a class ="smallfont" color="primary">Check In</a>
+                  </ion-col>
+                  <ion-col>
+                    <a class ="smallfont" color="primary">Check Out</a>
+                  </ion-col>
+                  <ion-col>
+                    <a class ="smallfont" color="primary">Duration</a>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <a class="textfont">{{checkin | date: "dd MMM yyyy"}}</a>  
+                    </ion-col>
+                    <ion-col>
+                        <a class="textfont">{{checkout | date: "dd MMM yyyy"}}</a>
+                    </ion-col>
+                    <ion-col >
+                      <a class="textfont">{{diffdays}} night(s)</a>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                      <ion-col>
+                            <a class="textfont">{{checkin| date: "EEE,"}} 13:00</a>
+                        </ion-col>
+                      <ion-col>
+                            <a class="textfont">{{checkout| date: "EEE,"}} 12:00</a>
+                      </ion-col>
+                      <ion-col>                      
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <a class ="smallfont" color="primary">Notes</a>
+                        </ion-col>                                                        
+                    </ion-row>
+                    <ion-row class="padding-bottom-col">
+                        <ion-col>
+                            <a class="textfont">{{notes}}</a>
+                        </ion-col>                    
+                    </ion-row>
+            </ion-grid>                  
+      </ion-card>
+  </div>
+  <div padding-bottom>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid> 
+              <ion-row>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Pemesan Homestay</a>
+                    </ion-col>                  
+              </ion-row>                        
+                <ion-row>                                       
+                    <ion-col>
+                      <a class="textfont">{{user?.nama}}</a>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <a class="textfont">{{user?.nohp}}</a>
+                    </ion-col>                  
+                   </ion-row>
+            </ion-grid>                  
+      </ion-card>
+  </div>  
+  <div>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid>
+              <ion-row>
+                    <ion-col>
+                         <a class ="smallfont" color="primary">Detail Harga</a>
+                    </ion-col>                    
+              </ion-row>           
+              <ion-row>                   
+                  <ion-col>
+                    <a class ="textfont">{{datahomestay?.nama_homestay}}</a>
+                  </ion-col>
+                  <ion-col >
+                      <a float-right item-end class ="textfont">{{datahomestay?.harga_perhari | currency:'IDR ':true}}</a>
+                  </ion-col>                
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                    <a class ="textfont">Duration</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                      <a float-right item-end class ="textfont">{{diffdays}} night(s)</a>
+                  </ion-col>                
+              </ion-row>                           
+            </ion-grid>                  
+      </ion-card>
+  </div>
+  <div padding-bottom>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid>           
+              <ion-row>
+                  <ion-col>
+                    <a class ="textfont">Total</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                      <a float-right item-end class ="textfont">{{totalharga | currency:'IDR ':true}}</a>
+                  </ion-col>                
+              </ion-row>              
+            </ion-grid>                  
+      </ion-card>
+  </div>
+  <button ion-button icon-start block no-margin color="primary" class="round" (click)="orderHomestay()" tappable >
+      Order
+  </button>    
+</ion-content>

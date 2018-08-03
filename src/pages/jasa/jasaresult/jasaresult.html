@@ -1,0 +1,62 @@
+<ion-header >
+
+  <ion-navbar color= "navbar">
+    <ion-title>
+      <span class="firstline">Search Result</span>
+      <span *ngIf="namaJenis != null" class="twoline">{{namaJenis}}</span>
+      <span *ngIf="namaJenis == null" class="twoline">All Jasa</span>
+   </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let data of datajasa" (click)="jasadetail(data.jasa_id)" tappable>
+      <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
+      <img src="{{BASE_URL+data?.mainphoto}}" />
+      <ion-card-content>
+          <h2 >            
+            <b>{{data.nama_jasa}}</b>            
+          </h2>
+            <ion-icon *ngIf= "data?.averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+            <ion-icon><h6>({{data?.jumlahReview}})</h6></ion-icon> 
+          <h6 class = "fontblue">            
+            Rp {{data.harga_jasa}} / plan            
+          </h6>          
+          <h6>            
+            {{data?.pemandu?.nama_company}}        
+          </h6> 
+        <!-- <p>
+          {{data.deskripsi}}
+        </p> -->
+      </ion-card-content>
+      <!-- <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
+            <ion-icon name='star'></ion-icon>
+            Favorite
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" icon-left (click)="listen(card)">
+            <ion-icon name='musical-notes'></ion-icon>
+            Listen
+          </button>
+        </ion-col>
+        <ion-col text-right>
+          <button ion-button clear small color="danger" icon-left (click)="share(card)">
+            <ion-icon name='share-alt'></ion-icon>
+            Share
+          </button>
+        </ion-col>
+      </ion-row> -->
+    </ion-card>
+</ion-content>

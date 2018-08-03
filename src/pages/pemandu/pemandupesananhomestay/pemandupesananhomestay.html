@@ -1,0 +1,187 @@
+<!--
+  Generated template for the PemandupesananhomestayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+
+  <ion-navbar color="primary">
+    <ion-title>Detail Pesanan Homestay</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card class ="full-card">
+        <button ion-item (click)="getDetailHomestay()">
+          <ion-avatar item-start>
+            <img *ngIf="!detail_homestay?.mainphoto" class ="notround" src="assets/imgs/logo/usericon.png">
+          </ion-avatar>
+          <h5 class="textlisttransaksi" text-wrap><b>{{detail_homestay?.nama_homestay}}</b></h5>
+        </button>
+    </ion-card>
+    <ion-card class="full-card">
+      <ion-card-header class="nopaddingbottom">
+        <h6>Nama Pemesan</h6>
+      </ion-card-header>
+      <ion-card-content class="textfont-telp-wa">
+        {{detail_pemesan?.nama}}
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <ion-card-header class="nopaddingbottom">
+              <h6>Nomor Handphone</h6>
+            </ion-card-header>
+            <ion-card-content class="textfont-telp-wa">
+            <a href="https//:wa.me/{{detail_pemesan?.no_hp}}">{{detail_pemesan?.no_hp}}</a>
+          </ion-card-content>
+        </ion-col>
+        <ion-col class="button-wa">
+          <ion-buttons end>
+            <button ion-button color="white" clear (click)="onUpdate(updateForm)" >
+              <ion-icon name="logo-whatsapp">
+
+              </ion-icon>
+            </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>  
+    </ion-card>
+
+    &nbsp;
+  <div>
+    <ion-card class="full-card">          
+      <button ion-item >
+        <ion-avatar item-start>
+          <img *ngIf="detail_trans?.transaction_status <= 1" class ="notround" src="assets/imgs/logo/payment.png">
+          <img *ngIf="detail_trans?.transaction_status == 2" class ="notround" src="assets/imgs/logo/paymentdone.png">
+          <img *ngIf="detail_trans?.transaction_status == 3 " class ="notround" src="assets/imgs/logo/check-in.png">  
+          <img *ngIf="detail_trans?.transaction_status == 4" class ="notround" src="assets/imgs/logo/check-out.png">                      
+          <img *ngIf="detail_trans?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">          
+        </ion-avatar>                  
+        <h6 class="keterangantextlisttransaksi">Status</h6> 
+          
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 0"><b>Belum Konfirmasi Pembayaran</b></h5>
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 1"><b>Menunggu Verifikasi Pembayaran</b></h5>
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 2"><b>Pembayaran telah diverifikasi</b></h5>
+        <a text-wrap *ngIf="detail_trans?.transaction_status == 2" class="noteinfotransaksi">Menunggu Proses Pemakaian Homestay</a>                             
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Penggunaan Homestay sedang berjalan</b></h5>                   
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 4"><b>Penggunaan Homestay telah selesai</b></h5>                   
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 5"><b>Transaksi selesai</b></h5>
+      </button>         
+    </ion-card>
+
+    <ion-card class ="full-card-homenamecard-padding-left">
+        <ion-grid>           
+          <ion-row>
+            <ion-col>
+              <a class ="smallfont" color="primary">Check In</a>
+            </ion-col>
+            <ion-col>
+              <a class ="smallfont" color="primary">Check Out</a>
+            </ion-col>
+            <ion-col>
+              <a class ="smallfont" color="primary">Duration</a>
+            </ion-col>
+          </ion-row>
+            <ion-row>
+              <ion-col>
+                <a class="textfont">{{detail_trans?.check_in | date: "dd MMM yyyy"}}</a>                 
+              </ion-col>
+              <ion-col>
+                <a class="textfont">{{detail_trans?.check_out| date: "dd MMM yyyy"}}</a>
+              </ion-col>
+              <ion-col >
+                <a class="textfont">{{detail_trans?.jumlah_hari}} night(s)</a>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <a class="textfont">{{detail_trans?.check_in| date: "EEE, HH:mm"}}</a>
+              </ion-col>
+              <ion-col>
+                <a class="textfont">{{detail_trans?.check_out| date: "EEE, HH:mm"}}</a>
+              </ion-col>
+              <ion-col>                      
+              </ion-col>
+            </ion-row>
+              <ion-row>
+                <ion-col>
+                  <a class ="smallfont" color="primary">Notes</a>
+                </ion-col>                            
+              </ion-row> 
+              <ion-row>
+                <ion-col>
+                <a class ="textfont" color="primary">{{detail_trans?.noteswisatawan}}</a>
+                </ion-col>                           
+              </ion-row>
+          </ion-grid>                  
+    </ion-card>
+  </div>
+  <span></span><span></span><span></span>&nbsp;
+  
+  <div>
+    <ion-card class ="full-card-homenamecard-padding-left">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <a class ="smallfont" color="primary">Detail Harga</a>
+          </ion-col> 
+        </ion-row>           
+          <ion-row>                   
+            <ion-col>
+              <a class ="textfont">{{detail_trans?.nama_homestay}}</a>
+            </ion-col>
+            <ion-col >
+                <a float-right class ="textfont">{{detail_trans?.harga_perhari | currency:'IDR ':true}}</a>
+            </ion-col>                
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <a class ="textfont">Duration</a>
+            </ion-col>
+            <ion-col align-self-end>
+                <a float-right class ="textfont">{{detail_trans?.jumlah_hari}} night(s)</a>
+            </ion-col>                
+          </ion-row>                           
+        </ion-grid>                  
+    </ion-card>
+  </div>
+  <div>
+    <ion-card class ="full-card-homenamecard-padding-left">
+        <ion-grid>           
+            <ion-row>
+                <ion-col>
+                  <a class ="textfont">Total</a>
+                </ion-col>
+                <ion-col align-self-end>
+                    <a float-right class ="textfont">{{detail_trans?.total_harga | currency:'IDR ':true}}</a>
+                </ion-col>                
+            </ion-row>              
+          </ion-grid>                  
+    </ion-card>
+  </div>
+  <div padding>
+    <button *ngIf="detail_trans?.transaction_status < 2" disabled="true" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
+        Menunggu Pembayaran
+    </button>
+    <button *ngIf="detail_trans?.transaction_status == 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
+        Terima Pesanan
+    </button>
+    <button *ngIf="detail_trans?.transaction_status <= 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
+        Tolak Pesanan
+    </button>
+    <button *ngIf="detail_trans?.transaction_status == 4" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="konfirmasiTransaksi(dataTransaksi?.transaction_id)" tappable >
+        Konfirmasi Transaksi Selesai
+    </button>
+    <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Homestay Dalam Penggunaan</b></h5>
+    <button *ngIf="detail_trans?.transaction_status >= 4" disabled="true" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
+        Batalkan Transaksi
+    </button>   
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+page-commentproduk {
+    .avatarhomestay{        
+        border-radius: 15% !important;
+    }
+
+    .full-card-homenamecard {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+    }
+    .full-card-commentcard {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: #f1f2f6 !important;
+        border-radius: 0px !important;
+        border-bottom: 2px solid #f1f2f6;
+    }
+
+    .colorbackground{
+        background-color: #f1f2f6 !important;
+    }
+
+    .pemandu{
+        font-size: 13px;
+        background-color:#07c23f !important;
+        color: white !important;
+    }
+    .wisatawan{
+        font-size: 13px;
+        background-color: #488aff !important;
+        color: white !important;
+    }
+    .tanggal{
+        font-size: 13px;
+        color: #9c9c9a;
+    }
+    .paddingleftword{
+        padding-left: 4px;
+    }
+    
+}

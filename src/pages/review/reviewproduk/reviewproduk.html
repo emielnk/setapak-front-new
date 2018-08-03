@@ -1,0 +1,87 @@
+<!--
+  Generated template for the ReviewprodukPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+    <ion-navbar color= "navbar">
+        <ion-title>
+            <span class="firstline">Ulasan {{nama}}</span>
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+
+<ion-content>
+    <div padding-bottom>
+        <ion-card class ="full-card" >
+            <ion-grid>
+                <ion-row> 
+                    <ion-col text-center >
+                        <a class="averagefont" ><b>{{averageReview}}</b></a>
+                        <a class="averagefive" ><b> / 5</b></a>                     
+                    </ion-col>                                                             
+                </ion-row>
+              <ion-row> 
+                <ion-col text-center >
+                    <ion-icon *ngIf= "averageReview >= 1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >= 2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >= 3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview >= 4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                    <ion-icon *ngIf= "averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>                   
+                </ion-col>                                                                    
+              </ion-row>              
+              <ion-row> 
+                <ion-col text-center >
+                    <a class="jumlahreview" ><b>{{jumlahReview}} Review</b></a>                   
+                </ion-col>                                                                                    
+              </ion-row>
+            </ion-grid>                     
+              
+      </ion-card>
+    </div>
+    
+    <ion-item class="full-card-commentcard">
+            <ion-col >
+                <span class="fontsemuareview" ion-text color="primary"><strong>Semua Review</strong></span>                                         
+            </ion-col>
+            <div padding-top>
+                    <div class="full-card-commentcard" *ngFor="let data of dataReview">                         
+                            <ion-row class="nopaddingleft">             
+                                <ion-item>
+                                    <ion-row>                                        
+                                            <ion-icon *ngIf= "data?.jumlah_star >= 1" class ="reviewlogo" name="star" color="bright"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star >= 2" class ="reviewlogo" name="star" color="bright"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star >= 3" class ="reviewlogo" name="star" color="bright"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star >= 4" class ="reviewlogo" name="star" color="bright"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star == 5"class ="reviewlogo" name="star" color="bright"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star < 1" class ="reviewlogo" name="star" color="darkgrey"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star < 2" class ="reviewlogo" name="star" color="darkgrey"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star < 3" class ="reviewlogo" name="star" color="darkgrey"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star < 4" class ="reviewlogo" name="star" color="darkgrey"></ion-icon>
+                                            <ion-icon *ngIf= "data?.jumlah_star < 5" class ="reviewlogo" name="star" color="darkgrey"></ion-icon>                                                                                 
+                                    </ion-row>                                            
+                                    <ion-row>      
+                                            <h5>Oleh</h5>             
+                                            <h5 class="paddingleftword"><b>{{(data?.nama_user.length>25)? (data?.nama_user | slice:0:25)+'..':(data?.nama_user) }}</b></h5>
+                                    </ion-row>                  
+                                        <ion-row>
+                                            <h6>{{(data?.isi_review.length>30)? (data?.isi_review | slice:0:30)+'..':(data?.isi_review) }}</h6>  
+                                        </ion-row>
+                                        <ion-row>
+                                            <a class="tanggal">{{data?.created_at | date: "dd MMMM yyyy, HH:mm"}}</a>                  
+                                        </ion-row>
+                                    </ion-item>                                        
+                            </ion-row>                      
+                    </div> 
+            </div>
+                 
+        </ion-item>
+    
+</ion-content>

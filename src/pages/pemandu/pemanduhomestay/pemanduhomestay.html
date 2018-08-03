@@ -1,0 +1,109 @@
+<!--
+  Generated template for the PemanduhomestayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Setapak Bogor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Buat Homestay Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #newHomestay="ngForm">
+          <ion-list no-lines padding-right>
+              <ion-item>
+                <ion-label stacked color="primary">Nama Homestay</ion-label>
+                <ion-input placeholder="Wisma Asyik" name="nama" type="text" required>
+                </ion-input>
+              </ion-item>
+
+              <ion-item> 
+                <ion-label stacked color="primary">Pilih Wilayah</ion-label>
+                <ion-select  name="kecamatan" placeholder="Hoemstay Region" required  >
+                  <ion-option value="a">Kec 1</ion-option>
+                  <ion-option value="b">Kec 2</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item> 
+                <ion-label stacked color="primary">Harga perhari</ion-label>
+                <ion-input placeholder="Price" name="price" type="number" required></ion-input>
+              </ion-item>
+              
+              <ion-grid>
+                  <ion-label stacked color="primary">Fasilitas</ion-label>
+                  <ion-row>
+                    <ion-col col-3>
+                      <ion-label>AC</ion-label>
+                      <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-label>Wifi</ion-label>
+                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                      </ion-col >
+                      <ion-col col-6>
+                          <ion-label>Parkir Mobil</ion-label>
+                          <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                      </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                      <ion-col col-5>
+                          <ion-label>Kamar Mandi</ion-label>
+                          <ion-input type="number" max="10"></ion-input>
+                      </ion-col>
+                      <ion-col col-5>
+                          <ion-label>Kamar Tidur</ion-label>
+                          <ion-input type="number" max="10"></ion-input>
+                      </ion-col>
+                      
+                  </ion-row>
+              </ion-grid>
+
+              <ion-item> 
+                <ion-label stacked color="primary">Alamat Homestay</ion-label>
+                <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
+                </ion-textarea>
+              </ion-item>
+
+              <ion-item> 
+                <ion-label stacked color="primary">Deskripsi Homestay</ion-label>
+                  <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
+                  </ion-textarea>
+              </ion-item>
+
+              <ion-item>
+                <ion-label stacked color="primary">Apakah Langsung Diaktifkan?</ion-label>
+                <ion-toggle></ion-toggle>
+              </ion-item>
+              
+              <div class="uploadphoto">
+                <ion-label stacked color="primary">Pilih Foto</ion-label>
+                <ion-item>
+                  <p>lokasi/file/photo.jpg</p>
+                  <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+                </ion-item>
+                <ion-item>
+                  <h4>Image Preview</h4>
+                  <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+                </ion-item>
+                <ion-item>
+                  <button ion-button (click)="uploadFile()">Upload</button>
+                </ion-item>
+              </div>
+              
+          </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

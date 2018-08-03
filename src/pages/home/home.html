@@ -1,0 +1,94 @@
+<ion-header>
+    <ion-navbar color= "navbar">
+      <ion-title>
+         <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
+      </ion-title>
+    </ion-navbar>
+</ion-header> 
+
+<ion-content >
+<div>
+    <ion-slides autoplay="2500" loop="true">
+    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background' : 'url(' + slide.imageUrl + ')'}">
+    <!-- <h2 font-color="white">{{slide.title}}</h2> -->
+    </ion-slide>
+    </ion-slides>
+</div>
+
+<div>
+    <ion-card class ="full-card">               
+            <ion-grid>
+            <ion-row>
+                <ion-col>
+                        <ion-icon name="person" color ="primary"></ion-icon>
+                        <a (click) ="openmyaccount()" *ngIf="!nama" text-center >Login or Register </a> 
+                        <a (click) ="openmyaccount()" *ngIf="nama" text-center >{{nama}} </a>         
+                </ion-col>
+                <!-- <ion-col>
+                        <ion-icon name="person" color ="primary"></ion-icon>
+                        <a text-center >Point</a>
+                </ion-col> -->
+            </ion-row>
+            </ion-grid>
+    </ion-card>
+</div>
+<div text-center>   
+  <h4 text-center>Kategori</h4>
+      <ion-card m-ripple-effect tappable (click)="navigateToSearchHomestay()" class="categories-card">
+        <div class="button-effect"></div>             
+          <ion-row>                
+              <ion-col text-center >
+                  <img class ="center" src="assets/imgs/logo/home-icon-silhouette.png"  />
+                  <a><b>Homestay</b></a>
+               </ion-col>            
+          </ion-row>                 
+      </ion-card>
+      <ion-card  tappable (click)="navigateToSearchProduk()" class="categories-card">        
+          <ion-row >
+              <ion-col text-center>
+                  <img class ="center" src="assets/imgs/logo/box.png"  />                  
+                  <a><b>Produk</b></a>
+               </ion-col>               
+          </ion-row>
+      </ion-card>
+      <ion-card tappable (click)="navigateToSearchJasa()" class="categories-card">        
+          <ion-row >
+              <ion-col text-center>
+                  <img class ="center" src="assets/imgs/logo/conversation.png"  />
+                  <a><b>Jasa</b></a>
+               </ion-col>               
+          </ion-row>
+      </ion-card>      
+</div>
+<h4 text-center>Artikel</h4>
+<ion-scroll scrollX style="min-height:120px !important;">
+                <ion-card *ngFor="let data of (dataArtikel ? dataArtikel.slice(0,4): []); let i = index" class="myCard" (click)="viewArtikel(data?.id)">
+                        <img class="image-full" src="{{BASE_URL+data?.picture}}"/>
+                        <div class="myOverlay">
+                                <div class="card-title">{{data?.title}}</div>
+                        </div>
+                </ion-card>
+                <ion-card class="myCard" (click)="viewAllArtikel()">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-4.jpg"/>
+                        <div class="myOverlaySeeMore">                                        
+                                <div class="text-card-title">See More Artikel</div>
+                        </div>
+                </ion-card>                
+</ion-scroll>
+<h4 text-center>Event</h4>
+<ion-scroll scrollX style="min-height:120px !important;">
+                <ion-card *ngFor="let data of (dataEvent ? dataEvent.slice(0,4): []); let i = index" class="myCard" (click)="viewEvent(data?.id)">
+                                <img class="image-full" src="{{BASE_URL+data?.picture}}"/>
+                                <div class="myOverlay">
+                                        <div class="card-title">{{data?.title}}</div>
+                                </div>
+                </ion-card>
+                <ion-card class="myCard" (click)="viewAllEvent()">
+                        <img class="image-full" src="assets/imgs/images/Wisata-Bogor-4.jpg"/>
+                        <div class="myOverlaySeeMore">                                        
+                                <div class="text-card-title">See More Event</div>
+                        </div>
+                </ion-card>  
+</ion-scroll>
+      
+ </ion-content>

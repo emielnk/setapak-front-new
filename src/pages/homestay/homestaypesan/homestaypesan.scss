@@ -1,0 +1,49 @@
+page-homestaypesan {
+    .twoline {        
+        display: block;
+        line-height: .7em;
+        font-size: 18px;
+        margin: 5px 0;
+      }
+    .avatarhomestay{        
+        border-radius: 15% !important;
+    }
+    .full-card {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+    }
+    .full-card-homenamecard {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6
+    }
+    .full-card-info {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: #b7d0ff;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+    }
+    h5,h6{
+        color: #488aff;
+    }
+
+    .smallfont {      
+        font-size: 13px;
+    }
+    .labelfont {      
+        font-size: 1.6rem;
+        color: #488aff !important;
+        padding-left:6px;
+    }
+    .alamat{
+        font-size: 13px;
+        color:grey !important;
+    }
+}

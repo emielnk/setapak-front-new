@@ -1,0 +1,77 @@
+page-transaksijasa {
+    .firstline {        
+        display: block;
+        line-height: .7em;
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .full-card {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 1px solid #f1f2f6;
+    }
+    .full-card-homenamecard {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+    }
+    .full-card-homenamecard-padding-left{
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+        padding-left:11px !important;
+    }
+
+    .iconbutton{
+        padding-left:10px;
+        font-size:3.5rem;
+    }
+    .textlisttransaksi{
+        font-size: 15px;
+        color: #488aff;
+    }
+    .smallfont {      
+        font-size: 12px;
+    }
+    .avatarhomestay {
+        border-radius:15% !important;
+    }
+    .buttontransaksi{
+        margin :7.5px 0 !important;
+    }
+    .samebackground{
+        background-color: #f1f2f6;
+        color:black !important;
+    }
+    .notround{
+        border-radius: 0% !important;
+      }
+      .textfont {      
+        font-size: 13px;
+        color: black !important;
+    }
+    .alamat{
+        font-size: 13px;
+        color:grey !important;
+    }
+    .noteinfotransaksi {        
+        display: block;
+        line-height: 1em;
+        font-size: 13px;
+        margin: 7px 0;
+        color: #9c9c9a;
+    }
+    .padding1px{
+        margin-top:  !important;
+        }
+}

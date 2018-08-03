@@ -1,0 +1,50 @@
+page-produkpesan {
+    .full-card-homenamecard {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+    }
+
+    .firstline {        
+        display: block;
+        line-height: .7em;
+        font-size: 18px;
+        margin: 5px 0;
+    }
+    .twoline {        
+        display: block;
+        line-height: .7em;
+        font-size: 13px;
+        margin: 5px 0;
+    }
+    .smallfont {      
+        font-size: 13px;
+    }
+
+    .jumlah {
+        padding-left: 16px;  
+    }
+
+    .padding-left {
+        padding-left: 16px;
+        
+    }
+
+    .labelfont {      
+        font-size: 1.6rem;
+        color: #488aff !important;
+        padding-left:6px;
+    }
+   
+    .textfont{
+        color: black !important;
+    }
+    .alamat{
+        font-size: 13px;
+        color:grey !important;
+    }
+}
+

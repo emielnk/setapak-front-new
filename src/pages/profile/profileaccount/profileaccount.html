@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar color= "navbar">
+    <ion-title>
+       <img alt="logo" height="30px"   src="assets/imgs/logoSetapakBogor.png" >
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>     
+    <div class="headerprofile">       
+          <ion-row justify-content-center align-items-center>
+              <ion-avatar item-start (click)="updateProfileImage()">
+                <img class="profpic" src="assets/imgs/logo/usericon.png" *ngIf="!urlprofpict">
+                <img class="profpic" src="{{BASE_URL+urlprofpict}}" *ngIf="urlprofpict">
+              </ion-avatar>
+          </ion-row>
+          <ion-row justify-content-center align-items-center>
+              <h5 class="namaprofile">{{nama}}</h5>
+          </ion-row>      
+    </div>
+  <div padding-bottom>
+      <ion-card class="full-card">
+          <ion-card-header class="nopaddingbottom">
+            <h6>Email</h6>
+          </ion-card-header>
+          <ion-card-content class="nopaddingbottom">
+            {{email}}
+          </ion-card-content>
+
+          <ion-card-header class="nopaddingbottom">
+          <h6>Nomor Handphone</h6>
+          </ion-card-header>
+          <ion-card-content class="nopaddingbottom">
+            {{nohp}}
+          </ion-card-content>
+          <button class="buttoncenter" ion-item (click)="editProfile()" >
+            <h6><b>EDIT PROFILE</b></h6>
+          </button>         
+      </ion-card>
+  </div>
+
+<div padding-bottom>
+      <ion-card class="full-card">          
+          <button  ion-item (click)="navChangePassword()" >
+            <ion-icon color= "navbar" name="md-lock" item-left></ion-icon>
+            <h5><b>Change Password</b></h5>
+            <ion-icon color= "navbar" name="ios-arrow-forward-outline" item-right></ion-icon>
+          </button>         
+      </ion-card>
+</div>
+
+<div padding-bottom>
+    <ion-card class="full-card">          
+        <button  ion-item (click)="logout()" >
+          <ion-icon color= "navbar" name="power" item-left></ion-icon>
+          <h5><b>Logout</b></h5>
+          <ion-icon color= "navbar" name="ios-arrow-forward-outline" item-right></ion-icon>
+        </button>         
+    </ion-card>
+</div>
+
+
+
+  
+  <!-- <button ion-button (click) = "loadToken()">
+    Check Token
+  </button>
+  <button ion-button (click) = "loadUserData()">
+      Check User Data
+    </button>
+  <button ion-button (click) = "loadLoggedIn()">
+    Check Logged in
+  </button>
+  <button ion-button (click) = "logout()">
+    LogOut
+  </button>  -->
+</ion-content>

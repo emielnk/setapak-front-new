@@ -1,0 +1,71 @@
+<!--
+  Generated template for the PemanduregisPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Tour Guide Registration</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      Tour Guide Registration
+    </ion-card-header>
+    <ion-card-content>
+      <form #regisPemandu="ngForm" novalidate>
+          <ion-list no-lines padding-right>
+              <ion-item>
+                <ion-label stacked color="primary">Nama Jasa Wisata Anda</ion-label>
+                <ion-input [(ngModel)]="pemandu.namacompany"placeholder="ex: Setapaktour.id" name="namacompany" type="text"  required>
+                </ion-input>
+              </ion-item>
+              <ion-item> 
+                <ion-label stacked color="primary">Alamat Anda</ion-label>
+                  <ion-input [(ngModel)]="pemandu.alamat" placeholder="con. Jl. raya Dramaga" name="alamat" type="text"  required>
+                  </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label stacked color="primary">Pilih Kecamatan</ion-label>
+                <ion-select   name="kecamatan" placeholder="Your locations" required  >
+                  <ion-option value="a">Kec 1</ion-option>
+                  <ion-option value="b">Kec 2</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item> 
+                <ion-label stacked color="primary">Deskripsi Jasa Anda</ion-label>
+                  <ion-input  [(ngModel)]="pemandu.deskripsi" placeholder="be a number one touring service" name="deskripsi" type="text" required>
+                  </ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Langsung Aktif?</ion-label>
+                  <ion-checkbox name="active_status" color="black" checked="false"></ion-checkbox>
+              </ion-item>
+              <!-- <div class="uploadphoto">
+                <ion-label stacked color="primary">Pilih Foto</ion-label>
+                <ion-item>
+                  <p>lokasi/file/photo.jpg</p>
+                  <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+                </ion-item>
+                <ion-item>
+                  <h4>Image Preview</h4>
+                  <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+                </ion-item>
+                <ion-item>
+                  <button ion-button (click)="uploadFile()">Upload</button>
+                </ion-item>
+              </div> -->
+          </ion-list>
+          <div padding>
+            <button ion-button type="submit" (click)="registPemandu(regisPemandu)" block>Daftarkan</button>
+          </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

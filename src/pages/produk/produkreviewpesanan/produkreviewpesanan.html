@@ -1,0 +1,144 @@
+
+<ion-header >
+    <ion-navbar color= "navbar">
+        <ion-title>
+            <span class="firstline">Review Pesanan</span>
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+
+<ion-content>
+  <div padding-bottom>
+      <ion-card class ="full-card-textreview">
+          <h3 ion-text color="text-green">Silahkan review detail pemesanan anda sebelum proses pembayaran</h3>                 
+      </ion-card>
+      <ion-card class ="full-card-homenamecard">
+          <ion-grid>           
+              <ion-row >             
+                  <ion-item>
+                      <ion-avatar item-start>
+                        <img src="{{BASE_URL+dataBarang?.mainphoto}}" class="avatarhomestay">
+                      </ion-avatar>
+                      <h6><b color="primary">{{dataBarang?.nama_barang}}</b></h6> 
+                      <a  class ="alamat" class *ngFor="let data of dataAlamatCategory" class="smallfont"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
+                    </ion-item>                                        
+              </ion-row>
+            </ion-grid>                  
+      </ion-card>
+      <ion-card class ="full-card-homenamecard-padding-left">
+           <ion-grid>           
+                <ion-row>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Penjual</a>
+                    </ion-col>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Kurir Pengiriman</a>
+                    </ion-col>                                  
+                </ion-row>
+                <ion-row class="padding-bottom-col">
+                    <ion-col>
+                        <a class="textfont">{{dataPemandu?.nama_company}}</a>
+                    </ion-col>                    
+                    <ion-col >
+                      <a class="textfont">JNE - {{tarifKode}}</a>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Alamat Pengiriman</a>
+                    </ion-col>                                                     
+                  </ion-row>
+                  <ion-row class="padding-bottom-col">
+                      <ion-col>
+                          <a class="textfont">{{alamatpengiriman}}</a>
+                      </ion-col>                             
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                        <a class ="smallfont" color="primary">Notes</a>
+                    </ion-col>                                                
+                </ion-row>
+                  <ion-row class="padding-bottom-col">
+                    <ion-col>
+                        <a class="textfont">{{notes}}</a>
+                    </ion-col>                    
+                </ion-row>
+            </ion-grid>                
+      </ion-card>
+  </div>
+  <div padding-bottom>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid> 
+              <ion-row>
+                <ion-col>
+                    <a class ="smallfont" color="primary">Pemesan Homestay</a>
+                </ion-col>         
+              </ion-row>                        
+                <ion-row>                                       
+                    <ion-col>
+                      <a class="textfont">{{user.nama}}</a>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <a class="textfont">{{user.nohp}}</a>
+                    </ion-col>                  
+                   </ion-row>
+            </ion-grid>                  
+      </ion-card>
+  </div>  
+  <div>     
+      <ion-card class ="full-card-homenamecard">
+          <ion-grid>
+              <ion-row>
+                  <ion-col class="jumlah">
+                    <a class ="smallfont" color="primary">Detail Biaya</a>
+                </ion-col>                       
+              </ion-row>
+              <ion-row>                   
+                  <ion-col padding-left>
+                    <a class ="textfont">Jumlah Unit</a>
+                  </ion-col>
+                  <ion-col >
+                      <a float-right item-end class ="textfont">{{jumlahBarang}}({{this.jumlahBarang * this.dataBarang?.berat_gram/1000}} kg)</a>
+                  </ion-col>                
+              </ion-row>           
+              <ion-row>                   
+                  <ion-col padding-left>
+                    <a class ="textfont">Total Harga Produk</a>
+                  </ion-col>
+                  <ion-col >
+                      <a float-right item-end class ="textfont">{{totalHargaProduk | currency:'IDR ':true}}</a>
+                  </ion-col>                
+              </ion-row>
+              <ion-row>
+                  <ion-col padding-left>
+                    <a class ="textfont">Biaya Kirim</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                      <a float-right item-end class ="textfont">{{totalHargaOngkir | currency:'IDR ':true}}</a>
+                  </ion-col>                
+              </ion-row>                           
+            </ion-grid>                  
+      </ion-card>
+  </div>
+  <div padding-bottom>
+      <ion-card class ="full-card-homenamecard-padding-left">
+          <ion-grid>           
+              <ion-row>
+                  <ion-col>
+                    <a class ="textfont">Total</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                      <a float-right item-end class ="textfont">{{totalHargaAkhir | currency:'IDR ':true}}</a>
+                  </ion-col>                
+              </ion-row>              
+            </ion-grid>                  
+      </ion-card>
+  </div>
+  <button ion-button icon-start block no-margin color="primary" class="round" (click)="orderBarang()" tappable >
+      Order
+  </button>    
+</ion-content>

@@ -1,0 +1,168 @@
+page-home {
+    ion-slides,
+    .swiper-container {
+      height: 25vh;      
+      width: 100% !important;
+      //box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 3px 3px rgba(0,0,0,0.24);
+    }
+    .swiper-slide {
+      background-size: cover !important;
+      background-position: center !important;
+    }
+    .swiper-pagination-bullet {
+      background-color: white;
+    }
+    // Custom Pagination Style 1
+    .custom-pagination.swiper-pagination-bullet {
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
+      font-size: 12px;
+      color: #000;
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .custom-pagination.swiper-pagination-bullet-active {
+      color: #fff;
+      background: #f52c2c;
+      transition: transform 0.3s;
+      transform: scale(1.5);
+    }
+    // Custom Pagination Style 2
+    .custom-pagination-2.swiper-pagination-bullet {
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      font-size: 12px;
+      opacity: 1;
+      line-height: 18px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid white;
+    }
+    .custom-pagination-2.swiper-pagination-bullet-active {
+      color: #fff;
+      border-color: #a0f;
+      background: transparent;
+    }
+    
+    // Icons developed by Paomedia: https://www.iconfinder.com/iconsets/small-n-flat
+    .swiper-pagination-bullet.bullet-icon-1 {
+      background: url(../assets/icon/camera.svg) no-repeat;
+    }
+    .bullet-icon-2 {
+      background: url(../assets/icon/map.svg) no-repeat;
+    }
+    .bullet-icon-3 {
+      background: url(../assets/icon/world.svg) no-repeat;
+    }
+    .bullet-icon-4 {
+      background: url(../assets/icon/heart.svg) no-repeat;
+    }
+    .categories-card {
+      position: relative; 
+      overflow: hidden;
+      border-radius: 10px;
+      width: 74px !important;
+      height: 60px !important;
+      display: inline-block;
+      margin: 7.5px !important;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+  }
+  .full-card {        
+    margin: 0px !important;    
+    width: 100% !important;
+    background-color: white;
+    border-radius: 0px !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+  }
+  .artikel-card {
+    display: flex !important;
+    border-radius: 5px;
+    width: 125px !important;
+    height: 100px !important;
+    display: inline-block;
+    margin: 7.5px !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    
+    
+  }
+  .full-image {
+    background-image : cover !important;
+  }
+
+  
+  ion-scroll[scrollX] {
+    white-space: nowrap;
+    .scroll-item {
+      display: inline-block;
+    }
+    .scroll-item-artikel{
+      display: inline-block;
+      border-radius: 5px;
+      width: 125px !important;
+      height: 100px !important;
+      margin: 7.5px !important;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+  }  
+
+  .myCard{
+    display: inline-flex;
+    position:relative;
+    border-radius: 2px;
+    width: 125px !important;
+    height: 100px !important;
+    margin: 0 0 0 7.5px !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  .image-full{
+    width:100%;
+    height:100%;
+  }
+  .myOverlay{
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    opacity: 0.5;
+    background: #000;
+    color: #fff;
+}
+.myOverlaySeeMore{
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  z-index: 99;
+  bottom: 0px;
+  opacity: 0.68;
+  background: #000;
+  color: #fff;
+  
+}
+.text-card-title{
+   text-align: center;
+   padding-top : 35%;
+   font-size: 15px;
+}
+
+.twoline {        
+  display: block;
+  line-height: .7em;
+  font-size: 18px;
+  margin: 5px 0;
+}
+.nomargintop{
+  margin-top:0 !important;
+}
+  
+  
+}

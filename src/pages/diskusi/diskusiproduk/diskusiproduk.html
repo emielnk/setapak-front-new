@@ -1,0 +1,68 @@
+<!--
+  Generated template for the DiskusiprodukPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar  color="primary">
+      <ion-title >
+        <span class="firstline">Diskusi {{tipeProduk}}</span>
+      </ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only color="white" (click)="addDiskusi()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>  
+  </ion-header>
+  
+<ion-content >  
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content></ion-refresher-content>
+        </ion-refresher> 
+    <div padding>
+        <ion-card class ="full-card" *ngFor= "let diskusi of dataDiskusi ; let i=index"  (click)="navCommentProduk(diskusi)" >           
+            <ion-grid >                
+                <ion-row>             
+                    <ion-item>
+                        <ion-avatar item-start >
+                          <img *ngIf= "diskusi?.dataUser?.photo" src="{{BASE_URL+diskusi?.dataUser?.photo}}">
+                          <img *ngIf= "!diskusi?.dataUser?.photo" src="assets/imgs/logo/usericon.png">
+                        </ion-avatar>
+                        <ion-row *ngIf = "userPemanduId == diskusi?.user_id">
+                            <ion-col class="paddingbottomzero" col-3>   
+                                <h6 class="pemandu"><b>Pemandu</b></h6>             
+                            </ion-col>
+                            <ion-col class="paddingbottomzero"  col-6>   
+                                <h5><b>{{(diskusi?.dataUser?.nama.length>14)? (diskusi?.dataUser?.nama | slice:0:14)+'..':(diskusi?.dataUser?.nama) }}</b></h5>
+                              </ion-col>                             
+                              <ion-col class="paddingbottomzero" (click)="presentPopover($event,diskusi?.diskusi_id)">   
+                                  <ion-icon *ngIf ="currentUserId == diskusi?.user_id" color="navbar" class="moreicon" name="more" ></ion-icon>
+                              </ion-col>   
+                         </ion-row> 
+                        <ion-row *ngIf = "userPemanduId != diskusi?.user_id">
+                          <ion-col class="paddingbottomzero" col-3>   
+                              <h6 class="wisatawan"><b>Wisatawan</b></h6>             
+                          </ion-col>
+                          <ion-col class="paddingbottomzero"  col-6>   
+                            <h5><b>{{(diskusi?.dataUser?.nama.length>14)? (diskusi?.dataUser?.nama | slice:0:14)+'..':(diskusi?.dataUser?.nama) }}</b></h5>
+                          </ion-col>  
+                          <ion-col class="paddingbottomzero">   
+                              <ion-icon *ngIf ="currentUserId == diskusi?.user_id"  color="navbar" class="moreicon" name="more" (click)="presentPopover($event,diskusi?.diskusi_id)"></ion-icon>
+                          </ion-col>                                                     
+                        </ion-row>                         
+                          <ion-row>
+                              <h6>{{ (diskusi?.isi_diskusi.length>30)? (diskusi?.isi_diskusi | slice:0:30)+'..':(diskusi?.isi_diskusi) }}</h6>  
+                            </ion-row>
+                          <ion-row>
+                              <a class="tanggal">{{diskusi?.created_date | date: "dd MMMM yyyy, HH:mm"}}</a>                  
+                            </ion-row>
+                      </ion-item>                                        
+                </ion-row>                
+              </ion-grid>                  
+        </ion-card> 
+                  
+    </div>
+
+</ion-content>

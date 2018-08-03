@@ -1,0 +1,160 @@
+<!--
+  Generated template for the ProdukpesanPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+    <ion-navbar color= "navbar">
+        <ion-title>
+            <span class="firstline">Pesan Produk</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <div padding-bottom>
+            <ion-card class ="full-card-homenamecard">
+                    <ion-grid>           
+                        <ion-row >             
+                            <ion-item>
+                                <ion-avatar item-start>
+                                  <img src="{{BASE_URL+databarang?.mainphoto}}" class="avatarhomestay">
+                                </ion-avatar>
+                                <h6><b color="primary">{{databarang?.nama_barang}}</b></h6> 
+                                <a *ngFor="let data of dataAlamatCategory" class="alamat" color="primary"> {{data?.kecamatan}}, {{data?.kabupaten}}, {{data?.provinsi}}</a>                
+                              </ion-item>                                        
+                        </ion-row>
+                      </ion-grid>                  
+                </ion-card>
+    </div>
+    
+<div padding-bottom>
+        <form #pesanForm="ngForm" novalidate>
+        <ion-card class ="full-card-homenamecard" padding-top>
+                <ion-grid>           
+                        <ion-row class="rowpaddingtop">
+                        <ion-col class="jumlah" width-70>
+                            <span ion-text color="primary"><strong>Jumlah</strong></span>
+                        </ion-col>
+                        <ion-col width-10 text-center>
+                            <ion-icon name="remove-circle" class="text-2x" tappable (click)="minusJumlah()" [hidden]="jumlahBarang < 2"
+                                    color="secondary"></ion-icon>
+                        </ion-col>
+                        <ion-col width-10 text-center>{{ jumlahBarang }}</ion-col>
+                        <ion-col width-10 text-center>
+                            <ion-icon name="add-circle" class="text-2x" tappable (click)="plusJumlah()" color="secondary"></ion-icon>
+                        </ion-col>
+                        </ion-row>
+                        <ion-row>
+                                <ion-item>
+                                        <ion-label stacked color="primary"></ion-label>
+                                        <ion-input [(ngModel)]="formpesan.notes" placeholder = "Notes untuk penjual" name="notes" type="text" #notes="ngModel">
+                                        </ion-input>
+                               </ion-item> 
+                        </ion-row>
+
+                       
+                  </ion-grid>                  
+            </ion-card>
+            <ion-card class ="full-card-homenamecard">
+                    <ion-grid> 
+                        <ion-row>
+                            <ion-col class="jumlah">
+                                    <span ion-text color="primary"><strong>Tujuan Pengiriman</strong></span>                                         
+                            </ion-col> 
+                        </ion-row>                      
+                        <ion-row>
+                                <ion-item>
+                                        <ion-label stacked color="primary"></ion-label>
+                                        <ion-input [(ngModel)]="formpesan.alamat" placeholder = "Alamat" name="alamat" type="text" #alamat="ngModel" required>
+                                        </ion-input>
+                                </ion-item>
+                                        <p ion-text [hidden]="alamat.valid || submitted == false" color="danger" padding-left>
+                                        Alamat harus diisi
+                                        </p>             
+                        </ion-row>
+
+                        <ion-item>
+                                <ion-label stacked color="primary">Pilih provinsi </ion-label>
+                                <ion-select [(ngModel)]="pilihProvinsi" [disabled]="!provinsi" (ionChange)="changeProvinsi(pilihProvinsi)" name="provinsi" placeholder="Pilih Provinsi" required>
+                                  <ion-option *ngFor="let data of provinsi" value="{{data.provinsi}}">{{data.provinsi}}</ion-option>
+                                </ion-select>
+                            </ion-item>      
+                        <ion-item>
+                            <ion-label stacked color="primary">Pilih kabupaten </ion-label>
+                            <ion-select [(ngModel)]="pilihKabupaten" [disabled]="!kabupaten" (ionChange)="changeKabupaten(pilihKabupaten)" name="kabupaten" placeholder="Pilih Kabupaten" required>
+                                <ion-option *ngFor="let data of kabupaten" value="{{data.kabupaten}}">{{data.kabupaten}}</ion-option>
+                            </ion-select>
+                        </ion-item>
+                        <ion-item> 
+                                <ion-label stacked color="primary">Pilih kecamatan </ion-label>
+                                <ion-select [(ngModel)]="pilihKecamatan" [disabled]="!kecamatan" (ionChange)="changeKecamatan(pilihKecamatan)" name="kecamatan" placeholder="Pilih Kecamatan" required >
+                                  <ion-option *ngFor="let data of kecamatan" value="{{data.kecamatan}}">{{data.kecamatan}}</ion-option>
+                                </ion-select>
+                        </ion-item> 
+                    </ion-grid>                  
+                
+            </ion-card>
+
+            <ion-card class ="full-card-homenamecard" padding-bottom>
+                    <ion-grid> 
+                        <ion-row>
+                            <ion-col class="jumlah">
+                                    <span ion-text color="primary"><strong>Kurir Pengiriman</strong></span>                                         
+                            </ion-col> 
+                        </ion-row>                     
+                        <ion-item>
+                                <ion-label stacked color="primary">Pilih Paket Pengiriman </ion-label>
+                                <ion-select [(ngModel)]="pilihTarif" [disabled]="!dataTarif" (ionChange)="changeHargaTarif(pilihTarif)" name="tarif" required>
+                                  <!-- <ion-option *ngFor="let data of dataTarif" value="{{data.provinsi}}">JNE - {{data.provinsi}}</ion-option> -->
+                                  <ion-option *ngIf="dataTarif?.reg != 0" value="REG">JNE-Reguler</ion-option>
+                                  <ion-option *ngIf="dataTarif?.oke != 0" value="OKE">JNE-OKE</ion-option>
+                                  <ion-option *ngIf="dataTarif?.yes != 0" value="YES">JNE-YES</ion-option>                                 
+                                </ion-select>
+                        </ion-item>                          
+                    </ion-grid>                  
+            </ion-card>
+            <div [hidden]="pesanForm.valid || submitted == false">
+                    <p ion-text [hidden]="pesanForm.valid || submitted == false" color="danger" padding-left>
+                            Silahkan lengkapi data diatas terlebih dahulu                                </p>    
+            </div>
+            <ion-card class ="full-card-homenamecard">
+                    <ion-grid>
+                        <ion-row>
+                                <ion-col class="jumlah">
+                                        <span ion-text color="primary"><strong>Detail Biaya</strong></span>                                         
+                                </ion-col> 
+                        </ion-row>           
+                        <ion-row>                   
+                            <ion-col padding-left>
+                              <a class ="textfont">Total Harga Produk</a>
+                            </ion-col>
+                            <ion-col >
+                                <a item-end class ="textfont">{{databarang?.harga * jumlahBarang | currency:'IDR ':true}}</a>
+                            </ion-col>                
+                        </ion-row>
+                        <ion-row>
+                            <ion-col padding-left>
+                              <a class ="textfont">Biaya Kirim</a>
+                            </ion-col>
+                            <ion-col align-self-end>
+                                <a item-end class ="textfont">{{hargaOngkir * totalberat | currency:'IDR ':true}}</a>
+                            </ion-col>                
+                        </ion-row>                           
+                      </ion-grid>                  
+                </ion-card>
+               
+        </form>
+</div>
+
+
+
+</ion-content>
+ 
+<ion-footer>
+        <button ion-button large full no-margin color="navbar" (click)='pesanBarang(pesanForm)'>
+          Beli Produk
+        </button>
+    </ion-footer>

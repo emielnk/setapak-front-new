@@ -1,0 +1,90 @@
+<ion-header >
+    <ion-navbar color= "navbar">
+        <ion-title>
+            <span class="firstline">Cara Pembayaran</span>
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content>
+  <ion-card class ="full-card-info" padding> 
+  <div>
+      <h2 text-wrap>
+          <a class="titlecard">SEGERA LAKUKAN PEMBAYARAN SEBELUM</a>         
+      </h2>
+      <h6 text-justify text-wrap>
+          <a class="date"><b>{{datetimeDeadline | date: "EEEE, dd MMMM yyyy, HH:mm"}}</b></a>    
+      </h6>
+  </div>      
+   <h6 text-justify text-wrap>
+          <a class="text">Transfer pembayaran dapat dilakukan ke nomor rekening: </a>    
+  </h6>
+  <ion-row>
+    <ion-col class="flex-col">
+      <img class="mandirilogo" src="assets/imgs/logo/Mandiri.png">
+    </ion-col>
+    <ion-col class="flex-col">
+        <h2 text-wrap>
+            {{nomorRekeningMandiri}}                  
+        </h2>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+      <h6 text-justify text-wrap>
+              <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
+      </h6>
+  </ion-row>
+
+  <ion-row>
+      <ion-col class="flex-col">
+        <img class="bnilogo" src="assets/imgs/logo/BNI.png">
+      </ion-col>
+      <ion-col class="flex-col">
+          <h2 text-wrap>
+              {{nomorRekeningBNI}}                  
+          </h2>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <h6 text-justify text-wrap>
+                <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
+        </h6>
+    </ion-row>
+
+    <ion-row>
+        <ion-col class="flex-col">
+          <img class="brilogo" src="assets/imgs/logo/BRI.png">
+        </ion-col>
+        <ion-col class="flex-col">
+            <h2 text-wrap>
+                {{nomorRekeningBRI}}                  
+            </h2>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <h6 text-justify text-wrap>
+                  <a class="text">a/n Setapak Company Cabang Kab. Bogor </a>    
+          </h6>
+      </ion-row>
+</ion-card>
+
+<ion-card class ="full-card-info" padding>         
+     <h6 text-justify text-wrap>
+            <a class="text">Jumlah yang harus dibayar: </a>    
+    </h6>
+    <ion-row>
+      <ion-col>
+          <h2 text-wrap>             
+              <a class="totalharga">{{dataTransaksi.total_harga | currency:'IDR ':true}}</a>         
+          </h2>
+        </ion-col>
+    </ion-row>    
+  </ion-card>
+
+  <ion-card class ="full-card-info" padding>         
+      <h6 text-center text-wrap>
+          <a class="textketerangan"><b>Pastikan pembayaran Anda sudah BERHASIL dan unggah bukti untuk mempercepat proses verifikasi</b></a>    
+      </h6>       
+   </ion-card>
+</ion-content>

@@ -1,0 +1,75 @@
+<!--
+  Generated template for the HomestayresultPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+
+  <ion-navbar color= "navbar">
+    <ion-title>
+      <span class="firstline">Search Result</span>
+      <span text-wrap *ngIf="namaWisata != null && namaWisata.length <= 20" class="twoline">Homestay dekat {{namaWisata}}</span>
+      <span text-wrap *ngIf="namaWisata != null && namaWisata.length > 20" class="twoline">Homestay dekat {{namaWisata.substr(0,20)}}...</span>
+      <span *ngIf="namakecamatan != null ||namakabupaten != null ||namaprovinsi != null " class="twoline">{{namakecamatan}}, {{namakabupaten}}, {{namaprovinsi}}</span>
+      <span *ngIf="namakecamatan == null && namakabupaten == null && namaprovinsi == null " class="twoline">All Homestay</span>
+
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card *ngFor="let data of datahomestay" (click)="homestaydetail(data.homestay_id)" tappable>
+        <!-- <img [src]="card.imageUrl" (click)="cardTapped(card)" /> -->
+        <img src="{{BASE_URL+data?.mainphoto}}" />
+        <ion-card-content>
+            <h2>            
+              <b>{{data.nama_homestay}}</b>            
+            </h2>
+                <ion-icon *ngIf= "data?.averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon *ngIf= "data?.averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                <ion-icon><h6>({{data?.jumlahReview}})</h6></ion-icon> 
+            <h6 class = "fontblue">            
+              Rp {{data.harga_perhari}} / day           
+            </h6>
+            <h6>            
+              {{data?.pemandu?.nama_company}}        
+            </h6> 
+                <!-- <ion-icon name="pin" class="mapsizefont"></ion-icon> -->
+                <!-- <ion-icon class="mapsizefont" *ngFor="let alamat of data?.dataAlamatCategory" ><h6>{{alamat?.kabupaten}} </h6></ion-icon>  -->
+                <!-- <ion-icon class="mapsizefont" ><h6>{{data?.dataAlamatCategory?.kabupaten}} </h6></ion-icon>  -->
+
+        </ion-card-content>
+        <!-- <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="danger" icon-left (click)="favorite(card)">
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-center>
+            <button ion-button clear small color="danger" icon-left (click)="listen(card)">
+              <ion-icon name='musical-notes'></ion-icon>
+              Listen
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="danger" icon-left (click)="share(card)">
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row> -->
+      </ion-card>
+      
+</ion-content>

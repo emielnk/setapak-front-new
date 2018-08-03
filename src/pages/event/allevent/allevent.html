@@ -1,0 +1,27 @@
+
+<ion-header >
+
+    <ion-navbar color= "navbar">
+      <ion-title>        
+        <span class="firstline">All Event</span> 
+        </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <button ion-item *ngFor="let data of dataEvent" (tap)="viewEvent(data?.id)">
+        <ion-thumbnail item-left class="item-ribbon">
+            <span class="ribbon cruzeiro" *ngIf ="checkDate(data?.tanggalpelaksanaan)">
+              <span >Event Mendatang</span>
+            </span>
+            <img src="{{BASE_URL+data?.picture}}">
+          </ion-thumbnail>
+          <div>          
+            <p color="black" text-wrap><b>{{data?.title}}</b></p>
+          </div>               
+    </button>  
+        
+      
+  </ion-content>
+  

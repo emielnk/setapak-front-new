@@ -1,0 +1,96 @@
+<!--
+  Generated template for the SignupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color= "navbar">
+			<ion-title>
+          <span class="twoline">Signup</span>
+      </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+  <form #signupForm="ngForm" novalidate>
+		<ion-list no-lines padding-right>
+			<ion-item>
+				<ion-label stacked color="primary">Nama lengkap</ion-label>
+				<ion-input [(ngModel)]="user.name" placeholder="Nama lengkap" name="nama" type="text" #nama="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="nama.valid || submitted == false" color="danger" padding-left>
+				Nama lengkap harus diisi
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="primary">Email</ion-label>
+				<ion-input [(ngModel)]="user.email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" type="email" #email="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<div [hidden]="email.valid || submitted == false" padding-left>
+				<p ion-text color="danger" *ngIf="!user.email">Email harus diisi</p>
+				<p ion-text color="danger" *ngIf="user.email">Email tidak valid</p>
+			</div>
+			<ion-item>
+				<ion-label stacked color="primary">Alamat</ion-label>
+				<ion-input [(ngModel)]="user.alamat" pattern="" placeholder="Alamat" name="alamat" type="text" #alamat="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<div padding-left [hidden]="alamat.valid || submitted == false">
+				<p ion-text color="danger" *ngIf="!user.alamat" >Alamat harus diisi</p>
+				<p ion-text color="danger" *ngIf="user.alamat" >Alamat mengandung karakter yang tidak valid</p>
+      </div>
+			<ion-item>
+				<ion-label stacked color="primary">Nomor HP</ion-label>
+				<ion-input [(ngModel)]="user.nohp" pattern="[0-9]{10,15}" placeholder="Ex: 081289063136" name="nohp" type="text" #nohp="ngModel" required>
+				</ion-input>				
+			</ion-item>
+			<div padding-left [hidden]="nohp.valid || submitted == false">
+				<p ion-text color="danger" *ngIf="!user.nohp" >Nomor HP harus diisi</p>
+				<p ion-text color="danger" *ngIf="user.nohp" >Nomor HP tidak valid</p>
+      </div>
+      
+			<ion-item>
+				<ion-label stacked color="primary">Password</ion-label>
+				<ion-input [(ngModel)]="user.password" pattern=".{8,}" placeholder="Password" name="password" type="password" #password="ngModel" required>
+				</ion-input>				
+			</ion-item>
+			
+			
+			<div [hidden]="password.valid || submitted == false" padding-left>
+				<p ion-text color="danger" *ngIf="!user.password">Password harus diisi</p>
+				<p ion-text color="danger" *ngIf="user.password">Password minimal 8 karakter</p>
+      </div>
+      
+      <ion-item >
+				<ion-label stacked color="primary">Confirm Password</ion-label>
+				<ion-input [(ngModel)]="user.confirmpassword" pattern=".{8,}" placeholder="ConfirmPassword" name="confirmpassword" type="password" #confirmpassword="ngModel" required>
+				</ion-input>
+			</ion-item>
+				<div [hidden]="confirmpassword.valid || submitted == false" padding-left>
+          <p ion-text color="danger" *ngIf="!user.confirmpassword">Konfirmasi Password harus diisi</p>
+					<p ion-text color="danger" *ngIf="user.confirmpassword">Password minimal 8 karakter</p>			
+				</div>				
+				<div padding-left>
+					<p ion-text color="danger" *ngIf="user.password != user.confirmpassword">Password tidak match</p>
+				</div>
+		</ion-list>
+		<div padding>
+			<button ion-button type="submit" (click)="onSignup(signupForm)" block>Daftar</button>
+		</div>
+	</form>
+	<div class="row" padding>
+		<div class="col">
+			<div class="text-center">
+				<div style="text-align: center;"><span>Sudah punya akun? </span> <span ion-text color="primary" (click)="onLogin()"><b>login disini</b></span></div>
+			</div>
+		</div>
+	</div>
+</ion-card>
+</ion-content>

@@ -1,0 +1,176 @@
+
+
+<ion-header >
+    <ion-navbar no-border-bottom color= "navbar" no-shadow>
+        <ion-title *ngIf="!isSearchbarOpened">
+          <span class="navbartitle">History Transaksi</span>            
+        </ion-title>
+    </ion-navbar>
+   
+  
+    <ion-toolbar class="paddingtoptoolbar" no-border-top>
+      <ion-segment [(ngModel)]="myBooking" *ngIf="this.userLoggedIn == true ;else otherSegment ">
+        <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
+            <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+            <div style="margin-top: -28px !important; ">
+              <span class = "fontsizesmall">Homestay</span>
+            </div>
+        </ion-segment-button>
+        <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
+            <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+            <div style="margin-top: -28px !important; ">
+              <span class = "fontsizesmall">Produk</span>
+            </div>          
+        </ion-segment-button>
+        <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
+            <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+            <div style="margin-top: -28px !important; ">
+              <span class = "fontsizesmall">Jasa</span>
+            </div>
+        </ion-segment-button>
+      </ion-segment>
+  
+      <ng-template #otherSegment>
+          <ion-segment [(ngModel)]="myBooking">
+              <ion-segment-button value="homestaynotloggin">
+                  <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+                  <div style="margin-top: -28px !important; ">
+                    <span class = "fontsizesmall">Homestay</span>
+                  </div>
+              </ion-segment-button>
+              <ion-segment-button value="produknotloggin">
+                  <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+                  <div style="margin-top: -28px !important; ">
+                    <span class = "fontsizesmall">Produk</span>
+                  </div>          
+              </ion-segment-button>
+              <ion-segment-button value="jasanotloggin">
+                  <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+                  <div style="margin-top: -28px !important; ">
+                    <span class = "fontsizesmall">Jasa</span>
+                  </div>
+              </ion-segment-button>
+          </ion-segment>
+        </ng-template>
+    </ion-toolbar>
+  </ion-header>  
+  <ion-content>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+                <ion-refresher-content></ion-refresher-content>
+        </ion-refresher> 
+    <div [ngSwitch]="myBooking">
+      <ion-list *ngSwitchCase="'homestay'" padding>
+        <ion-card  class ="full-card" *ngFor="let data of dataTransaksiHomestay">
+            <button ion-item (click)="transaksiHomestay(data?.transaction_id)">                     
+                  <ion-avatar item-start>
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">  
+                  </ion-avatar>
+                  <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                  <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
+               </button>                  
+          </ion-card>
+          <ion-card class="full-card"  *ngIf="dataTransaksiHomestay.length == 0"> 
+              <ion-row>
+                  <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>         
+              </ion-row>
+              <button ion-item >
+                <img class ="logonoaktiftransaksi" item-left src="assets/imgs/logo/zzz-sleep-symbol.png"  />              
+                <span text-wrap class="textnotransaksi ">Transaksi yang aktif anda akan tampil di menu ini setelah anda melakukan transaksi. </span>        
+                <span text-wrap class="textnotransaksi" *ngIf="userLoggedIn == false">Log in or Register untuk melihat dan mengatur transaksi tersebut
+                </span>                      
+              </button> 
+              <div padding-right>
+                  <button *ngIf="userLoggedIn == false" class ="button-signup" ion-button (click) = "navigateToSignupPage()">
+                      Signup
+                  </button>    
+                  <button *ngIf="userLoggedIn == false" class ="button-login" ion-button (click) = "navigateToLoginPage()">
+                      Login
+                  </button> 
+              </div>           
+          </ion-card> 
+      </ion-list>
+      <ion-list *ngSwitchCase="'produk'" padding>
+          <ion-card  class ="full-card" *ngFor="let data of dataTransaksiProduk">
+              <button ion-item  (click)="transaksiProduk(data?.transaction_id)">             
+                  <ion-avatar item-start>
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png"> 
+                  </ion-avatar>
+                  <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                  <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 3 || data?.transaction_status == 4" class="fontketcard">Barang sudah dikirim</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Barang sampai tujuan</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 6" class="fontketcard">Transaksi selesai</h6>                                        
+              </button>                                        
+                                  
+          </ion-card>
+          <ion-card class="full-card"  *ngIf="dataTransaksiProduk == 0"> 
+              <ion-row>
+                  <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>            
+              </ion-row>
+              <button ion-item >
+                <img class ="logonoaktiftransaksi" item-left src="assets/imgs/logo/zzz-sleep-symbol.png"  />
+                <span text-wrap class="textnotransaksi">Transaksi yang aktif anda akan tampil di menu ini setelah anda melakukan transaksi. </span>        
+                <span text-wrap class="textnotransaksi" *ngIf="userLoggedIn == false">Log in or Register untuk melihat dan mengatur transaksi tersebut
+                </span>                      
+              </button> 
+              <div padding-right>
+                  <button *ngIf="userLoggedIn == false" class ="button-signup" ion-button (click) = "navigateToSignupPage()">
+                      Signup
+                  </button>    
+                  <button *ngIf="userLoggedIn == false" class ="button-login" ion-button (click) = "navigateToLoginPage()">
+                      Login
+                  </button> 
+              </div>           
+          </ion-card> 
+      </ion-list>
+      <ion-list *ngSwitchCase="'jasa'" padding>
+          <ion-card class ="full-card" *ngFor="let data of dataTransaksiJasa">
+              <button ion-item (click)="transaksiJasa(data?.transaction_id)">            
+                  <ion-avatar item-start>
+                    <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
+                    <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png"> 
+                  </ion-avatar>
+                  <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
+                  <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
+                  <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Jasa sedang berjalan</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Jasa telah selesai</h6>                   
+                  <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                        
+              </button>                                        
+                                   
+          </ion-card>    
+          <ion-card class="full-card"  *ngIf="dataTransaksiJasa == 0"> 
+              <ion-row>
+                  <h5 padding-left padding-top class="textlisttransaksi"><b>Belum ada transaksi selesai</b></h5>            
+              </ion-row>
+              <button ion-item >
+                <img class ="logonoaktiftransaksi" item-left src="assets/imgs/logo/zzz-sleep-symbol.png"  />    
+                <span text-wrap class="textnotransaksi">Transaksi yang aktif anda akan tampil di menu ini setelah anda melakukan transaksi. </span>        
+                <span text-wrap class="textnotransaksi" *ngIf="userLoggedIn == false">Log in or Register untuk melihat dan mengatur transaksi tersebut
+                </span>                      
+              </button> 
+              <div padding-right>
+                  <button *ngIf="userLoggedIn == false" class ="button-signup" ion-button (click) = "navigateToSignupPage()">
+                      Signup
+                  </button>    
+                  <button *ngIf="userLoggedIn == false" class ="button-login" ion-button (click) = "navigateToLoginPage()">
+                      Login
+                  </button> 
+              </div>           
+          </ion-card> 
+      </ion-list>        
+    </div>
+  </ion-content>

@@ -1,0 +1,84 @@
+<!--
+  Generated template for the HomestaysearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+  <ion-navbar color= "navbar">
+      <ion-title>
+          <span class="firstline">Homestay Search</span>
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="headerprofile">       
+        <ion-row justify-content-center align-items-center padding-bottom>
+            <ion-avatar item-start>
+              <img class="profpic" src="assets/imgs/logo/home-icon-silhouette.png">
+            </ion-avatar>
+        </ion-row>
+        <ion-row justify-content-center align-items-center>
+            <h5 class="homestaycategorytext">Homestay Search Category</h5>
+        </ion-row>      
+  </div>
+<form #searchForm="ngForm" novalidate>
+  <ion-card  class="full-width">
+      
+     
+      <!-- <ion-item>
+          <ion-label stacked color="primary">Pilih provinsi </ion-label>
+          <ion-select [(ngModel)]="pilihProvinsi" [disabled]="!provinsi" (ionChange)="changeProvinsi(pilihProvinsi)" name="provinsi" required>
+            <ion-option *ngFor="let data of provinsi" value="{{data.provinsi}}">{{data.provinsi}}</ion-option>
+          </ion-select>
+      </ion-item>      
+      <ion-item>
+          <ion-label stacked color="primary">Pilih kabupaten </ion-label>
+          <ion-select [(ngModel)]="pilihKabupaten" [disabled]="!kabupaten" (ionChange)="changeKabupaten(pilihKabupaten)" name="kabupaten" required>
+            <ion-option *ngFor="let data of kabupaten" value="{{data.kabupaten}}">{{data.kabupaten}}</ion-option>
+          </ion-select>
+      </ion-item>    -->   
+      <!-- <ion-item> 
+        <ion-label stacked color="primary">Pilih kecamatan </ion-label>
+        <ion-select [(ngModel)]="pilihKecamatan" [disabled]="!kecamatan" (ionChange)="changeKecamatan(pilihKecamatan)" name="kecamatan" placeholder="Pilih Kecamatan" required  >
+          <ion-option *ngFor="let data of kecamatan" value="{{data.kecamatan}}">{{data.kecamatan}}</ion-option>
+        </ion-select>
+      </ion-item> -->
+      
+      <!-- <div padding-left [hidden]="searchForm.valid || submitted == false">
+          <h6 ion-text color="danger" *ngIf="!searchForm.valid" >Wajib Memilih Daerah Homestay</h6>
+      </div> -->
+      <ion-item> 
+        <ion-label stacked color="primary">Pilih Tujuan Tempat Wisata</ion-label>
+        <ion-select [(ngModel)]="pilihWisata" [disabled]="!dataWisata" (ionChange)="changeWisata(pilihWisata)" name="wisata" placeholder="Pilih Tujuan Tempat Wisata" >
+          <ion-option *ngFor="let data of dataWisata" value="{{data.wisatacategory_id}}">{{data.nama_wisata}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label stacked color="primary">Rentang Harga</ion-label>
+          <ion-range [(ngModel)]="knobValues" name="knobValues" dualKnobs="true" [(ngModel)]="knobValues" min="0" max="1500000" step="100000" pin="true" snaps="true" #valuesknob="ngModel"></ion-range>
+        {{knobValues.upper}}
+      </ion-item>
+      <ion-item>
+          <ion-row>
+            <ion-col>
+                <h6 class="leftflex"  leftflex stacked color="primary"> {{knobValues.lower}}</h6>
+               
+            </ion-col>
+            <ion-col >
+                <h6 class="rightflex" stacked color="primary"> {{knobValues.upper}}</h6>               
+            </ion-col>
+          </ion-row>          
+      </ion-item>
+      
+  </ion-card>
+
+  <button ion-button icon-start block no-margin color="primary" class="round" (click)="homestayResult(searchForm)" tappable >
+    <ion-icon name="search" ></ion-icon> Search
+  </button>
+
+</form> 
+</ion-content>

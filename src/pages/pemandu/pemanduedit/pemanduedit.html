@@ -1,0 +1,69 @@
+<!--
+  Generated template for the PemandueditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Setapak Bogor</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="white" type="submit" (click)="saveEditProfile(saveEdit)">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+          Edit Profile Anda
+        </ion-card-header>
+        <ion-card-content>
+          <form #saveEdit="ngForm">
+              <ion-list no-lines padding-right>
+                <ion-item>
+                  <ion-label stacked color="primary">Nama Perusahaan</ion-label>
+                  <ion-input placeholder="{{nama_company}}" name="nama" type="text" disabled="true">
+                  </ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label stacked color="primary">Nomor Telepon</ion-label>
+                  <ion-input placeholder="" [(ngModel)]="phoneNumber" name="telepon" type="tel" pattern="[0]{1}[0-9]{9}[0-9]{1,}" maxlength="15" required>
+                  </ion-input>
+                </ion-item> 
+                <ion-item> 
+                  <ion-label stacked color="primary">Alamat Perusahaan</ion-label>
+                  <ion-textarea placeholder="{{alamat}}" name="nama" type="text" required>
+                  </ion-textarea>
+                </ion-item>
+                <ion-item> 
+                  <ion-label stacked color="primary">Deskripsi Perusahaan</ion-label>
+                    <ion-textarea placeholder="{{deskripsi}}" name="nama" type="text" required>
+                    </ion-textarea>
+                </ion-item>
+                <div>
+                  <ion-label stacked color="primary">Pilih Foto</ion-label>
+                  <ion-item>
+                    <p>lokasi/file/photo.jpg</p>
+                    <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+                  </ion-item>
+                </div>        
+              </ion-list>
+              <!-- <div padding>
+                <button ion-button block type="submit" (click)="onSignup(signupForm)" block>Simpan</button>
+              </div> -->
+          </form>
+        </ion-card-content>
+      </ion-card>
+        <button *ngIf="status == 1" color="danger" block ion-button (click)="nonAktifkanPerusahaan()">
+            <ion-icon name="warning"></ion-icon> <label> non aktifkan toko</label>
+        </button>
+        <button *ngIf="status == 0" color="secondary" block ion-button (click)="AktifkanPerusahaan()">
+            <ion-icon name="primary"></ion-icon> <label> Aktifkan Toko Saya</label>
+        </button>
+</ion-content>
+

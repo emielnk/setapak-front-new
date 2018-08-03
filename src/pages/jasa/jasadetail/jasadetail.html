@@ -1,0 +1,129 @@
+
+<ion-header>
+
+  <ion-navbar  color="primary">
+    <ion-title >
+      <span class="firstline">{{newDataJasa?.nama_jasa}}</span>
+      <span class="twoline">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div>
+        <ion-slides pager>
+            <ion-slide *ngFor="let data of dataPictures" class="text-center slider-item" [ngStyle]="{'background-image': 'url(' + BASE_URL+data?.directory +')'}">        
+            <div class="slide-text">
+              <!-- <h2>asd</h2>
+              <p>asd</p>  -->
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div> 
+
+<div>
+    <ion-card class ="full-card" >                     
+            <ion-grid padding-left>
+              <ion-row>                                        
+                    <h2 class="firstlinenamecard"><b>{{newDataJasa?.nama_jasa}}</b></h2>                            
+              </ion-row>
+              <ion-row>              
+                    <a class="twolinenamecard">{{dataAlamatCategory?.kecamatan}}, {{dataAlamatCategory?.kabupaten}}, {{dataAlamatCategory?.provinsi}}</a>                             
+              </ion-row>
+            </ion-grid>
+    </ion-card>
+</div>
+<div padding-bottom>
+    <ion-card class ="full-card" >
+          <ion-grid padding-left>
+            <ion-row> 
+              <ion-col text-center (click)="navReviewPage()">
+                  <ion-icon *ngIf= "averageReview >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+                  <ion-icon *ngIf= "averageReview < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon>                   
+              </ion-col>
+              <ion-col text-center (click)="navDiskusiprodukPage()" >
+                  <img class ="centerlogobutton" src="assets/imgs/logo/diskusi.png"  />                  
+              </ion-col>                                                     
+            </ion-row>
+            <ion-row> 
+              <ion-col text-center (click)="navReviewPage()">
+                  <a class="centerlogobuttonword" ><b>{{jumlahReview}} Review</b></a>                   
+              </ion-col> 
+              <ion-col text-center (click)="navDiskusiprodukPage()">
+                  <a class="centerlogobuttonword"><b>{{jumlahDiskusi}} Diskusi</b></a>                  
+              </ion-col>                                                                     
+            </ion-row>
+          </ion-grid>                     
+            
+    </ion-card>
+</div>
+  
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Lokasi Wisata</b></h2>
+            </ion-row>
+            <ion-row>  
+                <h5 class="">{{newDataJasa?.lokasi_wisata}}</h5>                                                     
+            </ion-row>
+          </ion-grid>                 
+    </ion-card>
+</div>
+
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Deskripsi</b></h2>
+            </ion-row>
+            <ion-row>             
+                <h5 class="">{{newDataJasa?.deskripsi}}</h5>                                         
+            </ion-row>
+          </ion-grid>                  
+    </ion-card>
+</div>  
+
+<div padding-bottom>
+    <ion-card class ="full-card">
+        <ion-grid padding-left>
+            <ion-row>                                        
+               <h2 ion-text color="dark"> <b>Pemandu</b></h2>
+            </ion-row>
+            <ion-row>             
+                <ion-item text-wrap>
+                    <ion-avatar item-start>
+                        <img *ngIf="dataPemandu?.photo" src="{{BASE_URL+dataPemandu?.photo}}">
+                        <img *ngIf="!dataPemandu?.photo" src="assets/imgs/logo/usericon.png">
+                    </ion-avatar>
+                    <ion-row>                                        
+                        <h5 (click)='navProfileCompany()'><b>{{dataPemandu?.nama_company}}</b></h5>
+                     </ion-row>
+                     <ion-row>                                        
+                        <h6>{{dataPemandu?.deskripsi}}</h6>
+                     </ion-row>                                      
+                </ion-item>                                        
+            </ion-row>
+          </ion-grid>                  
+    </ion-card>
+</div>  
+  
+</ion-content>
+
+<ion-footer>
+    
+
+    <button ion-button large full no-margin color="navbar" (click)='pesanJasa(newDataJasa?.jasa_id)' >
+      Pesan Jasa
+    </button>
+</ion-footer>

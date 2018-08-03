@@ -1,0 +1,62 @@
+page-pemandupesananhomestay {
+    .full-card {        
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 1px solid #f1f2f6;
+    }
+    .notround{
+        border-radius: 0% !important;
+    }
+    .smallfont {      
+        font-size: 12px;
+    }
+    .samebackground{
+        background-color: #f1f2f6;
+        color:black !important;
+    }
+    .buttontransaksi{
+        margin :7.5px 0 !important;
+    }
+    .textfont-telp-wa{
+        color: #488aff !important
+    }
+    .textfont {      
+        font-size: 13px;
+        color: black !important;
+    }
+    .textfont-pemesan {      
+        font-size: 12px;
+        color: black !important;
+    }
+    .nopaddingbottom{
+        padding-bottom: 0 !important;
+    }
+    .textlisttransaksi{
+        font-size: 15px;
+        color: #488aff;
+    }
+    .noteinfotransaksi{
+        display: block;
+        line-height: 1em;
+        font-size: 13px;
+        margin: 7px 0;
+        color: #9c9c9a;
+    }
+    .button-wa{
+        position: absolute;
+        top: 150px;
+        right: 15px;
+    }
+    .full-card-homenamecard-padding-left{
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+        padding-left:11px !important;
+    }
+}

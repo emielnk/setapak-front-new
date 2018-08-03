@@ -1,0 +1,32 @@
+page-tambahdiskusi {
+    .firstline {        
+        display: block;
+        line-height: .7em;
+        font-size: 18px;
+        margin: 5px 0;
+    }
+    
+    .full-card {        
+       
+        //width: 100% !important;
+        //height: 30rem !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        
+    }
+    .full-card-name{
+        background-color: #f1f2f6d0 ;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+    }
+      .colordisabled {
+        color: #999999 !important;
+    }
+
+    .nopaddingleft{
+        padding-left: 0px !important;
+    }
+     
+    
+}

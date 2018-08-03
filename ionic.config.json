@@ -1,0 +1,8 @@
+{
+  "name": "setapakbogor",
+  "app_id": "d0be20b8",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

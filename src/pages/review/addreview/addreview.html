@@ -1,0 +1,90 @@
+<!--
+  Generated template for the AddreviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+  <ion-navbar color= "navbar">
+      <ion-title>
+          <span class="firstline">Tambah Review</span>
+      </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content >
+  <div padding-bottom>
+      <ion-card class ="full-card-homenamecard">                  
+          <ion-row >             
+              <ion-item>
+                  <ion-avatar item-start>
+                    <img src="{{BASE_URL+photoProduk}}" class="avatar">
+                  </ion-avatar>
+                  <ion-row>
+                      <ion-col>
+                          <h6><b color="primary">Untuk {{namaProduk}}</b></h6> 
+                      </ion-col>
+                      
+                  </ion-row>                    
+                </ion-item>                                        
+          </ion-row>                          
+        </ion-card>
+  </div>
+ 
+  <div padding-bottom> 
+      <ion-card class ="full-card-homenamecard"> 
+          <ion-row>        
+              <h5 padding-left class="textlisttransaksi" text-wrap ><b>Kualitas Transaksi</b></h5>       
+          </ion-row>                
+        <ion-row> 
+            <ion-col col-9>
+                <ion-icon *ngIf= "jumlah_star >= 1" class ="centerlogo" name="star" color="bright" (click)="hitungJumlahStar(1)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star >= 2" class ="centerlogo" name="star" color="bright" (click)="hitungJumlahStar(2)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star >= 3" class ="centerlogo" name="star" color="bright" (click)="hitungJumlahStar(3)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star >= 4" class ="centerlogo" name="star" color="bright" (click)="hitungJumlahStar(4)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star == 5"class ="centerlogo" name="star" color="bright" (click)="hitungJumlahStar(5)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star < 1" class ="centerlogo" name="star" color="darkgrey" (click)="hitungJumlahStar(1)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star < 2" class ="centerlogo" name="star" color="darkgrey" (click)="hitungJumlahStar(2)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star < 3" class ="centerlogo" name="star" color="darkgrey" (click)="hitungJumlahStar(3)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star < 4" class ="centerlogo" name="star" color="darkgrey" (click)="hitungJumlahStar(4)"></ion-icon>
+                <ion-icon *ngIf= "jumlah_star < 5" class ="centerlogo" name="star" color="darkgrey" (click)="hitungJumlahStar(5)"></ion-icon>                   
+            </ion-col> 
+            <ion-col col-3>
+                <h6 *ngIf= "jumlah_star == 1" >Sangat Buruk</h6>
+                <h6 *ngIf= "jumlah_star == 2" >Burukk</h6>
+                <h6 *ngIf= "jumlah_star == 3" >Cukup</h6>
+                <h6 *ngIf= "jumlah_star == 4" >Baik</h6>
+                <h6 *ngIf= "jumlah_star == 5" >Sangat Baik</h6>
+            </ion-col>                                                                   
+          </ion-row> 
+      </ion-card>
+  </div>
+
+<div padding-bottom> 
+  <form #reviewForm="ngForm" novalidate>   
+    <ion-card class="full-card-homenamecard">        
+        <ion-item no-padding>
+            <ion-textarea   [(ngModel)]="isiReview" pattern=".{10,}" class= "full-ion-item" placeholder="Isi Review"  name="isireview" #isireview="ngModel" autocomplete="on" autocorrect="on" required>
+            </ion-textarea>            
+        </ion-item>
+        <div [hidden]="isireview.valid || submitted == false" padding-left>
+            <p ion-text color="danger" *ngIf="!isiReview">Isi Review harus diisi</p>
+            <p ion-text color="danger" *ngIf="isiReview">Isi Review harus diisi minimal 10 karakter</p>
+        </div>
+      </ion-card>  
+      
+      <ion-card class="full-card">        
+          <button ion-button icon-start block no-margin color="primary" class="round" (click)="tambahReview(reviewForm)" tappable >
+              Kirim
+            </button>
+        </ion-card>
+        
+      </form>
+      
+  </div>
+<div padding-bottom>
+    
+</div>
+</ion-content>
