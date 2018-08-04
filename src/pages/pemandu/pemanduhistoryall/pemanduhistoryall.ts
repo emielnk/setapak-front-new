@@ -14,9 +14,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'pemanduhistoryall.html',
 })
 export class PemanduhistoryallPage {
-  tab1: any = "PemanadusuksesPage";
-  tab2: any = "PemanadufailedPage";
-  tab3: any = "PemanaduprogressPage";
+  tab1: any = "PemandutransmenunggubayarPage";
+  tab2: any = "PemandutransberjalanPage";
+  tab3: any = "PemandutransmenungguselesaiPage";
+  tab4: any = "PemandutransselesaiPage"
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

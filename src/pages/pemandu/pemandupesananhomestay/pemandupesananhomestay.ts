@@ -24,6 +24,7 @@ export class PemandupesananhomestayPage {
   detail_pemesan: any;
   id_homestay: any;
   id_user: any;
+  no_hp_wa: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
@@ -83,6 +84,12 @@ export class PemandupesananhomestayPage {
       console.log("ini HS bro", response.data[0]);
       this.detail_pemesan = response.data[0];
       console.log("detail_pemesan = ", this.detail_pemesan)
+      this.no_hp_wa = this.detail_pemesan.no_hp;
+      this.no_hp_wa = this.no_hp_wa.toString();
+      if(this.no_hp_wa.charAt(0) == "0") {
+        this.no_hp_wa = this.no_hp_wa.substr(1);
+      }
+      console.log("no udah jadi = ", this.no_hp_wa);
     })
   }
 

@@ -54,9 +54,9 @@
     </ion-card>
   </div>
   <div>
-      <ion-row justify-content-center align-items-center>
-          <h5 class="namaprofile">Pesanan/Transaksi Aktif</h5>
-      </ion-row>
+    <ion-row justify-content-center align-items-center>
+        <h5 class="namaprofile">Pesanan/Transaksi Aktif</h5>
+    </ion-row>
   </div>
   <div>
     <ion-toolbar class="paddingtoptoolbar" no-border-top>
@@ -123,8 +123,8 @@
         <ion-card  class ="full-card" *ngFor="let data of dataTransProduk > 0">
           <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">                     
             <ion-avatar item-start>
-              <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
-              <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                   
+              <img class = "photoavatar" *ngIf="data?.photoPemesan?.photo" src="{{BASE_URL+data?.photoPemesan}}">
+              <img class = "photoavatar" *ngIf="!data?.photoPemesan?.photo" src="assets/imgs/logo/usericon.png">                   
             </ion-avatar>
             <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
             <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
@@ -148,11 +148,11 @@
         <ion-card  class ="full-card" *ngFor="let data of dataTransJasa">
             <button ion-item (click)="navDetailTransJasa(data?.transaction_id)">                     
               <ion-avatar item-start>
-                <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
-                <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                   
+                <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+                <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
               </ion-avatar>
                 <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-                <h6 class="textbooking" text-wrap><b>Booking di :</b></h6>
+                <h6 class="textbooking" text-wrap><b>Booking di : {{data?.namaJ}}</b></h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
                 <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>

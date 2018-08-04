@@ -133,11 +133,11 @@ export class PemanduhomePage {
         let response = data.json();
         this.dataTransHomestay = response.data
         for(var i = 0; i<this.dataTransHomestay.length; i++){
-          console.log("this.dataTransHomestay[i].homestay_id = ", this.dataTransHomestay[i].homestay_id)
+          // console.log("this.dataTransHomestay[i].homestay_id = ", this.dataTransHomestay[i].homestay_id)
           this.setNamaHomestay(this.dataTransHomestay[i].homestay_id, i);
           this.setPemesanHomestay(this.dataTransHomestay[i].user_id, i);
         }
-        console.log("this.dataTransHomestay = ", this.dataTransHomestay)
+        // console.log("this.dataTransHomestay = ", this.dataTransHomestay)
       })
     })
   }
@@ -145,16 +145,15 @@ export class PemanduhomePage {
   setNamaHomestay(id: any, i: any) {
     this.http.get(this.userData.BASE_URL+'api/homestay/detail/'+id, this.options).subscribe(data => {
       let response = data.json();
-      console.log("ini HS bro", response.data[0]);
       this.dataTransHomestay[i].namaHS = response.data[0].nama_homestay
-      console.log("this.dataTransHomestay[i].namaHS = ", this.dataTransHomestay[i].namaHS)
+      this.dataTransHomestay[i].idHS = response.data[0].homestay_id
     })
   }
   
   setPemesanHomestay(id: any, i: number) {
     this.http.get(this.userData.BASE_URL+'api/wisatawan/detail/'+id, this.options).subscribe(data => {
       let response = data.json();
-      console.log("response detail wisatawan = ", response.data[0])
+      // console.log("response detail wisatawan homestay = ", response.data[0])
       this.dataTransHomestay[i].namaPemesan = response.data[0].nama;
       this.dataTransHomestay[i].noPemesan = response.data[0].no_hp;
       this.dataTransHomestay[i].photoPemesan = response.data[0].photo;
@@ -171,10 +170,10 @@ export class PemanduhomePage {
         let response = data.json();
         console.log("transaksi jasa", response);
         this.dataTransJasa = response.data;
-        // for(var i = 0; i<this.dataTransJasa.length; i++){
-        //   this.setNamaJasa(this.dataTransJasa[i].jasa_id, i)
-        // }
-     
+        for(let i = 0; i < this.dataTransJasa.length; i++) {
+          this.setNamaJasa(this.dataTransJasa[i].jasa_id, i)
+          this.setPemesanJasa(this.dataTransJasa[i].user_id, i)
+        }
       })
     })
   }
@@ -183,6 +182,17 @@ export class PemanduhomePage {
     this.http.get(this.userData.BASE_URL+'api/jasa/detail/'+id, this.options).subscribe(data => {
       let response = data.json()
       this.dataTransJasa[i].namaJ = response.data[0].nama_jasa
+      this.dataTransJasa[i].jasa_id = response.data[0].jasa_id
+    })
+  }
+
+  setPemesanJasa(id: number, i: number) {
+    this.http.get(this.userData.BASE_URL+'api/wisatawan/detail/'+id, this.options).subscribe(data => {
+      let response = data.json();
+      console.log("response detail wisatawan jasa = ", response.data[0])
+      this.dataTransJasa[i].namaPemesan = response.data[0].nama;
+      this.dataTransJasa[i].noPemesan = response.data[0].no_hp;
+      this.dataTransJasa[i].photoPemesan = response.data[0].photo;
     })
   }
 
@@ -242,6 +252,10 @@ export class PemanduhomePage {
     this.navCtrl.push("PemandupesananPage");
   }
 
+  navToTransaksiHistory() {
+    this.navCtrl.push('PemanduhistoryallPage')
+  }
+
   navDetailTransHomestay(id: number) {
     this.app.getRootNav().push('PemandupesananhomestayPage', {transaction_id: id});
   }
@@ -251,6 +265,6 @@ export class PemanduhomePage {
   }
 
   navDetailTransJasa(id: number) {
-    this.app.getRootNav().push('PemandupesananjasaPage', {transaction_id: id});
+    this.app.getRootNav().push('PemandupesananservicePage', {transaction_id: id});
   }
 }

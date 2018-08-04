@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the PemanaduprogressPage page.
+ * Generated class for the PemandutransberjalanPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-pemanaduprogress',
-  templateUrl: 'pemanaduprogress.html',
+  selector: 'page-pemandutransberjalan',
+  templateUrl: 'pemandutransberjalan.html',
 })
-export class PemanaduprogressPage {
+export class PemandutransberjalanPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PemanaduprogressPage');
+    console.log('ionViewDidLoad PemandutransberjalanPage');
   }
 
 }

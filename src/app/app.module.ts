@@ -64,7 +64,7 @@ export function getAuthHttp(http, Storage) {
     TabsPage,
     ProfileAccountPage,
     PopoverdiskusiPage,
-    // IonMarqueeModule
+    // IonMarqueeModule,
     PemanduhomePage
     
   ],

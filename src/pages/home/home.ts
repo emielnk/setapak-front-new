@@ -62,6 +62,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    // this.navCtrl.setRoot('HomePage');
   }
   ionViewWillEnter(){
     this.loading = this.loadCtrl.create({
