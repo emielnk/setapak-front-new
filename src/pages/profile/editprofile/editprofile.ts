@@ -65,7 +65,6 @@ export class EditprofilePage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditprofilePage');
-    
   }
 
   ionViewWillEnter(){
@@ -80,7 +79,6 @@ export class EditprofilePage {
       this.token = token;
     });
     this.profpict();
-
   }
   
   takePicture(){
@@ -91,7 +89,6 @@ export class EditprofilePage {
       //console.log(this.base64Image)      
       this.postUpdatePicture();
       this.profpict();
-      
      }, (err) => {
       // Handle error
      });    

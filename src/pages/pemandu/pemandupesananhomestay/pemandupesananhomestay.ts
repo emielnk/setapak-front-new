@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 /**
@@ -25,8 +25,9 @@ export class PemandupesananhomestayPage {
   id_homestay: any;
   id_user: any;
   no_hp_wa: any;
+  transaksi: {new_status?: number, trans_id?: number} = {}
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
+  constructor(public alertCtrl: AlertController, public loadCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
   }
 
@@ -93,4 +94,37 @@ export class PemandupesananhomestayPage {
     })
   }
 
+  touchTerimaPesanan(id: number, setTo: number) {
+    let alert = this.alertCtrl.create({
+      title: 'Konfitmasi Terima Pesanan',
+      message: 'Apakah Anda yakin ingin menerima pesanan ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ya',
+          handler: () => {
+            this.terimaPesananHomestay(id, setTo);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  terimaPesananHomestay(id: number, setTo: number) {
+    let loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar'
+    });
+    loading.present();
+    let param = JSON.stringify({
+      trans_id: setTo,
+      transaction_id: id
+    });
+  }
 }
