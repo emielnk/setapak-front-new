@@ -14,6 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'pemandutambahproduk.html',
 })
 export class PemandutambahprodukPage {
+  tab1: any = "PemandulisthomestayPage";
+  tab2: any = "PemandulistproductPage";
+  tab3: any = "PemandulistservicePage";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -21,5 +24,7 @@ export class PemandutambahprodukPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PemandutambahprodukPage');
   }
+
+  
 
 }

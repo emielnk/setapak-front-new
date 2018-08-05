@@ -28,6 +28,9 @@
       <ion-segment [(ngModel)]="MyProduk">
         <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
             <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+            <ion-badge class="notif-badge" *ngIf="dataTransStatusHs?.length > 0">
+              {{dataTransStatusHs?.length}}
+            </ion-badge>
             <div style="margin-top: -28px !important; ">
               <span class = "fontsizesmall">Homestay</span>
             </div>

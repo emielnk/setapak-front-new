@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>PemandutambahprodukPage</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Produk Anda</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-tabs tabsPlacement="top" tabsHideOnSubPages="true">
+    <ion-tab tabTitle="Homestay" [root]="tab1"></ion-tab>
+    <ion-tab tabTitle="Produk" [root]="tab2"></ion-tab>
+    <ion-tab tabTitle="Jasa" [root]="tab3"></ion-tab>
+  </ion-tabs>
 </ion-content>

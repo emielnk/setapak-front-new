@@ -19,7 +19,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'pemanduhome.html',
 })
 export class PemanduhomePage {
-
+  BASE_URL = 'http://setapakbogor.site/';
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
