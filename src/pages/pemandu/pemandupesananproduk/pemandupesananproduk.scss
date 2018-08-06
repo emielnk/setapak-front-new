@@ -13,9 +13,26 @@ page-pemandupesananproduk {
     .smallfont {      
         font-size: 12px;
     }
+    .samebackground{
+        background-color: #f1f2f6;
+        color:black !important;
+    }
+    .buttontransaksi{
+        margin :7.5px 0 !important;
+    }
+    .textfont-telp-wa{
+        color: #488aff !important
+    }
     .textfont {      
         font-size: 13px;
         color: black !important;
+    }
+    .textfont-pemesan {      
+        font-size: 12px;
+        color: black !important;
+    }
+    .nopaddingbottom{
+        padding-bottom: 0 !important;
     }
     .textlisttransaksi{
         font-size: 15px;
@@ -27,6 +44,11 @@ page-pemandupesananproduk {
         font-size: 13px;
         margin: 7px 0;
         color: #9c9c9a;
+    }
+    .button-wa{
+        position: absolute;
+        top: 150px;
+        right: 15px;
     }
     .full-card-homenamecard-padding-left{
         margin: 0px !important;    

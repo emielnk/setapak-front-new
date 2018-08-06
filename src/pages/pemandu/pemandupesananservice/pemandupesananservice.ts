@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { relativeTimeThreshold } from '../../../../node_modules/moment';
@@ -18,16 +18,18 @@ import { relativeTimeThreshold } from '../../../../node_modules/moment';
   templateUrl: 'pemandupesananservice.html',
 })
 export class PemandupesananservicePage {
+  BASE_URL = 'http://setapakbogor.site/';
   trans_id: any;
   detail_jasa: any;
   detail_pemesan: any;
   no_hp_wa: any;
+  isAvalible: any;
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
   detail_trans: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
+  constructor(public loadCtrl: LoadingController, public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
   }
 
@@ -77,6 +79,129 @@ export class PemandupesananservicePage {
         this.no_hp_wa = this.no_hp_wa.substr(1);
       }
       console.log("no hp wa", this.detail_pemesan)
+    })
+  }
+
+  touchTerimaPesanan(id: number, status: number) {
+    let alert = this.alertCtrl.create({
+      title: 'Konfitmasi Terima Pesanan',
+      message: 'Apakah Anda yakin ingin menerima pesanan ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ya',
+          handler: () => {
+            this.terimaPesananJasa(id, status);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  touchTolakPesanan(id: number, status: number) {
+    let alert = this.alertCtrl.create({
+      title: 'Konfirmasi Menolak Pesanan',
+      message: 'Apakah Anda yakin ingin menolak pesanan ini?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ya',
+          handler: () => {
+            this.tolakPesananJasa(id, status);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  cekIsHsAvalible() {
+    let jasa_id = this.detail_trans.jasa_id;
+    let id =  this.detail_trans.transaction_id
+    this.http.get(this.userData.BASE_URL+"api/jasa/check/avalible/"+id+'/'+jasa_id, this.options).subscribe(data => {
+      let response = data.json();
+      console.log("cek tanggal berhasil", response)
+      if(response.length == 0){
+        this.isAvalible = "empty"
+      }
+      else {
+        this.isAvalible = "notempty"
+      }
+      console.log("isAvalible = ", this.isAvalible)
+    })
+  }
+
+  terimaPesananJasa(id: number, status: number) {
+    let loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar'
+    });
+    this.cekIsHsAvalible();
+    if(this.isAvalible == "empty"){
+      if(status == 2) {
+        loading.present();
+        let param = JSON.stringify({
+          transaction_status: status,
+          transaction_id: id,
+          new_status: 3
+        });
+        this.http.post(this.userData.BASE_URL+'api/transaksi/jasa/update/'+id, param, this.options).subscribe(data => {
+          loading.dismiss();
+          let response = data.json();
+          this.navCtrl.popTo('PemanduhomePage');
+          const alert = this.alertCtrl.create({
+            title: 'Pesanan Diterima',
+            subTitle: 'Pesanan ini bisa dilihat pada menu semua transaksi',
+            buttons: ['OK']
+          });
+          alert.present();
+          console.log("updated gak?", response)
+        })
+      }
+    }
+    else {
+      const alert = this.alertCtrl.create({
+        title: 'Jasa ini sedang aktif',
+        subTitle: 'batalkan pesanan ini atau hubungi pemesan',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+  tolakPesananJasa(id: number, status: number) {
+    let loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar'
+    });
+    loading.present();
+    let param = JSON.stringify({
+      transaction_status: status,
+      transaction_id: id,
+      new_status: 7
+    });
+    this.http.post(this.userData.BASE_URL+'api/transaksi/jasa/update/'+id, param, this.options).subscribe(data => {
+      loading.dismiss();
+      let response = data.json();
+      this.navCtrl.popTo('PemanduhomePage');
+      const alert = this.alertCtrl.create({
+        title: 'Pesanan Ditolak',
+        subTitle: 'riwayat pesanan ini bisa dilihat pada menu semua transaksi',
+        buttons: ['OK']
+      });
+      alert.present();
+      console.log("updated gak?", response)
     })
   }
 

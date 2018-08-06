@@ -16,6 +16,7 @@ import { AuthHttp } from 'angular2-jwt';
   templateUrl: 'pemandupesananhomestay.html',
 })
 export class PemandupesananhomestayPage {
+  BASE_URL = 'http://setapakbogor.site/';
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});

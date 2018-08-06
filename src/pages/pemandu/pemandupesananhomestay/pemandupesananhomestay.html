@@ -21,6 +21,7 @@
         <button ion-item (click)="getDetailHomestay()">
           <ion-avatar item-start>
             <img *ngIf="!detail_homestay?.mainphoto" class ="notround" src="assets/imgs/logo/usericon.png">
+            <img *ngIf="detail_homestay?.mainphoto" class ="notround" src="{{BASE_URL+detail_homestay?.mainphoto}}">
           </ion-avatar>
           <h5 class="textlisttransaksi" text-wrap><b>{{detail_homestay?.nama_homestay}}</b></h5>
         </button>

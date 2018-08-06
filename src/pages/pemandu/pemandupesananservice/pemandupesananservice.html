@@ -14,7 +14,8 @@
     <ion-card class ="full-card">
         <button ion-item (click)="getDetailHomestay()">
           <ion-avatar item-start>
-            <img *ngIf="!detail_homestay?.mainphoto" class ="notround" src="assets/imgs/logo/usericon.png">
+              <img *ngIf="detail_jasa?.mainphoto" class ="notround" src="{{BASE_URL+detail_jasa?.mainphoto}}">
+            <img *ngIf="!detail_jasa?.mainphoto" class ="notround" src="assets/imgs/logo/usericon.png">
           </ion-avatar>
           <h5 class="textlisttransaksi" text-wrap><b>{{detail_jasa?.nama_jasa}}</b></h5>
         </button>
@@ -148,21 +149,18 @@
     </ion-card>
   </div>
   <div padding>
-    <button *ngIf="detail_trans?.transaction_status < 2" disabled="true" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
-        Menunggu Pembayaran
-    </button>
-    <button *ngIf="detail_trans?.transaction_status == 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="uploadBuktiPembayaran()" tappable >
-        Terima Pesanan
-    </button>
-    <button *ngIf="detail_trans?.transaction_status <= 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
-        Tolak Pesanan
-    </button>
-    <button *ngIf="detail_trans?.transaction_status == 4" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="konfirmasiTransaksi(dataTransaksi?.transaction_id)" tappable >
-        Konfirmasi Transaksi Selesai
-    </button>
-    <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Homestay Dalam Penggunaan</b></h5>
-    <button *ngIf="detail_trans?.transaction_status >= 4" disabled="true" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="cancelTransaksi(dataTransaksi?.transaction_status,dataTransaksi?.transaction_id)" tappable >
-        Batalkan Transaksi
-    </button>   
-  </div>
+      <button *ngIf="detail_trans?.transaction_status < 2" disabled="true" ion-button icon-start block no-margin color="primary">
+          Menunggu Pembayaran
+      </button>
+      <button *ngIf="detail_trans?.transaction_status == 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="touchTerimaPesanan(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
+          Terima Pesanan
+      </button>
+      <button *ngIf="detail_trans?.transaction_status <= 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="touchTolakPesanan(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
+          Tolak Pesanan
+      </button>
+      <button *ngIf="detail_trans?.transaction_status == 4" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="tolakPesananJasa(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
+          Konfirmasi Selesai
+      </button>
+      <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Homestay Dalam Penggunaan</b></h5>  
+    </div>
 </ion-content>
