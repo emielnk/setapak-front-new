@@ -138,13 +138,21 @@
             <ion-col>
               <a class ="smallfont" color="primary">Detail Harga</a>
             </ion-col> 
-          </ion-row>           
+          </ion-row>  
+          <ion-row>
+            <ion-col>
+                <a class ="textfont">Berat Barang</a>
+            </ion-col>
+            <ion-col >
+                <a float-right class ="textfont">{{berat_barang_kg}}</a>
+            </ion-col>
+            </ion-row>         
             <ion-row>                   
               <ion-col>
-                <a class ="textfont">Ongkos Kirim</a>
+                <a class ="textfont">Total Ongkos Kirim</a>
               </ion-col>
               <ion-col >
-                  <a float-right class ="textfont">{{detail_trans?.ongkos_kirim | currency:'IDR ':true}}</a>
+                  <a float-right class ="textfont">{{detail_trans?.ongkos_kirim*berat_barang_kg | currency:'IDR ':true}}</a>
               </ion-col>                
             </ion-row>
             <ion-row>

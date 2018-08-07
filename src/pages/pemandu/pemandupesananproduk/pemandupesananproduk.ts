@@ -25,6 +25,7 @@ export class PemandupesananprodukPage {
   detail_produk: any;
   detail_pemesan: any;
   no_hp_wa: any;
+  berat_barang_kg: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
@@ -61,6 +62,8 @@ export class PemandupesananprodukPage {
       let response = data.json();
       if(response.status == true){
         this.detail_produk = response.data[0];
+        let berat = (this.detail_produk.berat_gram)/1000;
+        this.berat_barang_kg = Math.ceil(berat);
       }
       console.log("detail produk", this.detail_produk)
     })

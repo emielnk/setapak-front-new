@@ -19,6 +19,19 @@
   </ion-refresher>
   <div>
     <ion-card class="full-card">
+
+      <ion-card *ngIf="profile_pemandu?.pemandu_status == 0" class="full-card-notice">
+        <button ion-item (click)="navPemanduEditProfile()">
+            <ion-icon color="secondary" name="information-circle" item-left></ion-icon>
+            <ion-row justify-content-center>
+              <p class="tidak-aktif">Perusahaan anda tidak aktif!</p>
+            </ion-row>
+            <ion-row justify-content-center>
+              <p class="tidak-aktif">Tekan disini untuk mulai berbagi liburan</p>
+            </ion-row>
+        </button> 
+      </ion-card>
+
         <ion-col>
           <ion-item>
               <ion-avatar item-start>
@@ -34,6 +47,7 @@
         </ion-card-content>
     </ion-card>
   </div>
+  
   <div>
     <ion-card class="full-card" >
       <ion-row>
@@ -74,7 +88,7 @@
         <ion-segment [(ngModel)]="start_tabs">
           <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
               <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
-              <ion-badge class="notif-badge" color="danger" *ngIf="dataTransHomestay?.length > 0">
+              <ion-badge class="notif-badge" [color]="secondary" *ngIf="dataTransHomestay?.length > 0">
                 {{dataTransHomestay?.length}}
               </ion-badge>
               <div style="margin-top: -28px !important; ">
@@ -177,10 +191,16 @@
                 <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
               </button>                  
             </ion-card>
-            
       </ion-list>
-      
   </div>
+  <div class="button-scroll-up" ion-fixed>
+    <button ion-button color="light" round="true" outline="true" default (click)="scrollToTop()">
+      <ion-icon color="dark" name="arrow-dropup-circle">
+
+      </ion-icon>
+    </button>
+  </div>
+
 </ion-content>
 
 <ion-footer>

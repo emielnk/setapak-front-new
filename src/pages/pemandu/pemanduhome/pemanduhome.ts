@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams, DateTime, App, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Events, IonicPage, NavController, NavParams, DateTime, App, LoadingController, Content} from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
 import { dateDataSortValue } from '../../../../node_modules/ionic-angular/umd/util/datetime-util';
 import { Storage } from '@ionic/storage';
+import { ViewartikelPageModule } from '../../artikel/viewartikel/viewartikel.module';
 
 /**
  * Generated class for the PemanduhomePage page.
@@ -19,6 +20,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'pemanduhome.html',
 })
 export class PemanduhomePage {
+  @ViewChild(Content) content: Content;
   BASE_URL = 'http://setapakbogor.site/';
   headers = new Headers({ 
     'Content-Type': 'application/json'});
@@ -51,7 +53,7 @@ export class PemanduhomePage {
     public events: Events,
     public pemanduData: PemanduDataProvider,
     public app: App,
-    public loadCtrl: LoadingController,) {
+    public loadCtrl: LoadingController) {
   }
 
   getReadyData(){
@@ -252,6 +254,9 @@ export class PemanduhomePage {
 /*
   NAVIGATIONS
 */
+  scrollToTop() {
+    this.content.scrollToTop();
+  }
 
   navTambahProduk() {
     this.navCtrl.push("PemandutambahprodukPage");
