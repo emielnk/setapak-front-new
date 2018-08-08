@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home Tour Guide</ion-title>
+    <ion-title>Beranda</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -55,7 +55,7 @@
             <button block  ion-button  (click)="navPemanduEditProfile()">
               <ion-col>
                 <ion-icon name="settings"></ion-icon>
-                Profile
+                Profil
               </ion-col>
             </button>
         </ion-col>
@@ -71,7 +71,7 @@
           <button block ion-button (click)="navToTransaksiHistory()" tappable>
             <ion-col>
               <ion-icon name="book"></ion-icon>
-              History
+              Riwayat
             </ion-col>
           </button>
         </ion-col>
@@ -143,6 +143,7 @@
             </ion-row>           
           </ion-card>
       </ion-list>
+
       <ion-list *ngSwitchCase="'produk'" padding>
         <ion-card  class ="full-card" *ngFor="let data of dataTransProduk">
           <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">                     

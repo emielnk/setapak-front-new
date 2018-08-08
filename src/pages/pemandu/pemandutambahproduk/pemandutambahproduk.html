@@ -14,9 +14,107 @@
 
 
 <ion-content padding>
-  <ion-tabs tabsPlacement="top" tabsHideOnSubPages="true">
-    <ion-tab tabTitle="Homestay" [root]="tab1"></ion-tab>
-    <ion-tab tabTitle="Produk" [root]="tab2"></ion-tab>
-    <ion-tab tabTitle="Jasa" [root]="tab3"></ion-tab>
-  </ion-tabs>
+  <div>
+    <ion-toolbar class="paddingtoptoolbar" no-border-top>
+        <ion-segment [(ngModel)]="start_tabs">
+          <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
+              <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+              
+              <div style="margin-top: -28px !important; ">
+                <span class = "fontsizesmall">Homestay</span>
+              </div>
+          </ion-segment-button>
+          <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
+              <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+              
+              <div style="margin-top: -28px !important; ">
+                <span class = "fontsizesmall">Produk</span>
+              </div>          
+          </ion-segment-button>
+          <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
+              <img class ="logosegment" src="assets/imgs/logo/conversation.png"/>
+              <div style="margin-top: -28px !important; ">
+                <span class = "fontsizesmall">Jasa</span>
+              </div>
+          </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+  </div>
+
+  <div [ngSwitch]="start_tabs">
+    <ion-list *ngSwitchCase="'homestay'" padding>
+      <button ion-item color="secondary" class="font-roboto">
+        <ion-icon name="add">
+          Tambah Homestay
+        </ion-icon>
+      </button>
+      &nbsp;
+      <ion-card *ngIf="homestays < 1; else content-hs"> 
+        <ion-row>
+          <h5 padding-left padding-top><b>Kamu Belum Punya Homestay</b></h5>         
+        </ion-row>           
+      </ion-card>
+      <ion-card name="content-hs"  class ="full-card" *ngFor="let data of homestays">
+        <button ion-item (click)="navDetailHomestay(data?.homestay_id)" >                     
+          <ion-avatar item-start>
+            <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+            <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
+          </ion-avatar>
+          <h6 class="tanggal paddingtop1px"><p><b>ISI</b></p></h6>
+          <h6 class="hitam" text-wrap><p><b>ISI</b></p></h6>
+          <h6 class="hitam" text-wrap>ISI</h6>                                                                                  
+        </button>                 
+      </ion-card>
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'produk'" padding>
+      <button ion-item color="secondary" class="font-roboto">
+        <ion-icon name="add">
+          Tambah  Barang
+        </ion-icon>
+      </button>
+      <ion-card *ngIf="products < 1; else content-p"> 
+        <ion-row>
+          <h5 padding-left padding-top><b>Kamu Belum Punya Produk</b></h5>         
+        </ion-row>           
+      </ion-card>
+      <ion-card  class ="full-card" name="content-p" *ngFor="let data of products">
+        <button ion-item (click)="navDetailProduk(data?.transaction_id)">                     
+          <ion-avatar item-start>
+            <img class = "photoavatar" *ngIf="data?.photoPemesan?.photo" src="{{BASE_URL+data?.photoPemesan}}">
+            <img class = "photoavatar" *ngIf="!data?.photoPemesan?.photo" src="assets/imgs/logo/usericon.png">                   
+          </ion-avatar>
+          <h6 class="tanggal paddingtop1px"><p><b>ISI</b></p></h6>
+          <h6 class="textbooking" text-wrap><p><b>ISI</b></p></h6>
+          <h6 class="textbooking" text-wrap>ISI</h6>                                                                                  
+        </button>                  
+      </ion-card>
+    </ion-list>
+
+
+    <ion-list *ngSwitchCase="'jasa'" padding>
+      <button ion-item color="secondary" class="font-roboto">
+        <ion-icon name="add">
+          Tambah Jasa
+        </ion-icon>
+      </button>
+      <ion-card *ngIf="services < 1; else content-j"> 
+        <ion-row>
+          <h5 padding-left padding-top><b>Kamu Belum Punya Jasa Pemandu</b></h5>         
+        </ion-row>           
+      </ion-card>
+      <ion-card  class ="full-card" name="content-j" *ngFor="let data of services">
+        <button ion-item (click)="navDetailJasa(data?.transaction_id)">                     
+          <ion-avatar item-start>
+            <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+            <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
+          </ion-avatar>
+            <h6 class="tanggal paddingtop1px"><p><b>ISI</b></p></h6>
+            <h6 class="textbooking" text-wrap><b>ISI</b></h6>                                                                                   
+          </button>                  
+        </ion-card>
+    </ion-list>
+  </div>
+
 </ion-content>
