@@ -23,21 +23,20 @@
           <ion-list no-lines padding-right>
               <ion-item>
                 <ion-label stacked color="primary">Nama Homestay</ion-label>
-                <ion-input placeholder="Wisma Asyik" name="nama" type="text" required>
+                <ion-input [(ngModel)]="homestay.nama_hs" placeholder="Contoh: Wisma Dramaga" name="nama_hs" type="text" required>
                 </ion-input>
               </ion-item>
 
               <ion-item> 
                 <ion-label stacked color="primary">Pilih Wilayah</ion-label>
-                <ion-select  name="kecamatan" placeholder="Hoemstay Region" required  >
-                  <ion-option value="a">Kec 1</ion-option>
-                  <ion-option value="b">Kec 2</ion-option>
+                <ion-select [(ngModel)]="homestay.alamat_id" name="kecamatan" placeholder="Lokasi Kecamatan" required  >
+                  <ion-option *ngFor="let kecamatan of kecamatans" value="{{kecamatan?.alamatcategory_id}}">{{kecamatan?.kecamatan}}</ion-option>
                 </ion-select>
               </ion-item>
 
               <ion-item> 
                 <ion-label stacked color="primary">Harga perhari</ion-label>
-                <ion-input placeholder="Price" name="price" type="number" required></ion-input>
+                <ion-input [(ngModel)]="homestay.harga_perhari" placeholder="Price" name="harga_perhari" type="number" required></ion-input>
               </ion-item>
               
               <ion-grid>
@@ -45,40 +44,39 @@
                   <ion-row>
                     <ion-col col-3>
                       <ion-label>AC</ion-label>
-                      <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                      <ion-checkbox color="dark" checked="false" name="ac"></ion-checkbox>
                     </ion-col>
                     <ion-col col-3>
-                        <ion-label>Wifi</ion-label>
-                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
-                      </ion-col >
-                      <ion-col col-6>
-                          <ion-label>Parkir Mobil</ion-label>
-                          <ion-checkbox color="dark" checked="false"></ion-checkbox>
-                      </ion-col>
+                      <ion-label>Wifi</ion-label>
+                      <ion-checkbox color="dark" checked="false" name="wifi"></ion-checkbox>
+                    </ion-col >
+                    <ion-col col-6>
+                      <ion-label>Parkir Mobil</ion-label>
+                      <ion-checkbox color="dark" checked="false" name="parkir_count"></ion-checkbox>
+                    </ion-col>
                   </ion-row>
 
                   <ion-row>
                       <ion-col col-5>
-                          <ion-label>Kamar Mandi</ion-label>
-                          <ion-input type="number" max="10"></ion-input>
+                        <ion-label>Kamar Mandi</ion-label>
+                        <ion-input type="number" max="10" name="mandi"></ion-input>
                       </ion-col>
                       <ion-col col-5>
-                          <ion-label>Kamar Tidur</ion-label>
-                          <ion-input type="number" max="10"></ion-input>
+                        <ion-label>Kamar</ion-label>
+                        <ion-input type="number" max="10" name="tidur"></ion-input>
                       </ion-col>
-                      
                   </ion-row>
               </ion-grid>
 
               <ion-item> 
                 <ion-label stacked color="primary">Alamat Homestay</ion-label>
-                <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
+                <ion-textarea [(ngModel)]="homestay.alamat_lengkap" placeholder="be a number one touring service" name="alamat_lengkap" type="text" required>
                 </ion-textarea>
               </ion-item>
 
               <ion-item> 
                 <ion-label stacked color="primary">Deskripsi Homestay</ion-label>
-                  <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
+                  <ion-textarea [(ngModel)]="homestay.deskripsi" placeholder="be a number one touring service" name="deskripsi" type="text" required>
                   </ion-textarea>
               </ion-item>
 

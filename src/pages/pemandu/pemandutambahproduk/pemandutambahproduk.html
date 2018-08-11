@@ -43,7 +43,7 @@
 
   <div [ngSwitch]="start_tabs">
     <ion-list *ngSwitchCase="'homestay'" padding>
-      <button ion-item color="secondary" class="font-roboto">
+      <button ion-item color="secondary" class="font-roboto" (click)="navTambahHomestay()">
         <ion-icon name="add">
           Tambah Homestay
         </ion-icon>
@@ -60,9 +60,9 @@
             <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
             <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
           </ion-avatar>
-          <h6 class="tanggal paddingtop1px"><p><b>ISI</b></p></h6>
-          <h6 class="hitam" text-wrap><p><b>ISI</b></p></h6>
-          <h6 class="hitam" text-wrap>ISI</h6>                                                                                  
+          <h6 class="tanggal paddingtop1px"><p><b>{{data?.nama_homestay}}</b></p></h6>
+          <h6 class="hitam" text-wrap><p>{{data?.deskripsi}}</p></h6>
+          <h6 class="hitam" text-wrap>{{data?.harga_perhari}}</h6>                                                                                  
         </button>                 
       </ion-card>
     </ion-list>
@@ -74,6 +74,7 @@
           Tambah  Barang
         </ion-icon>
       </button>
+      &nbsp;
       <ion-card *ngIf="products < 1; else content-p"> 
         <ion-row>
           <h5 padding-left padding-top><b>Kamu Belum Punya Produk</b></h5>         
@@ -99,6 +100,7 @@
           Tambah Jasa
         </ion-icon>
       </button>
+      &nbsp;
       <ion-card *ngIf="services < 1; else content-j"> 
         <ion-row>
           <h5 padding-left padding-top><b>Kamu Belum Punya Jasa Pemandu</b></h5>         

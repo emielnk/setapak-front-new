@@ -130,4 +130,7 @@ export class PemandutambahprodukPage {
     });
   }
 
+  navTambahHomestay() {
+    this.navCtrl.push("PemanduhomestayPage");
+  }
 }
