@@ -70,7 +70,7 @@ export class PemanduhomePage {
   */
   ionViewDidLoad() {
     console.log('ionViewDidLoad PemanduhomePage');
-    // this.ionViewWillEnter()
+    this.ionViewWillEnter()
   }
 
   ionViewWillEnter() {
@@ -96,7 +96,7 @@ export class PemanduhomePage {
     this.segment = value;
     //req api
     if(this.segment == 'homestay'){
-      this.getProfile();
+      this.getTransaksiHomestay();
     }else if(this.segment == 'produk'){
       this.getTransaksiProduk();
     }else if(this.segment =='jasa'){
@@ -152,7 +152,7 @@ export class PemanduhomePage {
       this.pemandu_id = id;
       this.http.get(this.userData.BASE_URL+'api/pemandu/transaksi/homestay/'+this.pemandu_id, this.options).subscribe(data => {
         let response = data.json();
-        this.dataTransHomestay = response
+        this.dataTransHomestay = response;
         if(response.length > 0) {
           this.dataTransHomestay = response.data
           for(var i = 0; i<this.dataTransHomestay.length; i++){
@@ -160,6 +160,7 @@ export class PemanduhomePage {
             this.setNamaHomestay(this.dataTransHomestay[i].homestay_id, i);
             this.setPemesanHomestay(this.dataTransHomestay[i].user_id, i);
           }
+          console.log("ahahahahahaah",this.dataTransHomestay)
         }
         if(response.length <= 0) {
           this.dataTransHomestay = response.length;

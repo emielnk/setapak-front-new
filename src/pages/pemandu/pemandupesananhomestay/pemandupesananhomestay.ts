@@ -150,7 +150,7 @@ export class PemandupesananhomestayPage {
     this.http.get(this.userData.BASE_URL+"api/homestay/check/avalible/"+id+'/'+homestay_id, this.options).subscribe(data => {
       let response = data.json();
       console.log("cek tanggal berhasil", response)
-      if(response.length == 0){
+      if(response.length == 0 || response.length == null){
         this.isAvalible = "empty"
       }
       else {
@@ -164,37 +164,49 @@ export class PemandupesananhomestayPage {
     let loading = this.loadCtrl.create({
       content: 'Tunggu sebentar'
     });
-    this.cekIsHsAvalible();
-    if(this.isAvalible == "empty"){
-      if(status == 2) {
-        loading.present();
-        let param = JSON.stringify({
-          transaction_status: status,
-          transaction_id: id,
-          new_status: 3
-        });
-        this.http.post(this.userData.BASE_URL+'api/transaksi/homestay/update/'+id, param, this.options).subscribe(data => {
-          loading.dismiss();
-          let response = data.json();
-          this.navCtrl.popTo('PemanduhomePage');
-          const alert = this.alertCtrl.create({
-            title: 'Pesanan Diterima',
-            subTitle: 'Pesanan ini bisa dilihat pada menu semua transaksi',
-            buttons: ['OK']
-          });
-          alert.present();
-          console.log("updated gak?", response)
-        })
+    let homestay_id = this.detail_trans.homestay_id;
+    let id_t =  this.detail_trans.transaction_id
+    this.http.get(this.userData.BASE_URL+"api/homestay/check/avalible/"+id_t+'/'+homestay_id, this.options).subscribe(data => {
+      let response = data.json();
+      console.log("cek tanggal berhasil", response)
+      if(response.length == 0 || response.length == null){
+        this.isAvalible = "empty"
       }
-    }
-    else {
-      const alert = this.alertCtrl.create({
-        title: 'Homestay ini sedang aktif',
-        subTitle: 'batalkan pesanan ini atau hubungi pemesan',
-        buttons: ['OK']
-      });
-      alert.present();
-    }
+      else {
+        this.isAvalible = "notempty"
+      }
+      console.log("isAvalible = ", this.isAvalible)
+      if(this.isAvalible == "empty"){
+        if(status == 2) {
+          let param = JSON.stringify({
+            transaction_status: status,
+            transaction_id: id,
+            new_status: 3
+          });
+          this.http.post(this.userData.BASE_URL+'api/transaksi/homestay/update/'+id, param, this.options).subscribe(data => {
+            loading.dismiss();
+            let response = data.json();
+            this.navCtrl.popTo('PemanduhomePage');
+            const alert = this.alertCtrl.create({
+              title: 'Pesanan Diterima',
+              subTitle: 'Pesanan ini bisa dilihat pada menu semua transaksi',
+              buttons: ['OK']
+            });
+            alert.present();
+            console.log("updated gak?", response)
+          })
+        }
+      }
+      else {
+        const alert = this.alertCtrl.create({
+          title: 'Homestay ini sedang aktif',
+          subTitle: 'batalkan pesanan ini atau hubungi pemesan',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    })
+    // this.cekIsHsAvalible();
   }
 
   tolakPesananHomestay(id: number, status: number) {
