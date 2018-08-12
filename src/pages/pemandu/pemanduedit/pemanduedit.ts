@@ -23,6 +23,7 @@ export class PemandueditPage {
   deskripsi: any;
   since: any;
   status: any;
+  no_telp: any;
 
   masks: any;
   phoneNumber: any;
@@ -60,6 +61,7 @@ export class PemandueditPage {
       this.alamat = profile.alamat
       this.deskripsi = profile.deskripsi
       this.since = profile.created_at
+      this.no_telp = profile.nomor_telepon
       this.status = profile.pemandu_status
       console.log(profile)
       console.log(this.status)

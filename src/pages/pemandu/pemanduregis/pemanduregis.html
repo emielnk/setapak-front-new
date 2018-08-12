@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Tour Guide Registration</ion-title>
   </ion-navbar>
 
@@ -26,26 +26,26 @@
                 <ion-input [(ngModel)]="pemandu.namacompany"placeholder="ex: Setapaktour.id" name="namacompany" type="text"  required>
                 </ion-input>
               </ion-item>
+              <ion-item>
+                <ion-label stacked color="primary">Nomor Telepon (Whatsapp)</ion-label>
+                <ion-input [(ngModel)]="pemandu.no_telp"placeholder="ex: 08123456789" name="no_telp" type="text"  required>
+                </ion-input>
+              </ion-item>
               <ion-item> 
                 <ion-label stacked color="primary">Alamat Anda</ion-label>
                   <ion-input [(ngModel)]="pemandu.alamat" placeholder="con. Jl. raya Dramaga" name="alamat" type="text"  required>
                   </ion-input>
               </ion-item>
-              <ion-item>
-                <ion-label stacked color="primary">Pilih Kecamatan</ion-label>
-                <ion-select   name="kecamatan" placeholder="Your locations" required  >
-                  <ion-option value="a">Kec 1</ion-option>
-                  <ion-option value="b">Kec 2</ion-option>
+              <ion-item> 
+                <ion-label stacked color="primary">Pilih Wilayah</ion-label>
+                <ion-select [(ngModel)]="pemandu.alamat_id" name="kecamatan" placeholder="Lokasi Kecamatan" required  >
+                  <ion-option *ngFor="let kecamatan of kecamatans" value="{{kecamatan?.alamatcategory_id}}">{{kecamatan?.kecamatan}}</ion-option>
                 </ion-select>
               </ion-item>
               <ion-item> 
                 <ion-label stacked color="primary">Deskripsi Jasa Anda</ion-label>
                   <ion-input  [(ngModel)]="pemandu.deskripsi" placeholder="be a number one touring service" name="deskripsi" type="text" required>
                   </ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-label>Langsung Aktif?</ion-label>
-                  <ion-checkbox name="active_status" color="black" checked="false"></ion-checkbox>
               </ion-item>
               <!-- <div class="uploadphoto">
                 <ion-label stacked color="primary">Pilih Foto</ion-label>
@@ -63,7 +63,7 @@
               </div> -->
           </ion-list>
           <div padding>
-            <button ion-button type="submit" (click)="registPemandu(regisPemandu)" block>Daftarkan</button>
+            <button ion-button type="submit" (click)="touchRegister(regisPemandu)" block>Daftarkan</button>
           </div>
       </form>
     </ion-card-content>

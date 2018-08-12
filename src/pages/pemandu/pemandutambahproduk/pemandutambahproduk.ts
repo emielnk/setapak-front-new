@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
 import { Http,Headers,RequestOptions } from '@angular/http';
@@ -28,7 +28,7 @@ export class PemandutambahprodukPage {
   services: any = [];
   products: any = [];
 
-  constructor(public userData: UserData, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadCtrl: LoadingController, public pemanduData: PemanduDataProvider) {
+  constructor(public alertCtrl: AlertController, public userData: UserData, public http: Http, public navCtrl: NavController, public navParams: NavParams, public loadCtrl: LoadingController, public pemanduData: PemanduDataProvider) {
   }
 
   ionViewDidLoad() {
@@ -133,4 +133,26 @@ export class PemandutambahprodukPage {
   navTambahHomestay() {
     this.navCtrl.push("PemanduhomestayPage");
   }
+
+  navTambahJasa(){
+    this.navCtrl.push("PemandujasaPage");
+  }
+
+  navTambahProduk(){
+    // this.navCtrl.push("PemandulistservicePage");
+    let alert = this.alertCtrl.create({
+      title: "Perhatian!",
+      message: "Fitur ini akan segera tersedia, tunggu update terbaru ya"
+    })
+    alert.present();
+  }
+
+  navDetailHomestay(id) {
+    this.navCtrl.push("PemandulisthomestayPage", {homestay_id: id})
+  }
+
+  navDetailJasa(id) {
+    this.navCtrl.push("pemandulistservicePage", {jasa_id: id})
+  }
+   
 }

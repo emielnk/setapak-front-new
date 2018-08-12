@@ -6,14 +6,15 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Setapak Bogor</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Tambah Homestay</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  
   <ion-card>
     <ion-card-header>
       Buat Homestay Baru
@@ -35,38 +36,45 @@
               </ion-item>
 
               <ion-item> 
+                <ion-label stacked color="primary">Pilih Wilayah Terdekat</ion-label>
+                <ion-select [(ngModel)]="homestay.wisata_id" name="wisata_id" placeholder="Wisata Terdekat" required  >
+                  <ion-option *ngFor="let wisata of wisatas" value="{{wisata?.wisatacategory_id}}">{{wisata?.nama_wisata}}</ion-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item> 
                 <ion-label stacked color="primary">Harga perhari</ion-label>
                 <ion-input [(ngModel)]="homestay.harga_perhari" placeholder="Price" name="harga_perhari" type="number" required></ion-input>
               </ion-item>
               
-              <ion-grid>
-                  <ion-label stacked color="primary">Fasilitas</ion-label>
-                  <ion-row>
-                    <ion-col col-3>
-                      <ion-label>AC</ion-label>
-                      <ion-checkbox color="dark" checked="false" name="ac"></ion-checkbox>
-                    </ion-col>
-                    <ion-col col-3>
-                      <ion-label>Wifi</ion-label>
-                      <ion-checkbox color="dark" checked="false" name="wifi"></ion-checkbox>
-                    </ion-col >
-                    <ion-col col-6>
-                      <ion-label>Parkir Mobil</ion-label>
-                      <ion-checkbox color="dark" checked="false" name="parkir_count"></ion-checkbox>
-                    </ion-col>
-                  </ion-row>
+              <!-- <ion-item>
+                <ion-label stacked color="primary">Fasilitas</ion-label>
+              </ion-item>
+              <ion-row>
+                <ion-col col-3>
+                  <ion-label>AC</ion-label>
+                  <ion-checkbox color="dark" checked="false" name="ac"></ion-checkbox>
+                </ion-col>
+                <ion-col col-3>
+                  <ion-label>Wifi</ion-label>
+                  <ion-checkbox color="dark" checked="false" name="wifi"></ion-checkbox>
+                </ion-col >
+                <ion-col col-6>
+                  <ion-label>Parkir Mobil</ion-label>
+                  <ion-checkbox color="dark" checked="false" name="parkir_count"></ion-checkbox>
+                </ion-col>
+              </ion-row>
 
-                  <ion-row>
-                      <ion-col col-5>
-                        <ion-label>Kamar Mandi</ion-label>
-                        <ion-input type="number" max="10" name="mandi"></ion-input>
-                      </ion-col>
-                      <ion-col col-5>
-                        <ion-label>Kamar</ion-label>
-                        <ion-input type="number" max="10" name="tidur"></ion-input>
-                      </ion-col>
-                  </ion-row>
-              </ion-grid>
+              <ion-row>
+                <ion-col col-5>
+                  <ion-label>Kamar Mandi</ion-label>
+                  <ion-input type="number" max="10" name="mandi"></ion-input>
+                </ion-col>
+                <ion-col col-5>
+                  <ion-label>Kamar Tidur</ion-label>
+                  <ion-input type="number" max="10" name="tidur"></ion-input>
+                </ion-col>
+              </ion-row> -->
 
               <ion-item> 
                 <ion-label stacked color="primary">Alamat Homestay</ion-label>
@@ -78,29 +86,28 @@
                 <ion-label stacked color="primary">Deskripsi Homestay</ion-label>
                   <ion-textarea [(ngModel)]="homestay.deskripsi" placeholder="be a number one touring service" name="deskripsi" type="text" required>
                   </ion-textarea>
-              </ion-item>
+                </ion-item>
 
               <ion-item>
-                <ion-label stacked color="primary">Apakah Langsung Diaktifkan?</ion-label>
-                <ion-toggle></ion-toggle>
-              </ion-item>
-              
-              <div class="uploadphoto">
                 <ion-label stacked color="primary">Pilih Foto</ion-label>
-                <ion-item>
-                  <p>lokasi/file/photo.jpg</p>
-                  <button ion-button color="secondary" (click)="getImage()">Get Image</button>
-                </ion-item>
-                <ion-item>
-                  <h4>Image Preview</h4>
-                  <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
-                </ion-item>
-                <ion-item>
-                  <button ion-button (click)="uploadFile()">Upload</button>
-                </ion-item>
-              </div>
+              </ion-item>
+                <div class="uploadphoto">
+                  
+                  <ion-item>
+                    <p>lokasi/file/photo.jpg</p>
+                    <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+                  </ion-item>
+                  <ion-item>
+                    <h4>Image Preview</h4>
+                    <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+                  </ion-item>
+                </div>
+              
               
           </ion-list>
+          <div padding>
+            <button ion-button type="submit" (click)="touchButtonCreate(newHomestay)" block>Buat</button>
+          </div>
       </form>
     </ion-card-content>
   </ion-card>

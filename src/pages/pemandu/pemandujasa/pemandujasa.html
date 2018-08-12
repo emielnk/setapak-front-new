@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Setapak Bogor</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Tambah Jasa</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -19,41 +19,44 @@
          Jasa Pemanadu Wisata
         </ion-card-header>
         <ion-card-content>
-          <form #newHomestay="ngForm">
+          <form #newJasa="ngForm">
               <ion-list no-lines padding-right>
                   <ion-item>
                     <ion-label stacked color="primary">Nama Jasa</ion-label>
-                    <ion-input placeholder="Wisma Asyik" name="nama" type="text" required>
+                    <ion-input [(ngModel)]="jasa.nama_jasa" placeholder="contoh: Keliling Dramaga" name="nama_jasa" type="text" required>
                     </ion-input>
                   </ion-item>
-    
                   <ion-item> 
-                    <ion-label stacked color="primary">Pilih Wilayah</ion-label>
-                    <ion-select  name="kecamatan" placeholder="Your locations" required  >
-                      <ion-option value="a">Kec 1</ion-option>
-                      <ion-option value="b">Kec 2</ion-option>
+                    <ion-label stacked color="primary">Pilih Lokasi Jasa</ion-label>
+                    <ion-select  [(ngModel)]="jasa.alamatcategory_id" name="kecamatan" placeholder="Contoh: Jasa Keliling Kota" required  >
+                      <ion-option *ngFor="let kecamatan of kecamatans" value="{{kecamatan?.alamatcategory_id}}">{{kecamatan?.kecamatan}}</ion-option>
                     </ion-select>
                   </ion-item>
                   <ion-item> 
+                    <ion-label stacked color="primary">Lokasi Jasa</ion-label>
+                    <ion-input [(ngModel)]="jasa.lokasi_wisata" placeholder="contoh: Sekitar Danau Cifor" name="lokasi_wisata" type="text" required>
+                    </ion-input>
+                  </ion-item>
+                  <ion-item> 
                     <ion-label stacked color="primary">Harga Jasa</ion-label>
-                    <ion-input placeholder="Price" name="price" type="number" required></ion-input>
+                    <ion-input [(ngModel)]="jasa.harga_jasa" placeholder="Price" name="price" type="number" required></ion-input>
                   </ion-item>
                   <ion-item> 
                     <ion-label stacked color="primary">Deskripsi Jasa Anda</ion-label>
-                      <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
+                      <ion-textarea [(ngModel)]="jasa.deskripsi" placeholder="contoh: Jasa berkeliling dramaga dengan mobil yang nyaman" name="nama" type="text" required>
                       </ion-textarea>
                   </ion-item>
-                  <ion-item>
-                    <ion-label stacked color="primary">Lokasia Wisataa</ion-label>
-                    <ion-input placeholder="con: Gunung Gede" name="nama" type="text" required>
-                    </ion-input>
+                  <ion-item> 
+                    <ion-label stacked color="primary">Pilih Jenis Jasa Anda</ion-label>
+                    <ion-select  [(ngModel)]="jasa.jeniscategory_id" name="kecamatan" placeholder="Contoh: Jasa Keliling Kota" required  >
+                      <ion-option *ngFor="let jenisjasa of jenisjasas" value="{{jenisjasa?.jeniscategory_id}}">{{jenisjasa?.nama_jeniscategory}}</ion-option>
+                    </ion-select>
                   </ion-item>
-                  <ion-item>
-                    <ion-label stacked color="primary">Langsung Aktif?</ion-label>
-                    <ion-toggle></ion-toggle>
-                  </ion-item>
+    
                   <div class="uploadphoto">
-                    <ion-label stacked color="primary">Pilih Foto</ion-label>
+                    <ion-item>
+                      <ion-label stacked color="primary">Pilih Foto</ion-label>
+                    </ion-item>
                     <ion-item>
                       <p>lokasi/file/photo.jpg</p>
                       <button ion-button color="secondary" (click)="getImage()">Get Image</button>
@@ -67,6 +70,9 @@
                     </ion-item>
                   </div>
               </ion-list>
+              <div padding>
+                <button ion-button type="submit" (click)="touchButtonCreate(newJasa)" block>Buat</button>
+              </div>
           </form>
         </ion-card-content>
       </ion-card>

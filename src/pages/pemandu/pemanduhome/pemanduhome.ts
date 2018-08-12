@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams, DateTime, App, LoadingController, Content} from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams, AlertController, App, LoadingController, Content} from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
 import { dateDataSortValue } from '../../../../node_modules/ionic-angular/umd/util/datetime-util';
 import { Storage } from '@ionic/storage';
 import { ViewartikelPageModule } from '../../artikel/viewartikel/viewartikel.module';
+import { HomePage } from '../../home/home';
 
 /**
  * Generated class for the PemanduhomePage page.
@@ -52,6 +53,7 @@ export class PemanduhomePage {
     public storage: Storage,
     public events: Events,
     public pemanduData: PemanduDataProvider,
+    public alertCtrl: AlertController,
     public app: App,
     public loadCtrl: LoadingController) {
   }
@@ -68,7 +70,7 @@ export class PemanduhomePage {
   */
   ionViewDidLoad() {
     console.log('ionViewDidLoad PemanduhomePage');
-    this.ionViewWillEnter()
+    // this.ionViewWillEnter()
   }
 
   ionViewWillEnter() {
@@ -114,15 +116,29 @@ export class PemanduhomePage {
         let response = data.json()
         // console.log("ini responsenya", response)
         if(response.status == true) {
-          this.profile_pemandu = response.data[0]
-          this.created_at = this.profile_pemandu.created_at;
-          this.tanggal = this.created_at.substring(0,10);
-          console.log(this.tanggal)
-          this.profile_pemandu.created_at = this.tanggal;
-          this.pemanduData.setPemanduStorage(response.data);
-          this.getTransaksiHomestay();
-          this.getTransaksiJasa();
-          this.getTransaksiProduk();
+          if(response.data[0].pemandu_verifikasi == 0){
+            this.profile_pemandu = JSON.stringify({
+              length: 0,
+              status: "inverified"
+            });
+            let alert = this.alertCtrl.create({
+              title: "Anda Sudah Mendaftar",
+              message: "Silakan tunggu verifikasi dari Admin@setapakbogor",
+              buttons: ['OK']
+            })
+            alert.present();
+          }
+          else{
+            this.profile_pemandu = response.data[0]
+            this.created_at = this.profile_pemandu.created_at;
+            this.tanggal = this.created_at.substring(0,10);
+            console.log(this.tanggal)
+            this.profile_pemandu.created_at = this.tanggal;
+            this.pemanduData.setPemanduStorage(response.data);
+            this.getTransaksiHomestay();
+            this.getTransaksiJasa();
+            this.getTransaksiProduk();
+          }
         }
         if(response.status == "norecord") {
           this.navCtrl.push('PemanduregisPage')

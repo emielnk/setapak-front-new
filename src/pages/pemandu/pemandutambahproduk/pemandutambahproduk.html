@@ -14,6 +14,9 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div>
     <ion-toolbar class="paddingtoptoolbar" no-border-top>
         <ion-segment [(ngModel)]="start_tabs">
@@ -67,9 +70,8 @@
       </ion-card>
     </ion-list>
 
-
     <ion-list *ngSwitchCase="'produk'" padding>
-      <button ion-item color="secondary" class="font-roboto">
+      <button ion-item color="secondary" class="font-roboto" (click)="navTambahProduk()" >
         <ion-icon name="add">
           Tambah  Barang
         </ion-icon>
@@ -93,9 +95,8 @@
       </ion-card>
     </ion-list>
 
-
     <ion-list *ngSwitchCase="'jasa'" padding>
-      <button ion-item color="secondary" class="font-roboto">
+      <button ion-item color="secondary" class="font-roboto" (click)="navTambahJasa()">
         <ion-icon name="add">
           Tambah Jasa
         </ion-icon>
@@ -107,13 +108,14 @@
         </ion-row>           
       </ion-card>
       <ion-card  class ="full-card" name="content-j" *ngFor="let data of services">
-        <button ion-item (click)="navDetailJasa(data?.transaction_id)">                     
+        <button ion-item (click)="navDetailJasa(data?.jasa_id)">                     
           <ion-avatar item-start>
             <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
             <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
           </ion-avatar>
-            <h6 class="tanggal paddingtop1px"><p><b>ISI</b></p></h6>
-            <h6 class="textbooking" text-wrap><b>ISI</b></h6>                                                                                   
+            <h6 class="tanggal paddingtop1px"><p><b>{{data?.nama_jasa}}</b></p></h6>
+            <h6 class="textbooking" text-wrap>{{data?.deskripsi}}</h6> 
+            <h6 class="textbooking" text-wrap><b>{{data?.harga_jasa}}</b></h6>                                                                                  
           </button>                  
         </ion-card>
     </ion-list>

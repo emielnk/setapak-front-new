@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http'
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -30,11 +30,18 @@ export class PemanduregisPage {
   submitted = false;
   regData = { avatar:'', email: '', password: '', fullname: '' };
   imgPreview = 'assets/imgs/blank-avatar.jpg';
+  kecamatans: any;
   pemandu: {
     // user_id?: number,
-    namacompany?: string,
+    alamat_id?: any,
+    namacompany?: number,
+    user_id?: number,
+    no_telp?: any,
     alamat?: string,
-    deskripsi?: string
+    deskripsi?: string,
+    pemandu_status?: number,
+    pemandu_verivikasi?: number,
+    photo?: any,
   } = {}
   constructor(public navCtrl: NavController, 
     public toastCtrl: ToastController,
@@ -44,11 +51,35 @@ export class PemanduregisPage {
     public loadCtrl: LoadingController,
     private transfer: FileTransfer,
     private camera: Camera,
+    public alertCtrl: AlertController,
     private imagePicker: ImagePicker,
     private base64: Base64) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PemanduregisPage');
+    this.regisAlert()
+    this.cekIsVerified();
+  }
+
+  regisAlert() {
+    let alert = this.alertCtrl.create({
+      title: "Belum Mendaftar",
+      message: "Anda belum pernah mendaftar sebagai Pemandu Wisata. Halaman ini bisa di akses bila anda sudah terdaftar sebagai pemandu wisata",
+      buttons: ['OK']
+    })
+    alert.present();
+  }
+
+  ionViewWillEnter() {
+    this.getKecamatan();
+  }
+
+  getKecamatan() {
+    this.http.get(this.userData.BASE_URL+'api/alamat/kecamatan', this.options).subscribe( data=> {
+      let response = data.json();
+      this.kecamatans = response.data;
+      console.log("kecamatans",this.kecamatans);
+    })
   }
 
   getImage() {
@@ -67,34 +98,70 @@ export class PemanduregisPage {
     }, (err) => { });
   }
 
+  cekIsVerified() {
+    this.userData.getId().then((id) => {
+      this.http.get(this.userData.BASE_URL+"api/pemandu/registrasi/"+id, this.options).subscribe(data => {
+        let response = data.json();
+        console.log("ir verified", response);
+      })
+    })
+
+  }
+
+  touchRegister(form) {
+    const confirm = this.alertCtrl.create({
+      title: 'Anda Yakin Dengan Data Anda?',
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Yakin',
+          handler: () => {
+            this.registPemandu(form);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   registPemandu(form: NgForm) {
     this.submitted = true;
-    let loading = this.loadCtrl.create({
+    this.userData.getId().then((id) => {
+      // this.pemandu.user_id = id;
+      let loading = this.loadCtrl.create({
         content: 'Tunggu sebentar...'
-    });
-
-    if(form.valid){
+      });
+      
+      loading.present();
       let input = JSON.stringify({ 
-        // user_id: this.pemandu.user_id, 
-        nama_company:this.pemandu.namacompany,
+        user_id: id,
+        alamat_id: this.pemandu.alamat_id, 
+        nama_company: this.pemandu.namacompany,
+        no_telp: this.pemandu.no_telp,
         alamat: this.pemandu.alamat,
         deskripsi: this.pemandu.deskripsi,
+        pemandu_status: 0,
+        pemandu_verifikasi: 0
       });
-      console.log(input)
-      this.http.post(this.userData.BASE_URL + "api/regispemandu/create/post", input, this.options).subscribe(data => {
+      console.log(input);
+      this.http.post(this.userData.BASE_URL+"api/pemandu/registrasi/", input, this.options).subscribe(data => {
         loading.dismiss();
-        let response = data.json();           
+        let response = data.json();
+        this.navCtrl.push('ProfileAccountPage');           
         this.showAlert(response.message);
-     }, err => { 
-        loading.dismiss();
-        this.showError(err);
-        console.log(err);
-     });
+      },err => { 
+          loading.dismiss();
+          this.showError(err);
+          console.log(err);
+      });
+    })
 
-    }
-    else {
-      console.log("ga bisa gan")
-    }
   }
 
   showError(err: any){  

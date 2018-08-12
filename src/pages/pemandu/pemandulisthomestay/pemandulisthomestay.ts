@@ -23,12 +23,20 @@ export class PemandulisthomestayPage {
   user_id: any;
   pemandu_id: any;
   my_homestays: any = [];
-
+  currenthomestay_id: number;
+  currenthomestay: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData, public pemanduData: PemanduDataProvider) {
+    this.currenthomestay_id = navParams.data.homestay_id
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PemandulisthomestayPage');
+  }
+
+  ionViewWillEnter() {
+    // this.getPemanduId();
+    // this.getAllMyHomestay();
+    this.getHomestayById(this.currenthomestay_id)
   }
 
   doRefresh(refresher){
@@ -39,28 +47,11 @@ export class PemandulisthomestayPage {
     }, 1000);
   }
 
-  ionViewWillEnter() {
-    this.getPemanduId();
-    // this.getAllMyHomestay();
-  }
-
-  navEditHomestayById() {
-    this.navCtrl.push("PemanduedithomestayPage")
-  }
-
-  getPemanduId() {
-    this.pemanduData.getPemanduId().then((id) =>{
-      this.pemandu_id = id
-      this.http.get(this.userData.BASE_URL+'api/pemandu/homestay/'+this.pemandu_id, this.options).subscribe(data => {
-        let response = data.json();
-        console.log("data dr list HS", response);
-        this.my_homestays = response.data;
-        console.log(this.my_homestays);
-      })
+  getHomestayById(id: number) {
+    this.http.get(this.userData.BASE_URL+'api/homestay/detail/'+id, this.options).subscribe(data => {
+      let response = data.json();
+      this.currenthomestay = response.data;
+      console.log("ini data detailnya", response)
     })
-  }
-
-  navAddHomestay() {
-    this.navCtrl.push('PemanduhomestayPage');
   }
 }

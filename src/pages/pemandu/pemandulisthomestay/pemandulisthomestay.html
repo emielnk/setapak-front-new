@@ -5,16 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-row>
       <ion-col>
         <ion-title>Homestay saya</ion-title>
-      </ion-col>
-      <ion-col>
-        <button class="button-add-new" ion-button clear (click)="navAddHomestay()">
-          <ion-icon name="add">
-          </ion-icon>
-        </button>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -23,23 +17,9 @@
 
 <ion-content padding>
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>
-  <ion-list >
-    <ion-card  class ="full-card" *ngFor="let data of my_homestays">
-      <button ion-item (click)="navDetailHomestay(data?.homestay_id)" >                     
-        <ion-avatar item-start>
-            <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
-            <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
-        </ion-avatar>
-        <h6 class="textbooking"><b>{{data?.nama_homestay}}</b></h6>
-        <h6 text-wrap class="fontketcard">{{data?.deskripsi}}</h6>                                                                  
-      </button>                 
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
+      
     </ion-card>
-    <ion-card *ngIf="my_homestays.length <= 0 "> 
-        <ion-row>
-          <h5 padding-left padding-top><b>Belum Memiliki Homestay</b></h5>         
-        </ion-row>           
-      </ion-card>
-  </ion-list>
 </ion-content>

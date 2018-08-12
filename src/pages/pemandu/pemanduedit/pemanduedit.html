@@ -32,7 +32,7 @@
                 </ion-item>
                 <ion-item>
                   <ion-label stacked color="primary">Nomor Telepon</ion-label>
-                  <ion-input placeholder="" [(ngModel)]="phoneNumber" name="telepon" type="tel" pattern="[0]{1}[0-9]{9}[0-9]{1,}" maxlength="15" required>
+                  <ion-input placeholder="{{no_telp}}" [(ngModel)]="phoneNumber" name="telepon" type="tel" pattern="[0]{1}[0-9]{9}[0-9]{1,}" maxlength="15" required>
                   </ion-input>
                 </ion-item> 
                 <ion-item> 
@@ -46,7 +46,10 @@
                     </ion-textarea>
                 </ion-item>
                 <div>
-                  <ion-label stacked color="primary">Pilih Foto</ion-label>
+                  <ion-item>
+                    <ion-label stacked color="primary">Pilih Foto</ion-label>
+                  </ion-item>
+                  
                   <ion-item>
                     <p>lokasi/file/photo.jpg</p>
                     <button ion-button color="secondary" (click)="getImage()">Get Image</button>
@@ -60,7 +63,7 @@
         </ion-card-content>
       </ion-card>
         <button *ngIf="status == 1" color="danger" block ion-button (click)="nonAktifkanPerusahaan()">
-            <ion-icon name="warning"></ion-icon> <label> non aktifkan toko</label>
+            <ion-icon name="warning"></ion-icon> <label> non aktifkan perushaan anda</label>
         </button>
         <button *ngIf="status == 0" color="secondary" block ion-button (click)="AktifkanPerusahaan()">
             <ion-icon name="primary"></ion-icon> <label> Aktifkan Toko Saya</label>
