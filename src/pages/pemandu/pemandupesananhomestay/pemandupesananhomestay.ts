@@ -100,7 +100,7 @@ export class PemandupesananhomestayPage {
 
   touchTerimaPesanan(id: number, status: number) {
     let alert = this.alertCtrl.create({
-      title: 'Konfitmasi Terima Pesanan',
+      title: 'Konfirmasi Terima Pesanan',
       message: 'Apakah Anda yakin ingin menerima pesanan ini?',
       buttons: [
         {

@@ -18,7 +18,7 @@
 
 
 <ion-content>
-    <ion-card>
+    <ion-card class="full-card">
         <ion-card-header>
           Edit Profile Anda
         </ion-card-header>
@@ -52,7 +52,7 @@
                   
                   <ion-item>
                     <p>lokasi/file/photo.jpg</p>
-                    <button ion-button color="secondary" (click)="getImage()">Get Image</button>
+                    <button ion-button color="secondary" (click)="getImage()" disabled>Get Image</button>
                   </ion-item>
                 </div>        
               </ion-list>
@@ -62,11 +62,11 @@
           </form>
         </ion-card-content>
       </ion-card>
-        <button *ngIf="status == 1" color="danger" block ion-button (click)="nonAktifkanPerusahaan()">
-            <ion-icon name="warning"></ion-icon> <label> non aktifkan perushaan anda</label>
+        <button *ngIf="status == 1" color="danger" ion-button block (click)="touchNonAktif()">
+             non aktifkan perushaan anda
         </button>
-        <button *ngIf="status == 0" color="secondary" block ion-button (click)="AktifkanPerusahaan()">
-            <ion-icon name="primary"></ion-icon> <label> Aktifkan Toko Saya</label>
+        <button *ngIf="status == 0" color="secondary" ion-button block (click)="touchAktifkan()">
+            Aktifkan Toko Saya
         </button>
 </ion-content>
 
