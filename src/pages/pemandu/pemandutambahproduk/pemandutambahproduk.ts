@@ -140,11 +140,7 @@ export class PemandutambahprodukPage {
 
   navTambahProduk(){
     // this.navCtrl.push("PemandulistservicePage");
-    let alert = this.alertCtrl.create({
-      title: "Perhatian!",
-      message: "Fitur ini akan segera tersedia, tunggu update terbaru ya"
-    })
-    alert.present();
+    this.navCtrl.push("PemanduprodukPage")
   }
 
   navDetailHomestay(id) {

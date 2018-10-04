@@ -20,40 +20,40 @@
 
   <div>
     <ion-row justify-content-center align-items-center>
-        <h5 class="namaprofile">Jenis Produk</h5>
+      <h5 class="namaprofile">Jenis Produk</h5>
     </ion-row>
-</div>
-<div>
-  <ion-toolbar class="paddingtoptoolbar" no-border-top>
+  </div>
+  <div>
+    <ion-toolbar  no-border-top>
       <ion-segment [(ngModel)]="MyProduk">
         <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransStatusHs?.length > 0">
-              {{dataTransStatusHs?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Homestay</span>
-            </div>
+          <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransStatusHs?.length > 0">
+            {{dataTransStatusHs?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Homestay</span>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/box.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransProduk?.length > 0">
-              {{dataTransProduk?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Produk</span>
-            </div>          
+          <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransProduk?.length > 0">
+            {{dataTransProduk?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Produk</span>
+          </div>          
         </ion-segment-button>
         <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransJasa?.length > 0">
-              {{dataTransJasa?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Jasa</span>
-            </div>
-          </ion-segment-button>
-        </ion-segment>
+          <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransJasa?.length > 0">
+            {{dataTransStatusJasa?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Jasa</span>
+          </div>
+        </ion-segment-button>
+      </ion-segment>
     </ion-toolbar>
   </div>
 
@@ -67,9 +67,8 @@
               <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
           </ion-avatar>
           <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-          <h6 class="textbooking" text-wrap><b>Booking di : {{data?.namaHS}}</b></h6>
-          &nbsp;
-          <h6 class="textbooking" text-wrap><b>Perminataan Oleh : {{data?.namaPemesan}}</b></h6>
+          <h6 class="textbooking" text-wrap><b>{{data?.namaHS}}</b></h6>
+          <h6 class="textbooking" text-wrap><b>Pemesan: {{data?.namaPemesan}}</b></h6>
           <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
           <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
           <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
@@ -86,7 +85,7 @@
     </ion-list>
     
     <ion-list *ngSwitchCase="'produk'" padding>
-      <ion-card  class ="full-card" *ngFor="let data of dataTransProduk > 0">
+      <ion-card  class ="full-card" *ngFor="let data of dataTransStatusBarang > 0">
         <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">                     
           <ion-avatar item-start>
             <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
@@ -102,7 +101,7 @@
           <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
         </button>                  
       </ion-card>
-      <ion-card *ngIf="dataTransProduk.length <= 0 "> 
+      <ion-card *ngIf="dataTransStatusBarang.length <= 0 "> 
         <ion-row>
           <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
         </ion-row>           
@@ -111,7 +110,7 @@
 
 
     <ion-list *ngSwitchCase="'jasa'" padding>
-      <ion-card  class ="full-card" *ngFor="let data of dataTransJasa">
+      <ion-card  class ="full-card" *ngFor="let data of dataTransStatusJasa">
           <button ion-item (click)="navDetailTransJasa(data?.transaction_id)">                     
             <ion-avatar item-start>
               <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
@@ -127,7 +126,7 @@
               <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
             </button>                  
           </ion-card>
-          <ion-card *ngIf="dataTransJasa.length <= 0 "> 
+          <ion-card *ngIf="dataTransStatusJasa.length <= 0 "> 
             <ion-row>
               <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
             </ion-row>           

@@ -28,17 +28,17 @@
               </div>
           </ion-segment-button>
           <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
-              <img class ="logosegment" src="assets/imgs/logo/box.png"  />
-              
-              <div style="margin-top: -28px !important; ">
-                <span class = "fontsizesmall">Produk</span>
-              </div>          
+            <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+            
+            <div style="margin-top: -28px !important; ">
+              <span class = "fontsizesmall">Produk</span>
+            </div>          
           </ion-segment-button>
           <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
-              <img class ="logosegment" src="assets/imgs/logo/conversation.png"/>
-              <div style="margin-top: -28px !important; ">
-                <span class = "fontsizesmall">Jasa</span>
-              </div>
+            <img class ="logosegment" src="assets/imgs/logo/conversation.png"/>
+            <div style="margin-top: -28px !important; ">
+              <span class = "fontsizesmall">Jasa</span>
+            </div>
           </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
@@ -59,15 +59,15 @@
       </ion-card>
       <ion-card name="content-hs"  class ="full-card" *ngFor="let data of homestays">
         <button ion-item (click)="navDetailHomestay(data?.homestay_id)" >                     
-          <ion-avatar item-start>
-            <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.photoPemesan}}">
-            <img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png">                   
-          </ion-avatar>
-          <h6 class="tanggal paddingtop1px"><p><b>{{data?.nama_homestay}}</b></p></h6>
+          <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
+          <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+          <ion-card-title>
+            {{data?.nama_homestay}}
+          </ion-card-title>
           <h6 class="hitam" text-wrap><p>{{data?.deskripsi}}</p></h6>
           <h6 class="hitam" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</h6>                                                                                  
-        </button>                 
-      </ion-card>
+        </button>                
+      </ion-card >
     </ion-list>
 
     <ion-list *ngSwitchCase="'produk'" padding>
@@ -109,13 +109,11 @@
       </ion-card>
       <ion-card  class ="full-card" name="content-j" *ngFor="let data of services">
         <button ion-item (click)="navDetailJasa(data?.jasa_id)">                     
-          <ion-avatar item-start>
-            <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.photoPemesan}}">
-            <img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png">                   
-          </ion-avatar>
-            <h6 class="tanggal paddingtop1px"><p><b>{{data?.nama_jasa}}</b></p></h6>
-            <h6 class="hitam" text-wrap><p>{{data?.deskripsi}}</p></h6> 
-            <h6 class="hitam" text-wrap>{{data?.harga_jasa | currency:'IDR ': true}}</h6>                                                                                  
+          <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.photoPemesan}}">
+          <img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png">                   
+          <h6 class="tanggal paddingtop1px"><p><b>{{data?.nama_jasa}}</b></p></h6>
+          <h6 class="hitam" text-wrap><p>{{data?.deskripsi}}</p></h6> 
+          <h6 class="hitam" text-wrap>{{data?.harga_jasa | currency:'IDR ': true}}</h6>                                                                                  
           </button>                  
         </ion-card>
     </ion-list>

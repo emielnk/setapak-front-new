@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Setapak Bogor</ion-title>
   </ion-navbar>
 
@@ -16,10 +16,10 @@
 <ion-content padding>
     <ion-card>
         <ion-card-header>
-          TBuat Produk baru
+          Buat Produk baru
         </ion-card-header>
         <ion-card-content>
-          <form #tourServiceForm="ngForm">
+          <form #newBarang="ngForm">
               <ion-list no-lines padding-right>
                   <ion-item>
                     <ion-label stacked color="primary">Nama Barang</ion-label>
@@ -27,15 +27,20 @@
                     </ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-label stacked color="primary">Harga Barang</ion-label>
-                    <ion-input placeholder="" name="nama" type="number" required>
+                    <ion-label stacked color="primary">Harga Barang (Rp)</ion-label>
+                    <ion-input placeholder="ex: 10000" name="nama" type="number" required>
                     </ion-input>
                   </ion-item>
                   <ion-item>
-                    <ion-label stacked color="primary">Berat Barang</ion-label>
-                    <ion-input placeholder="" name="nama" type="number" required>
+                    <ion-label stacked color="primary">Berat Barang (KG)</ion-label>
+                    <ion-input placeholder="ex: 20" name="nama" type="number" required>
                     </ion-input>
-                  </ion-item>   
+                  </ion-item>
+                  <ion-item>
+                    <ion-label stacked color="primary">Jumlah Barang</ion-label>
+                    <ion-input placeholder="Jumlah dalam inventory" name="nama" type="number" required>
+                    </ion-input>
+                  </ion-item>    
                   <ion-item> 
                   <ion-label stacked color="primary">Deskripsi Barang</ion-label>
                     <ion-textarea placeholder="be a number one touring service" name="nama" type="text" required>
@@ -46,13 +51,6 @@
                     <ion-item>
                       <p>lokasi/file/photo.jpg</p>
                       <button ion-button color="secondary" (click)="getImage()">Get Image</button>
-                    </ion-item>
-                    <ion-item>
-                      <h4>Image Preview</h4>
-                      <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
-                    </ion-item>
-                    <ion-item>
-                      <button ion-button (click)="uploadFile()">Upload</button>
                     </ion-item>
                   </div>
               </ion-list>
