@@ -20,13 +20,15 @@ export class PemandutransmenunggubayarPage {
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
-
+  
+  BASE_URL: any = "http://setapakbogor.site"
   user_id: any;
   pemandu_id: any;
   status: any = 2;
   dataTransStatusHs: any = [];
   dataTransStatusJasa: any = [];
   dataTransStatusBarang: any = [];
+  start_tabs : any;
   
   segment: String = 'homestay';
 
@@ -44,13 +46,13 @@ export class PemandutransmenunggubayarPage {
   selectedSegment(value){
     this.segment = value;
     //req api
-    // if(this.segment == 'homestay'){
-    //   this.getTransaksiHomestay(this.token);
-    // }else if(this.segment == 'produk'){
-    //   this.getTransaksiProduk(this.token);
-    // }else if(this.segment =='jasa'){
-    //   this.getTransaksiJasa(this.token);
-    // }  
+    if(this.segment == 'homestay'){
+      this.getTransHomestayTungguBayar(this.status);
+    }else if(this.segment == 'produk'){
+      this.getTransJasaTungguBayar(this.status);
+    }else if(this.segment =='jasa'){
+      this.getTransProdukTungguBayar(this.status);
+    }  
   }
 
   ionViewDidLoad() {
@@ -59,6 +61,9 @@ export class PemandutransmenunggubayarPage {
 
   ionViewWillEnter() {
     this.getTransHomestayTungguBayar(this.status);
+    this.getTransJasaTungguBayar(this.status);
+    this.getTransProdukTungguBayar(this.status);
+    this.start_tabs = "homestay";
   }
 
   getTransHomestayTungguBayar(status: any) {
@@ -74,7 +79,7 @@ export class PemandutransmenunggubayarPage {
             this.getDetailTransHomestay(this.dataTransStatusHs[i].homestay_id, i)
             this.getDetailTransPemesanHs(this.dataTransStatusHs[i].user_id, i)
           }
-          console.log("this.dataTransStatusHs = ", this.dataTransStatusHs)
+          console.log("Homestay nih = ", this.dataTransStatusHs)
         }
       })
     })
@@ -96,6 +101,7 @@ export class PemandutransmenunggubayarPage {
       this.dataTransStatusHs[i].namaPemesan = response.data[0].nama;
       this.dataTransStatusHs[i].noPemesan = response.data[0].no_hp;
       this.dataTransStatusHs[i].photoPemesan = response.data[0].photo;
+      // console.log("nih potonya", this.dataTransStatusHs);
     })
   }
 
@@ -116,7 +122,7 @@ export class PemandutransmenunggubayarPage {
             this.getDetailTransJasa(this.dataTransStatusJasa[i].jasa_id, i)
             this.getDetailTransPemesanJasa(this.dataTransStatusJasa[i].user_id, i)
           }
-          console.log("this.dataTransStatusJasa = ", this.dataTransStatusJasa)
+          console.log("Jasa nih = ", this.dataTransStatusJasa)
         }
       })
     })
@@ -125,9 +131,8 @@ export class PemandutransmenunggubayarPage {
   getDetailTransJasa(id: number, i: number) {
     this.http.get(this.userData.BASE_URL+'api/jasa/detail/'+id, this.options).subscribe(data => {
       let response = data.json();
-      // console.log("HS dari data trans status", response.data[0]);
+      // console.log("jasa response", response);
       this.dataTransStatusJasa[i].namaJasa = response.data[0].nama_jasa
-      // console.log("this.dataTransStatus[i] = ", this.dataTransStatus[i].namaHS)
     })
   }
 
@@ -142,7 +147,7 @@ export class PemandutransmenunggubayarPage {
   }
 
   navDetailTransJasa(id: number) {
-    this.app.getRootNav().push('PemandupesananjasaPage', {transaction_id: id});
+    this.app.getRootNav().push('PemandupesananservicePage', {transaction_id: id});
   }
 
   getTransProdukTungguBayar(status: number) {
@@ -155,10 +160,10 @@ export class PemandutransmenunggubayarPage {
           this.dataTransStatusBarang = response.data;
           // console.log(this.dataTransStatus);
           for(let i = 0; i < this.dataTransStatusBarang.length; i++){
-            this.getDetailTransJasa(this.dataTransStatusBarang[i].jasa_id, i)
-            this.getDetailTransPemesanJasa(this.dataTransStatusBarang[i].user_id, i)
+            this.getDetailTransBarang(this.dataTransStatusBarang[i].barang_id, i)
+            this.getDetailTransPemesanBarang(this.dataTransStatusBarang[i].user_id, i)
           }
-          console.log("this.dataTransStatusJasa = ", this.dataTransStatusBarang)
+          console.log("Barang nih = ", this.dataTransStatusBarang)
         }
       })
     })
@@ -167,8 +172,8 @@ export class PemandutransmenunggubayarPage {
   getDetailTransBarang(id: number, i: number) {
     this.http.get(this.userData.BASE_URL+'api/produk/detail/'+id, this.options).subscribe(data => {
       let response = data.json();
-      // console.log("HS dari data trans status", response.data[0]);
-      this.dataTransStatusBarang[i].namaBarang = response.data[0].nama_jasa
+      console.log("Barang nih response nya", response);
+      this.dataTransStatusBarang[i].namaBarang = response.data[0].nama_barang
       // console.log("this.dataTransStatus[i] = ", this.dataTransStatus[i].namaHS)
     })
   }

@@ -119,7 +119,12 @@
 
   <div [ngSwitch]="start_tabs">
 
-      <ion-list *ngSwitchCase="'homestay'" padding>
+      <ion-list *ngSwitchCase="'homestay'">
+        <ion-card *ngIf="dataTransHomestay.length <= 0 "> 
+          <ion-row>
+            <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
+          </ion-row>           
+        </ion-card>
         <ion-card  class ="full-card" *ngFor="let data of dataTransHomestay">
           <button ion-item (click)="navDetailTransHomestay(data?.transaction_id)" >                     
             <ion-avatar item-start>
@@ -137,19 +142,19 @@
             <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
           </button>                 
         </ion-card>
-        <ion-card *ngIf="dataTransHomestay <= 0 "> 
-            <ion-row>
-              <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
-            </ion-row>           
-          </ion-card>
       </ion-list>
 
-      <ion-list *ngSwitchCase="'produk'" padding>
+      <ion-list *ngSwitchCase="'produk'" >
+        <ion-card *ngIf="dataTransProduk.length <= 0 "> 
+          <ion-row>
+            <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
+          </ion-row>           
+        </ion-card>
         <ion-card  class ="full-card" *ngFor="let data of dataTransProduk">
           <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">                     
             <ion-avatar item-start>
-              <img class = "photoavatar" *ngIf="data?.photoPemesan?.photo" src="{{BASE_URL+data?.photoPemesan}}">
-              <img class = "photoavatar" *ngIf="!data?.photoPemesan?.photo" src="assets/imgs/logo/usericon.png">                   
+              <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+              <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
             </ion-avatar>
             <h6 class="tanggal paddingtop1px"><p><b>{{data?.transaction_date | date: "dd MMMM yyyy"}}</b></p></h6>
             <h6 class="textbooking" text-wrap><p><b>{{data?.namaB}}</b></p></h6>
@@ -162,16 +167,11 @@
             <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
           </button>                  
         </ion-card>
-        <ion-card *ngIf="dataTransProduk <= 0 "> 
-          <ion-row>
-            <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
-          </ion-row>           
-        </ion-card>
       </ion-list>
 
 
-      <ion-list *ngSwitchCase="'jasa'" padding>
-        <ion-card *ngIf="dataTransJasa <= 0 "> 
+      <ion-list *ngSwitchCase="'jasa'" >
+        <ion-card *ngIf="dataTransJasa.length <= 0 "> 
           <ion-row>
               <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
           </ion-row>           

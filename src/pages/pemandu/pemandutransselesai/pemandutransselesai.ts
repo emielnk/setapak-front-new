@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
-import { Http,Headers,RequestOptions } from '@angular/http';
 
 /**
  * Generated class for the PemandutransselesaiPage page.
@@ -21,13 +21,16 @@ export class PemandutransselesaiPage {
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
-
+  BASE_URL = "http://setapakbogor.site"
   user_id: any;
   pemandu_id: any;
-  status: any = 3;
+  status: any = 7;
+  start_tabs: any;
+  // status_barang: number = 6;
   dataTransStatusHs: any = [];
   dataTransStatusJasa: any = [];
-  
+  dataTransStatusBarang: any = [];
+
   segment: String = 'homestay';
 
   constructor(public http: Http, public app: App, public userData: UserData, public pemanduData: PemanduDataProvider,public navCtrl: NavController, public navParams: NavParams) {
@@ -44,13 +47,13 @@ export class PemandutransselesaiPage {
   selectedSegment(value){
     this.segment = value;
     //req api
-    // if(this.segment == 'homestay'){
-    //   this.getTransaksiHomestay(this.token);
-    // }else if(this.segment == 'produk'){
-    //   this.getTransaksiProduk(this.token);
-    // }else if(this.segment =='jasa'){
-    //   this.getTransaksiJasa(this.token);
-    // }  
+    if(this.segment == 'homestay'){
+      this.getTransHomestayTungguBayar(this.status);
+    }else if(this.segment == 'produk'){
+      this.getTransJasaTungguBayar(this.status);
+    }else if(this.segment =='jasa'){
+      this.getTransProdukTungguBayar(this.status);
+    }  
   }
 
   ionViewDidLoad() {
@@ -59,6 +62,9 @@ export class PemandutransselesaiPage {
 
   ionViewWillEnter() {
     this.getTransHomestayTungguBayar(this.status);
+    this.getTransJasaTungguBayar(this.status);
+    this.getTransProdukTungguBayar(this.status);
+    this.start_tabs = "homestay";
   }
 
   getTransHomestayTungguBayar(status: any) {
@@ -74,7 +80,7 @@ export class PemandutransselesaiPage {
             this.getDetailTransHomestay(this.dataTransStatusHs[i].homestay_id, i)
             this.getDetailTransPemesanHs(this.dataTransStatusHs[i].user_id, i)
           }
-          console.log("this.dataTransStatusHs = ", this.dataTransStatusHs)
+          console.log("Homestay nih = ", this.dataTransStatusHs)
         }
       })
     })
@@ -96,6 +102,7 @@ export class PemandutransselesaiPage {
       this.dataTransStatusHs[i].namaPemesan = response.data[0].nama;
       this.dataTransStatusHs[i].noPemesan = response.data[0].no_hp;
       this.dataTransStatusHs[i].photoPemesan = response.data[0].photo;
+      // console.log("nih potonya", this.dataTransStatusHs);
     })
   }
 
@@ -107,7 +114,7 @@ export class PemandutransselesaiPage {
     this.pemanduData.getPemanduId().then(id => {
       this.pemandu_id = id
       this.status = status
-      this.http.get(this.userData.BASE_URL+'api/transaksi/homestay/'+this.pemandu_id+'/'+status, this.options).subscribe(data => {
+      this.http.get(this.userData.BASE_URL+'api/transaksi/jasa/'+this.pemandu_id+'/'+status, this.options).subscribe(data => {
         let response = data.json();
         if(response.status == true) {
           this.dataTransStatusJasa = response.data;
@@ -116,18 +123,17 @@ export class PemandutransselesaiPage {
             this.getDetailTransJasa(this.dataTransStatusJasa[i].jasa_id, i)
             this.getDetailTransPemesanJasa(this.dataTransStatusJasa[i].user_id, i)
           }
-          console.log("this.dataTransStatusJasa = ", this.dataTransStatusJasa)
+          console.log("Jasa nih = ", this.dataTransStatusJasa)
         }
       })
     })
   }
 
   getDetailTransJasa(id: number, i: number) {
-    this.http.get(this.userData.BASE_URL+'api/homestay/detail/'+id, this.options).subscribe(data => {
+    this.http.get(this.userData.BASE_URL+'api/jasa/detail/'+id, this.options).subscribe(data => {
       let response = data.json();
-      // console.log("HS dari data trans status", response.data[0]);
+      // console.log("jasa response", response);
       this.dataTransStatusJasa[i].namaJasa = response.data[0].nama_jasa
-      // console.log("this.dataTransStatus[i] = ", this.dataTransStatus[i].namaHS)
     })
   }
 
@@ -142,7 +148,48 @@ export class PemandutransselesaiPage {
   }
 
   navDetailTransJasa(id: number) {
-    this.app.getRootNav().push('PemandupesananhomestayPage', {transaction_id: id});
+    this.app.getRootNav().push('PemandupesananservicePage', {transaction_id: id});
   }
 
+  getTransProdukTungguBayar(status: number) {
+    this.pemanduData.getPemanduId().then(id => {
+      this.pemandu_id = id
+      this.status = status
+      this.http.get(this.userData.BASE_URL+'api/transaksi/produk/'+this.pemandu_id+'/'+status, this.options).subscribe(data => {
+        let response = data.json();
+        if(response.status == true) {
+          this.dataTransStatusBarang = response.data;
+          // console.log(this.dataTransStatus);
+          for(let i = 0; i < this.dataTransStatusBarang.length; i++){
+            this.getDetailTransBarang(this.dataTransStatusBarang[i].barang_id, i)
+            this.getDetailTransPemesanBarang(this.dataTransStatusBarang[i].user_id, i)
+          }
+          console.log("Barang nih = ", this.dataTransStatusBarang)
+        }
+      })
+    })
+  }
+
+  getDetailTransBarang(id: number, i: number) {
+    this.http.get(this.userData.BASE_URL+'api/produk/detail/'+id, this.options).subscribe(data => {
+      let response = data.json();
+      console.log("Barang nih response nya", response);
+      this.dataTransStatusBarang[i].namaBarang = response.data[0].nama_barang
+      // console.log("this.dataTransStatus[i] = ", this.dataTransStatus[i].namaHS)
+    })
+  }
+
+  getDetailTransPemesanBarang(id: number, i: number) {
+    this.http.get(this.userData.BASE_URL+'api/wisatawan/detail/'+id, this.options).subscribe(data => {
+      let response = data.json();
+      // console.log("Pemesan dari data trans status ", response.data[0])
+      this.dataTransStatusBarang[i].namaPemesan = response.data[0].nama;
+      this.dataTransStatusBarang[i].noPemesan = response.data[0].no_hp;
+      this.dataTransStatusBarang[i].photoPemesan = response.data[0].photo;
+    })
+  }
+
+  navDetailTransProduk(id: number) {
+    this.app.getRootNav().push('PemandupesananprodukPage', {transaction_id: id});
+  }
 }

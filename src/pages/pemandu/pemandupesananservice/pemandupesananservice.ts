@@ -128,7 +128,7 @@ export class PemandupesananservicePage {
     alert.present();
   }
 
-  cekIsHsAvalible() {
+  cekIsJasaAvalible() {
     let jasa_id = this.detail_trans.jasa_id;
     let id =  this.detail_trans.transaction_id
     this.http.get(this.userData.BASE_URL+"api/jasa/check/avalible/"+id+'/'+jasa_id, this.options).subscribe(data => {
@@ -148,7 +148,7 @@ export class PemandupesananservicePage {
     let loading = this.loadCtrl.create({
       content: 'Tunggu sebentar'
     });
-    this.cekIsHsAvalible();
+    this.cekIsJasaAvalible();
     if(this.isAvalible == "empty"){
       if(status == 2) {
         loading.present();
@@ -189,7 +189,7 @@ export class PemandupesananservicePage {
     let param = JSON.stringify({
       transaction_status: status,
       transaction_id: id,
-      new_status: 7
+      new_status: 8
     });
     this.http.post(this.userData.BASE_URL+'api/transaksi/jasa/update/'+id, param, this.options).subscribe(data => {
       loading.dismiss();

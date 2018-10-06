@@ -7,6 +7,15 @@ page-pemandutransmenunggubayar {
         box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
         border-bottom: 1px solid #f1f2f6;   
     }
+    .full-card-test{
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 1px solid #f1f2f6;
+        padding-bottom: 1px;   
+    }
 
     .profpic{
         width: 100% !important;  
@@ -32,16 +41,41 @@ page-pemandutransmenunggubayar {
         margin: 0px auto !important;    
         width: 100% !important;
         border-radius: 0px !important;           
-
     }
-    .button-history{
-        margin :7.5px 0 !important;
+    .button-detail {
+        margin-left: 30px;
+    }
+    .with-line {
+        border-bottom: #488aff
+    }
+    .smallfont {
+        font-size: 12px;
+    }
+    .blackfont {
+        color: black;
+    }
+    .redfont {
+        color: red;
+    }
+    .align-right {
+        float: right;
+    }
+    .geser-kiri-1 {
+        margin-right: 5px
     }
     .logosegment{        
         width: 25%;
     }
-    .coba-coba {
-        background-color: aqua;
+    .right-padding {
+        margin-left: 20px;
+    }
+    .right-padding-2 {
+        margin-left: 43px;
+    }
+    .photoavatar {
+        margin-top: 12px;
+        width: 100% !important;
+        height: 70% !important;
     }
     .buttoncenter{
         text-align: center;

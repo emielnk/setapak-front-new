@@ -1,5 +1,5 @@
 <!--
-  Generated template for the PemandutransselesaiPage page.
+  Generated template for the PemandutransmenunggubayarPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,127 +7,242 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Selesai</ion-title>
+    <ion-title>Transaksi Gagal</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <div>
     <ion-row justify-content-center align-items-center>
-        <h5 class="namaprofile">Jenis Produk</h5>
+      <h5 class="namaprofile">Jenis Produk</h5>
     </ion-row>
-</div>
-<div>
-  <ion-toolbar class="paddingtoptoolbar" no-border-top>
-      <ion-segment [(ngModel)]="MyProduk">
+  </div>
+  <div>
+    <ion-toolbar  no-border-top>
+      <ion-segment [(ngModel)]="start_tabs">
         <ion-segment-button  value="homestay" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransStatusHs?.length > 0">
-              {{dataTransStatusHs?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Homestay</span>
-            </div>
+          <img class ="logosegment" src="assets/imgs/logo/home-icon-silhouette.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransStatusHs?.length > 0">
+            {{dataTransStatusHs?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Homestay</span>
+          </div>
         </ion-segment-button>
         <ion-segment-button value="produk" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/box.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransProduk?.length > 0">
-              {{dataTransProduk?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Produk</span>
-            </div>          
+          <img class ="logosegment" src="assets/imgs/logo/box.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransStatusBarang?.length > 0">
+            {{dataTransStatusBarang?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Produk</span>
+          </div>          
         </ion-segment-button>
         <ion-segment-button value="jasa" (ionSelect)="selectedSegment($event.value)">
-            <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
-            <ion-badge class="notif-badge" *ngIf="dataTransJasa?.length > 0">
-              {{dataTransJasa?.length}}
-            </ion-badge>
-            <div style="margin-top: -28px !important; ">
-              <span class = "fontsizesmall">Jasa</span>
-            </div>
-          </ion-segment-button>
-        </ion-segment>
+          <img class ="logosegment" src="assets/imgs/logo/conversation.png"  />
+          <ion-badge class="notif-badge" *ngIf="dataTransStatusJasa?.length > 0">
+            {{dataTransStatusJasa?.length}}
+          </ion-badge>
+          <div style="margin-top: -28px !important; ">
+            <span class = "fontsizesmall">Jasa</span>
+          </div>
+        </ion-segment-button>
+      </ion-segment>
     </ion-toolbar>
   </div>
+  &nbsp;
+  <div [ngSwitch]="start_tabs">
 
-  <div [ngSwitch]="MyProduk">
-
-    <ion-list *ngSwitchCase="'homestay'" padding>
-      <!-- <ion-card  class ="full-card" *ngFor="let data of dataTransStatusHs">
-        <button ion-item (click)="navDetailTransHomestay(data?.transaction_id)" >                     
-          <ion-avatar item-start>
-              <img class = "photoavatar" *ngIf="data?.photoPemesan" src="setapakbogor.site{{data?.photoPemesan}}">
-              <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">                   
-          </ion-avatar>
-          <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-          <h6 class="textbooking" text-wrap><b>Booking di : {{data?.namaHS}}</b></h6>
-          &nbsp;
-          <h6 class="textbooking" text-wrap><b>Perminataan Oleh : {{data?.namaPemesan}}</b></h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
-          <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
-          <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
+    <ion-list *ngSwitchCase="'homestay'">
+      <ion-card  class ="full-card" *ngFor="let data of dataTransStatusHs">
+        <button ion-item (click)="navDetailTransHomestay(data?.transaction_id)">
+          <div>
+            <ion-row>
+              <ion-row>
+              <ion-col col-2>
+                  <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+                  <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Pemesan</a>
+                  </ion-col>
+                  <ion-col  align-self-end>
+                    <a class ="smallfont right-padding-2 align-right">{{data?.namaPemesan}}</a>
+                    </ion-col> 
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Homestay</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                    <a class ="smallfont right-padding align-right">{{data?.namaHS}}</a>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>                          
+            </ion-row> 
+            <ion-row>
+              <ion-col>
+                <a class ="smallfont blackfont">Tanggal Transaksi</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.transaction_date | date: "dd MMMM yyyy"}}</a>
+              </ion-col>  
+            </ion-row>
+            <ion-row>              
+              <ion-col>
+                <a class ="smallfont blackfont">Nominal</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.total_harga | currency: "IDR "}}</a>
+              </ion-col>    
+            </ion-row>   
+            <ion-row>
+              <ion-col>
+                  <a *ngIf="data?.transaction_status == 7" class ="smallfont blackfont">Dibatalkan Oleh Anda</a>
+                  <a *ngIf="data?.transaction_status == 8" class ="smallfont blackfont">Dibatalkan Oleh Wisatawan</a>
+                  <a *ngIf="data?.transaction_status == 9" class ="smallfont blackfont">Dibatalkan Oleh Admin</a>
+              </ion-col>
+            </ion-row>                 
+          </div>                                                           
         </button>                 
-      </ion-card> -->
-      <ion-card> 
+      </ion-card>
+      <ion-card *ngIf="dataTransStatusHs.length <= 0 "> 
           <ion-row>
             <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
           </ion-row>           
         </ion-card>
     </ion-list>
     
-    <ion-list *ngSwitchCase="'produk'" padding>
-      <!-- <ion-card  class ="full-card" *ngFor="let data of dataTransProduk > 0">
-        <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">                     
-          <ion-avatar item-start>
-            <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
-            <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                   
-          </ion-avatar>
-          <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-          <h6 class="textbooking" text-wrap><b>Booking di : {{data?.dataPemandu?.nama_company}}</b></h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
-          <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
-          <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
-          <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
+    <ion-list *ngSwitchCase="'produk'">
+      <ion-card  class ="full-card" *ngFor="let data of dataTransStatusBarang">
+        <button ion-item (click)="navDetailTransProduk(data?.transaction_id)"> 
+          <div>
+            <ion-row>
+              <ion-row>
+              <ion-col col-2>
+                  <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+                  <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Pemesan</a>
+                  </ion-col>
+                  <ion-col  align-self-end>
+                    <a class ="smallfont right-padding-2 align-right">{{data?.namaPemesan}}</a>
+                    </ion-col> 
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Barang</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                    <a class ="smallfont right-padding align-right">{{data?.namaBarang}}</a>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>                          
+            </ion-row> 
+            <ion-row>
+              <ion-col>
+                <a class ="smallfont blackfont">Tanggal Transaksi</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.transaction_date | date: "dd MMMM yyyy"}}</a>
+              </ion-col>  
+            </ion-row>
+            <ion-row>              
+              <ion-col>
+                <a class ="smallfont blackfont">Nominal</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.total_harga  | currency: "IDR "}}</a>
+              </ion-col>    
+            </ion-row>   
+            <ion-row>
+              <ion-col>
+                <a *ngIf="data?.transaction_status == 7" class ="smallfont blackfont">Dibatalkan Oleh Anda</a>
+                <a *ngIf="data?.transaction_status == 8" class ="smallfont blackfont">Dibatalkan Oleh Wisatawan</a>
+                <a *ngIf="data?.transaction_status == 9" class ="smallfont blackfont">Dibatalkan Oleh Admin</a>
+              </ion-col>
+            </ion-row>                 
+          </div>                                                                                   
         </button>                  
-      </ion-card> -->
-      <ion-card> 
+      </ion-card>
+      <ion-card *ngIf="dataTransStatusBarang.length <= 0 "> 
         <ion-row>
-          <h5 padding-left padding-top><b>Tidak ada transaksi Barang</b></h5>         
+          <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
         </ion-row>           
       </ion-card>
     </ion-list>
 
 
-    <ion-list *ngSwitchCase="'jasa'" padding>
-      <!-- <ion-card  class ="full-card" *ngFor="let data of dataTransJasa">
+    <ion-list *ngSwitchCase="'jasa'">
+      <ion-card  class ="full-card-test" *ngFor="let data of dataTransStatusJasa">
           <button ion-item (click)="navDetailTransJasa(data?.transaction_id)">                     
-            <ion-avatar item-start>
-              <img class = "photoavatar" *ngIf="data?.dataPemandu?.photo" src="{{BASE_URL+data?.dataPemandu?.photo}}">
-              <img class = "photoavatar" *ngIf="!data?.dataPemandu?.photo" src="assets/imgs/logo/usericon.png">                   
-            </ion-avatar>
-              <h6 class="tanggal paddingtop1px">{{data?.transaction_date | date: "dd MMMM yyyy"}}</h6>
-              <h6 class="textbooking" text-wrap><b>Booking di :</b></h6>
-              <h6 text-wrap *ngIf="data?.transaction_status == 0" class="fontketcard">Belum Konfirmasi Pembayaran</h6>
-              <h6 text-wrap *ngIf="data?.transaction_status == 1" class="fontketcard">Menunggu Verifikasi Pembayaran</h6>
-              <h6 text-wrap *ngIf="data?.transaction_status == 2" class="fontketcard">Pembayaran telah diverifikasi</h6>
-              <h6 text-wrap *ngIf="data?.transaction_status == 3" class="fontketcard">Penggunaan Homestay sedang berjalan</h6>                   
-              <h6 text-wrap *ngIf="data?.transaction_status == 4" class="fontketcard">Penggunaan Homestay telah selesai</h6>                   
-              <h6 text-wrap *ngIf="data?.transaction_status == 5" class="fontketcard">Transaksi selesai</h6>                                                                                    
+              <div>
+                  <ion-row>
+                    <ion-row>
+                    <ion-col col-2>
+                        <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+                        <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">
+                    </ion-col>
+                    <ion-col>
+                      <ion-row>
+                        <ion-col col-4>
+                          <a class ="smallfont blackfont">Pemesan</a>
+                        </ion-col>
+                        <ion-col  align-self-end>
+                          <a class ="smallfont align-right">{{data?.namaPemesan}}</a>
+                          </ion-col> 
+                      </ion-row>
+                      <ion-row>
+                        <ion-col >
+                          <a class ="smallfont blackfont">Jasa</a>
+                        </ion-col>
+                        <ion-col align-self-end>
+                          <a class ="smallfont align-right">{{data?.namaJasa}}</a>
+                        </ion-col>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>                          
+                  </ion-row> 
+                  <ion-row>
+                    <ion-col>
+                      <a class ="smallfont blackfont">Tanggal Transaksi</a>
+                    </ion-col>
+                    <ion-col>
+                      <a float-right class ="smallfont geser-kiri-1">{{data?.transaction_date | date: "dd MMMM yyyy"}}</a>
+                    </ion-col>  
+                  </ion-row>
+                  <ion-row>              
+                    <ion-col>
+                      <a class ="smallfont blackfont">Nominal</a>
+                    </ion-col>
+                    <ion-col>
+                      <a float-right class ="smallfont geser-kiri-1">{{data?.total_harga  | currency: "IDR "}}</a>
+                    </ion-col>    
+                  </ion-row>   
+                  <ion-row>
+                    <ion-col>
+                      <a *ngIf="data?.transaction_status == 7" class ="smallfont blackfont">Dibatalkan Oleh Anda</a>
+                      <a *ngIf="data?.transaction_status == 8" class ="smallfont blackfont">Dibatalkan Oleh Wisatawan</a>
+                      <a *ngIf="data?.transaction_status == 9" class ="smallfont blackfont">Dibatalkan Oleh Admin</a>
+                    </ion-col>
+                  </ion-row>                 
+                </div>
             </button>                  
-          </ion-card> -->
-          <ion-card> 
+          </ion-card>
+          <ion-card *ngIf="dataTransStatusJasa.length <= 0 "> 
             <ion-row>
               <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
             </ion-row>           

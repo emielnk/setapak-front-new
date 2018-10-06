@@ -217,7 +217,7 @@ export class PemandupesananhomestayPage {
     let param = JSON.stringify({
       transaction_status: status,
       transaction_id: id,
-      new_status: 7
+      new_status: 8
     });
     this.http.post(this.userData.BASE_URL+'api/transaksi/homestay/update/'+id, param, this.options).subscribe(data => {
       loading.dismiss();

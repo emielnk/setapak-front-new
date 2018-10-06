@@ -152,8 +152,8 @@ export class PemanduhomePage {
       this.pemandu_id = id;
       this.http.get(this.userData.BASE_URL+'api/pemandu/transaksi/homestay/'+this.pemandu_id, this.options).subscribe(data => {
         let response = data.json();
-        this.dataTransHomestay = response;
-        if(response.length > 0) {
+        // this.dataTransHomestay = response;
+        if(response.status == true) {
           this.dataTransHomestay = response.data
           for(var i = 0; i<this.dataTransHomestay.length; i++){
           // console.log("this.dataTransHomestay[i].homestay_id = ", this.dataTransHomestay[i].homestay_id)
@@ -162,9 +162,9 @@ export class PemanduhomePage {
           }
           console.log("ahahahahahaah",this.dataTransHomestay)
         }
-        if(response.length <= 0) {
-          this.dataTransHomestay = response.length;
-        }
+        // if(response.status == false) {
+        //   this.dataTransHomestay.length = 0;
+        // }
       })
     })
   }
@@ -195,18 +195,17 @@ export class PemanduhomePage {
       this.pemandu_id = id;
       this.http.get(this.userData.BASE_URL+'api/pemandu/transaksi/jasa/'+this.pemandu_id, this.options).subscribe(data => {
         let response = data.json();
-        let resp = response;
         console.log("transaksi jasa", response);
-        if(response.length > 0){
+        if(response.status == true){
           this.dataTransJasa = response.data;
           for(let i = 0; i < this.dataTransJasa.length; i++) {
             this.setNamaJasa(this.dataTransJasa[i].jasa_id, i)
             this.setPemesanJasa(this.dataTransJasa[i].user_id, i)
           }
         }
-        if(response.length <= 0){
-          this.dataTransJasa = response.length;
-        }
+        // if(response.length <= 0){
+        //   this.dataTransJasa = response.length;
+        // }
       })
     })
   }
@@ -236,16 +235,16 @@ export class PemanduhomePage {
       this.http.get(this.userData.BASE_URL+'api/pemandu/transaksi/produk/'+this.pemandu_id, this.options).subscribe(data => {
         let response = data.json();
         console.log("transaksi produk", response);
-        if(response.length > 0) {
+        if(response.status == true) {
           this.dataTransProduk = response.data;
           for(let i = 0; i < this.dataTransProduk.length; i++) {
             this.setNamaProduk(this.dataTransProduk[i].barang_id, i)
             this.setPemesanProduk(this.dataTransProduk[i].user_id, i)
           }
         }
-        if(response.length <= 0) {
-          this.dataTransProduk = response.length;
-        }
+        // if(response.length <= 0) {
+        //   this.dataTransProduk = response.length;
+        // }
       })
     })
   }
