@@ -14,9 +14,6 @@
 
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
   <div>
     <ion-toolbar class="paddingtoptoolbar" no-border-top>
         <ion-segment [(ngModel)]="start_tabs">
@@ -43,14 +40,74 @@
         </ion-segment>
     </ion-toolbar>
   </div>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <div [ngSwitch]="start_tabs">
+  
+  <ion-grid [ngSwitch]="start_tabs">
+
+    <ion-row *ngSwitchCase="'homestay'">
+      <button ion-item color="secondary" class="font-roboto" (click)="navTambahHomestay()">Tambah Homestay</button>
+      <ion-card *ngIf="homestays < 1; else content-hs"> 
+        <ion-row >
+          <h5 padding-left padding-top><b>Kamu Belum Punya Homestay</b></h5>         
+        </ion-row>           
+      </ion-card>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let data of homestays">
+        <ion-card name="content-hs"  class ="full-card" >
+          <button ion-item (click)="navDetailHomestay(data?.homestay_id)" >                     
+            <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
+            <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <a class="text-font">{{data?.nama_homestay}}</a><br/>
+            <strong><a  class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
+          </button>                
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'produk'">
+        <button ion-item color="secondary" class="font-roboto" (click)="navTambahProduk()">Tambah Produk</button>
+      <ion-card *ngIf="products < 1; else content-hs"> 
+          <ion-row >
+            <h5 padding-left padding-top><b>Kamu Belum Punya Homestay</b></h5>         
+          </ion-row>           
+        </ion-card>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let data of products">
+        <ion-card name="content-hs"  class ="full-card" >
+          <button ion-item (click)="navDetailProduk(data?.product_id)" >                     
+            <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
+            <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <a class="text-font">{{data?.nama_barang}}</a><br/>
+            <strong><a  class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
+          </button>                
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  <ion-row *ngSwitchCase="'jasa'">
+      <button ion-item color="secondary" class="font-roboto" (click)="navTambahJasa()">Tambah Jasa</button>
+        <ion-card *ngIf="jasa < 1; else content-hs"> 
+          <ion-row >
+            <h5 padding-left padding-top><b>Kamu Belum Punya Homestay</b></h5>         
+          </ion-row>           
+        </ion-card>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let data of services">
+        <ion-card name="content-hs"  class ="full-card" >
+          <button ion-item (click)="navDetailJasa(data?.jasa_id)" >                     
+            <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
+            <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <a class="text-font">{{data?.nama_jasa}}</a><br/>
+            <strong><a class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
+          </button>                
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+    <!-- <div [ngSwitch]="start_tabs">
     <ion-list *ngSwitchCase="'homestay'" padding>
-      <button ion-item color="secondary" class="font-roboto" (click)="navTambahHomestay()">
-        <ion-icon name="add">
-          Tambah Homestay
-        </ion-icon>
-      </button>
+      
       &nbsp;
       <ion-card *ngIf="homestays < 1; else content-hs"> 
         <ion-row>
@@ -67,16 +124,11 @@
           <h6 class="hitam" text-wrap><p>{{data?.deskripsi}}</p></h6>
           <h6 class="hitam" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</h6>                                                                                  
         </button>                
-      </ion-card >
+      </ion-card>
     </ion-list>
 
     <ion-list *ngSwitchCase="'produk'" padding>
-      <button ion-item color="secondary" class="font-roboto" (click)="navTambahProduk()" >
-        <ion-icon name="add">
-          Tambah  Barang
-        </ion-icon>
-      </button>
-      &nbsp;
+      
       <ion-card *ngIf="products < 1; else content-p"> 
         <ion-row>
           <h5 padding-left padding-top><b>Kamu Belum Punya Produk</b></h5>         
@@ -96,12 +148,7 @@
     </ion-list>
 
     <ion-list *ngSwitchCase="'jasa'" padding>
-      <button ion-item color="secondary" class="font-roboto" (click)="navTambahJasa()">
-        <ion-icon name="add">
-          Tambah Jasa
-        </ion-icon>
-      </button>
-      &nbsp;
+      
       <ion-card *ngIf="services < 1; else content-j"> 
         <ion-row>
           <h5 padding-left padding-top><b>Kamu Belum Punya Jasa Pemandu</b></h5>         
@@ -117,6 +164,6 @@
           </button>                  
         </ion-card>
     </ion-list>
-  </div>
+  </div> -->
 
 </ion-content>

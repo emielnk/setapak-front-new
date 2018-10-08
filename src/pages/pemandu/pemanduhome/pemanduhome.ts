@@ -141,7 +141,7 @@ export class PemanduhomePage {
           }
         }
         if(response.status == "norecord") {
-          this.navCtrl.push('PemanduregisPage')
+          this.navCtrl.push('PemandutungguverivPage')
         }
       })
     });

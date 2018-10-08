@@ -1,0 +1,85 @@
+<!--
+  Generated template for the PemandutransmenunggubayarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Dalam Pengiriman</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+    <ion-row justify-content-center align-items-center>
+      <h5 class="namaprofile">Barang</h5>
+    </ion-row>
+    <ion-list>
+      <ion-card  class ="full-card" *ngFor="let data of dataTransStatusBarang">
+        <button ion-item (click)="navDetailTransProduk(data?.transaction_id)"> 
+          <div>
+            <ion-row>
+              <ion-row>
+              <ion-col col-2>
+                  <img class = "photoavatar" *ngIf="data?.photoPemesan" src="{{BASE_URL+data?.photoPemesan}}">
+                  <img class = "photoavatar" *ngIf="!data?.photoPemesan" src="assets/imgs/logo/usericon.png">
+              </ion-col>
+              <ion-col>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Pemesan</a>
+                  </ion-col>
+                  <ion-col  align-self-end>
+                    <a class ="smallfont right-padding-2 align-right">{{data?.namaPemesan}}</a>
+                    </ion-col> 
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <a class ="smallfont blackfont">Barang</a>
+                  </ion-col>
+                  <ion-col align-self-end>
+                    <a class ="smallfont right-padding align-right">{{data?.namaBarang}}</a>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>                          
+            </ion-row> 
+            <ion-row>
+              <ion-col>
+                <a class ="smallfont blackfont">Tanggal Transaksi</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.transaction_date | date: "dd MMMM yyyy"}}</a>
+              </ion-col>  
+            </ion-row>
+            <ion-row>              
+              <ion-col>
+                <a class ="smallfont blackfont">Nominal</a>
+              </ion-col>
+              <ion-col>
+                <a float-right class ="smallfont geser-kiri-1">{{data?.total_harga  | currency: "IDR "}}</a>
+              </ion-col>    
+            </ion-row>   
+            <ion-row>
+              <ion-col>
+                  <a class ="smallfont blackfont">Transaksi Sedang Berjalan</a>
+              </ion-col>
+              <ion-col class="button-detail">
+                <button ion-button small class="align-right">Detail</button>
+              </ion-col>
+            </ion-row>                 
+          </div>                                                                                   
+        </button>                  
+      </ion-card>
+      <ion-card *ngIf="dataTransStatusBarang.length <= 0 "> 
+        <ion-row>
+          <h5 padding-left padding-top><b>Tidak ada transaksi</b></h5>         
+        </ion-row>           
+      </ion-card>
+    </ion-list>
+</ion-content>

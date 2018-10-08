@@ -86,8 +86,8 @@
                 <a class ="smallfont" color="primary">Jumlah Barang</a>
               </ion-col>
               <ion-col>
-                  <a class ="smallfont" color="primary">Ekspedisi</a>
-                </ion-col>
+                <a class ="smallfont" color="primary">Ekspedisi</a>
+             </ion-col>
             </ion-row>
               <ion-row>
                 <ion-col>
@@ -141,7 +141,7 @@
           </ion-row>  
           <ion-row>
             <ion-col>
-                <a class ="textfont">Berat Barang</a>
+                <a class ="smallfont">Berat Barang</a>
             </ion-col>
             <ion-col >
                 <a float-right class ="textfont">{{berat_barang_kg}}</a>
@@ -149,7 +149,7 @@
             </ion-row>         
             <ion-row>                   
               <ion-col>
-                <a class ="textfont">Total Ongkos Kirim</a>
+                <a class ="smallfont">Total Ongkos Kirim</a>
               </ion-col>
               <ion-col >
                   <a float-right class ="textfont">{{detail_trans?.ongkos_kirim*berat_barang_kg | currency:'IDR ':true}}</a>
@@ -157,7 +157,7 @@
             </ion-row>
             <ion-row>
               <ion-col>
-                  <a class ="textfont">Harga Barang</a>
+                  <a class ="smallfont">Harga Barang</a>
               </ion-col>
               <ion-col >
                   <a float-right class ="textfont">{{detail_trans?.total_harga | currency:'IDR ':true}}</a>
@@ -168,14 +168,31 @@
       </ion-card>
     </div>
     <div>
-      <ion-card class ="full-card-homenamecard-padding-left">
+        <ion-card class ="full-card-homenamecard-padding-left">
+            <ion-grid>           
+                <ion-row>
+                    <ion-col>
+                      <a class ="smallfont">Total</a>
+                    </ion-col>
+                    <ion-col align-self-end>
+                        <a float-right class ="textfont">{{detail_trans?.total_harga + detail_trans?.ongkos_kirim | currency:'IDR ':true}}</a>
+                    </ion-col>                
+                </ion-row>              
+              </ion-grid>                  
+        </ion-card>
+      </div>
+      &nbsp;
+    <div>
+      <ion-card *ngIf="detail_trans?.transaction_status >= 3 && detail_trans?.transaction_status < 7" class ="full-card-homenamecard-padding-left">
           <ion-grid>           
               <ion-row>
                   <ion-col>
-                    <a class ="textfont">Total</a>
+                    <a class ="smallfont">Resi</a>
                   </ion-col>
                   <ion-col align-self-end>
-                      <a float-right class ="textfont">{{detail_trans?.total_harga + detail_trans?.ongkos_kirim | currency:'IDR ':true}}</a>
+                      <a *ngIf="detail_trans?.resi" class ="textfont float-right">{{detail_trans?.resi}}</a>
+                      <a *ngIf="!detail_trans?.resi" class ="float-right redfont">Resi Belum Anda Input</a>
+                      <button *ngIf="!detail_trans?.resi" ion-button small class="float-right" (click)="touchInputResi(detail_trans?.transaction_id)">Input</button>
                   </ion-col>                
               </ion-row>              
             </ion-grid>                  
@@ -183,18 +200,12 @@
     </div>
 
     <div padding>
-        <button *ngIf="detail_trans?.transaction_status < 2" disabled="true" ion-button icon-start block no-margin color="primary">
-            Menunggu Pembayaran
-        </button>
         <button *ngIf="detail_trans?.transaction_status == 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi" (click)="touchTerimaPesanan(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
             Terima Pesanan
         </button>
-        <button *ngIf="detail_trans?.transaction_status <= 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="touchTolakPesanan(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
+        <button *ngIf="detail_trans?.transaction_status == 2" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="touchTolakPesanan(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
             Tolak Pesanan
         </button>
-        <button *ngIf="detail_trans?.transaction_status == 4" ion-button icon-start block no-margin color="primary" class="buttontransaksi samebackground" (click)="tolakPesananHomestay(detail_trans?.transaction_id, detail_trans?.transaction_status)" tappable >
-            Konfirmasi Selesai
-        </button>
-        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Homestay Dalam Penggunaan</b></h5>  
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Proses Pesanan Anda</b></h5>  
       </div>
 </ion-content>

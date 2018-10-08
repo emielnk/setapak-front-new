@@ -18,7 +18,7 @@ export class PemanduhistoryallPage {
   tab2: any = "PemandutransberjalanPage";
   tab3: any = "PemandutransmenungguselesaiPage";
   tab4: any = "PemandutransselesaiPage"
-  tab5: any  = "";
+  tab5: any  = "PemandutranskirimbarangPage";
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

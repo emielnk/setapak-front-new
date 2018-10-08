@@ -12,6 +12,7 @@ page-pemandupesananproduk {
     }
     .smallfont {      
         font-size: 12px;
+        color: black;
     }
     .samebackground{
         background-color: #f1f2f6;
@@ -20,12 +21,19 @@ page-pemandupesananproduk {
     .buttontransaksi{
         margin :7.5px 0 !important;
     }
+    .float-right {
+        float: right;
+    }
+    .redfont {
+        color: red;
+        font-size: 13px;
+    }
     .textfont-telp-wa{
         color: #488aff !important
     }
     .textfont {      
         font-size: 13px;
-        color: black !important;
+        color: #488aff !important;
     }
     .textfont-pemesan {      
         font-size: 12px;

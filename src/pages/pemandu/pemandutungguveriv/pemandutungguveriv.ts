@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the PemandudetailpesananPage page.
+ * Generated class for the PemandutungguverivPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-pemandudetailpesanan',
-  templateUrl: 'pemandudetailpesanan.html',
+  selector: 'page-pemandutungguveriv',
+  templateUrl: 'pemandutungguveriv.html',
 })
-export class PemandudetailpesananPage {
+export class PemandutungguverivPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PemandudetailpesananPage');
+    console.log('ionViewDidLoad PemandutungguverivPage');
   }
 
 }

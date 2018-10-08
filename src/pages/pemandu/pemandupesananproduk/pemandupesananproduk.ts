@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 import { Http,Headers,RequestOptions } from '@angular/http';
+import { Placeholder } from '../../../../node_modules/@angular/compiler/src/i18n/i18n_ast';
 
 /**
  * Generated class for the PemandupesananprodukPage page.
@@ -27,7 +28,7 @@ export class PemandupesananprodukPage {
   no_hp_wa: any;
   berat_barang_kg: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
+  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
   }
 
@@ -50,10 +51,13 @@ export class PemandupesananprodukPage {
   getDetailTransProduk() {
     this.http.get(this.userData.BASE_URL+"api/pemandu/detail/transaksi/produk/"+this.trans_id,this.options).subscribe(data => {
       let response = data.json();
-      this.detail_trans = response.data[0];
-      console.log("detail trans produk saya = ", this.detail_trans)
-      this.getDetailProduk(this.detail_trans.barang_id);
-      this.getDetailPemesan(this.detail_trans.user_id);
+      if(response.status == true) {
+        this.detail_trans = response.data[0];
+        console.log("detail trans produk saya = ", this.detail_trans)
+        this.getDetailProduk(this.detail_trans.barang_id);
+        this.getDetailPemesan(this.detail_trans.user_id);
+        this.getDetailResi(this.detail_trans.transaction_id);
+      }
     })
   }
 
@@ -80,5 +84,49 @@ export class PemandupesananprodukPage {
       }
       console.log("no hp wa", this.detail_pemesan)
     })
+  }
+
+  getDetailResi(id_trans: number) {
+    this.http.get(this.userData.BASE_URL+'api/transaksi/resi/'+id_trans, this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status == true){
+        console.log("Resiiiiiiiiiiiiiii",response.data);
+        this.detail_trans.resi = response.data[0].resi;
+      }
+      else{
+        this.detail_trans.resi = "";
+      }
+    })
+  }
+
+  inputResi(id: number) {
+
+  }
+
+  touchInputResi(id_trans: number) {
+    let alert = this.alertCtrl.create({
+      title: 'Masukkan Resi',
+      inputs: [
+        {
+          name: 'resi',      
+        }
+      ],
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Masukkan',
+          handler: () => {
+            this.inputResi(id_trans)
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

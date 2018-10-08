@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
-import { shiftInitState } from '../../../../node_modules/@angular/core/src/view';
+
 /**
  * Generated class for the PemandutransberjalanPage page.
  *
@@ -24,8 +24,8 @@ export class PemandutransberjalanPage {
   options = new RequestOptions({ headers: this.headers});
 
   user_id: any;
-  BASE_URL = 'http://setapakbogor.site/'
-;  pemandu_id: any;
+  BASE_URL = 'http://setapakbogor.site/';
+  pemandu_id: any;
   status: any = 3;
   dataTransStatusHs: any = [];
   dataTransStatusJasa: any = [];

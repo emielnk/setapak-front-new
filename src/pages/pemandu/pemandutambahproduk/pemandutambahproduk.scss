@@ -21,10 +21,11 @@ page-pemandutambahproduk {
         //box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
     }
     .photoavatar {
-        width: 100% !important;
-        height: 100% !important;
+        width: 75% !important;
+        height: 75% !important;
         max-width: 100% !important;
-        max-height: 230px !important;
+        max-height: 100% !important;
+        margin-left: 15px;
     }
     .headerprofile{
         margin-top: 20px;
@@ -48,6 +49,10 @@ page-pemandutambahproduk {
         margin :7.5px 0 !important;
         top: 0px;
         right: -52px;
+    }
+    .text-font {
+        color: #488aff;
+        font-size: 12px;
     }
     .logosegment{        
         width: 25%;
