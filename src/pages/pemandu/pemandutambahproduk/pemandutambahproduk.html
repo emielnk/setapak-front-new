@@ -59,6 +59,17 @@
           <button ion-item (click)="navDetailHomestay(data?.homestay_id)" >                     
             <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
             <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <ion-icon *ngIf= "data?.bintang >=  1" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  2" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  3" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  4" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang == 5"class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 1" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 2" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 3" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 4" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 5" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <br/>
             <a class="text-font">{{data?.nama_homestay}}</a><br/>
             <strong><a  class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
           </button>                
@@ -75,11 +86,22 @@
         </ion-card>
       <ion-col col-6 col-md-4 col-xl-3 *ngFor="let data of products">
         <ion-card name="content-hs"  class ="full-card" >
-          <button ion-item (click)="navDetailProduk(data?.product_id)" >                     
+          <button ion-item (click)="navDetailBarang(data?.product_id)" >                     
             <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
             <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <ion-icon *ngIf= "data?.bintang >=  1" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  2" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  3" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  4" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang == 5"class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 1" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 2" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 3" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 4" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 5" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <br/>
             <a class="text-font">{{data?.nama_barang}}</a><br/>
-            <strong><a  class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
+            <strong><a  class="text-font" text-wrap>{{data?.harga | currency:'IDR ': true}}</a></strong>                                                                                  
           </button>                
         </ion-card>
       </ion-col>
@@ -97,8 +119,19 @@
           <button ion-item (click)="navDetailJasa(data?.jasa_id)" >                     
             <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
             <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
+            <ion-icon *ngIf= "data?.bintang >=  1" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  2" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  3" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang >=  4" class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang == 5"class ="kecilin" name="star" color="bright"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 1" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 2" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 3" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 4" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <ion-icon *ngIf= "data?.bintang < 5" class ="kecilin" name="star" color="darkgrey"></ion-icon>
+            <br/>
             <a class="text-font">{{data?.nama_jasa}}</a><br/>
-            <strong><a class="text-font" text-wrap>{{data?.harga_perhari | currency:'IDR ': true}}</a></strong>                                                                                  
+            <strong><a class="text-font" text-wrap>{{data?.harga_jasa | currency:'IDR ': true}}</a></strong>                                                                                  
           </button>                
         </ion-card>
       </ion-col>

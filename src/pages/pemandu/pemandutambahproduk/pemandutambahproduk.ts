@@ -81,12 +81,16 @@ export class PemandutambahprodukPage {
       this.http.get(this.userData.BASE_URL+'api/pemandu/allhomestay/'+this.pemandu_id, this.options).subscribe(data => {
         let response = data.json();
         let check = response.data;
+        console.log("ASiiiiiiiiiiiiiiik", response.data);
         if(check = undefined) {
           console.log("sukuriin")
           this.homestays = 0;
         }
         else{
           this.homestays = response.data;
+          for(let i=0; i<response.length; i++) {
+            this.getReviewHs(this.homestays[i].homestay_id, i);
+          }
           console.log(this.homestays)
         }
       });
@@ -106,6 +110,9 @@ export class PemandutambahprodukPage {
         }
         else{
           this.services = response.data;
+          for(let i=0; i<response.length; i++) {
+            this.getReviewJ(this.services[i].jasa_id, i);
+          }
           console.log(this.services)
         }
       });
@@ -124,10 +131,47 @@ export class PemandutambahprodukPage {
         }
         else{ 
           this.products = response.data;
+          for(let i=0; i<response.length; i++) {
+            this.getReviewB(this.products[i].barang_id, i);
+          }
           console.log(this.products);
         }
       });
     });
+  }
+
+  getReviewHs(id_hs: number, i: number, jenis_p: any = 'Homestay') {
+    this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_hs+'/'+jenis_p, this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status == true) {
+        this.homestays[i].bintang = response.data[i].jumlah_star;
+      }
+      else
+        this.homestays[i].bintang = 0;
+    });
+  }
+
+  getReviewB(id_b: number, i: number, jenis_p: any = 'Barang') {
+    this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_b+'/'+jenis_p, this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status == true) {
+        this.products[i].bintang = response.data[0].jumlah_star;
+        console.log("niiih bintang produk", this.products[i].bintang)
+      }
+      else
+      this.products[i].bintang = 0;
+    })
+  }
+
+  getReviewJ(id_j: number, i: number, jenis_p: any = 'Barang') {
+    this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_j+'/'+jenis_p, this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status == true) {
+        this.services[i].bintang = response.data[0].jumlah_star;
+      }
+      else
+      this.services[i].bintang = 0;
+    })
   }
 
   navTambahHomestay() {
@@ -148,7 +192,10 @@ export class PemandutambahprodukPage {
   }
 
   navDetailJasa(id) {
-    this.navCtrl.push("pemandulistservicePage", {jasa_id: id})
+    this.navCtrl.push("PemandulistservicePage", {jasa_id: id})
   }
-   
+
+  navDetailBarang(id) {
+    this.navCtrl.push("PemandulistbarangPage", {barang_id: id})
+  }
 }
