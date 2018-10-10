@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { UserData } from '../../../providers/user-data';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { Placeholder } from '../../../../node_modules/@angular/compiler/src/i18n/i18n_ast';
@@ -28,7 +28,7 @@ export class PemandupesananprodukPage {
   no_hp_wa: any;
   berat_barang_kg: number;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
+  constructor(public loadCtrl: LoadingController, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData) {
     this.trans_id = navParams.data.transaction_id
   }
 
@@ -99,8 +99,21 @@ export class PemandupesananprodukPage {
     })
   }
 
-  inputResi(id: number) {
-
+  inputResi(id: number, resi: string) {
+    let loading = this.loadCtrl.create({
+      content: 'Tunggu sebentar...'
+    });
+    let new_resi = JSON.stringify({
+      id_trans: id,
+      resi: resi
+    });
+    console.log("resiiiiiiiii newwwwwww", new_resi);
+    loading.present();
+    this.http.post(this.userData.BASE_URL+"api/transaksi/barang/inputresi/"+id, new_resi, this.options).subscribe(data => {
+      let response = data.json();
+      loading.dismiss();
+      this.navCtrl.pop();
+    })
   }
 
   touchInputResi(id_trans: number) {
@@ -121,8 +134,9 @@ export class PemandupesananprodukPage {
         },
         {
           text: 'Masukkan',
-          handler: () => {
-            this.inputResi(id_trans)
+          handler: data => {
+            console.log("iniiiiiiiiiiiiiii", data);
+            this.inputResi(id_trans, data.resi)
           }
         }
       ]

@@ -21,10 +21,10 @@ export class PemandutransmenungguselesaiPage {
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
 
-  user_id: any;
+  user_id: number;
   BASE_URL = 'http://setapakbogor.site/';  
-  pemandu_id: any;
-  status: any = 5;
+  pemandu_id: number;
+  status: number = 5;
   dataTransStatusHs: any = [];
   dataTransStatusJasa: any = [];
   dataTransStatusBarang: any = [];
@@ -153,7 +153,7 @@ export class PemandutransmenungguselesaiPage {
     this.pemanduData.getPemanduId().then(id => {
       this.pemandu_id = id
       this.status = status
-      this.http.get(this.userData.BASE_URL+'api/transaksi/produk/'+this.pemandu_id+'/'+status, this.options).subscribe(data => {
+      this.http.get(this.userData.BASE_URL+'api/transaksi/produk/'+this.pemandu_id+'/'+this.status, this.options).subscribe(data => {
         let response = data.json();
         if(response.status == true) {
           this.dataTransStatusBarang = response.data;

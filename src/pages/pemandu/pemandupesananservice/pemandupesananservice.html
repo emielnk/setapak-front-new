@@ -56,7 +56,8 @@
           <img *ngIf="detail_trans?.transaction_status == 2" class ="notround" src="assets/imgs/logo/paymentdone.png">
           <img *ngIf="detail_trans?.transaction_status == 3 " class ="notround" src="assets/imgs/logo/check-in.png">  
           <img *ngIf="detail_trans?.transaction_status == 4" class ="notround" src="assets/imgs/logo/check-out.png">                      
-          <img *ngIf="detail_trans?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">          
+          <img *ngIf="detail_trans?.transaction_status == 5" class ="notround" src="assets/imgs/logo/handshake.png">
+          <img *ngIf="detail_trans?.transaction_status >= 7" class ="notround" src="assets/imgs/logo/transaksicancel.png">          
         </ion-avatar>                  
         <h6 class="keterangantextlisttransaksi">Status</h6> 
           
@@ -66,7 +67,8 @@
         <a text-wrap *ngIf="detail_trans?.transaction_status == 2" class="noteinfotransaksi">Menunggu Proses Pemakaian Homestay</a>                             
         <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 3"><b>Penggunaan Homestay sedang berjalan</b></h5>                   
         <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 4"><b>Penggunaan Homestay telah selesai</b></h5>                   
-        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 5"><b>Transaksi selesai</b></h5>
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status == 5"><b>Transaksi Selesai</b></h5>
+        <h5 class="textlisttransaksi" text-wrap *ngIf="detail_trans?.transaction_status >= 7"><b>Transaksi Gagal</b></h5>
       </button>         
     </ion-card>
 

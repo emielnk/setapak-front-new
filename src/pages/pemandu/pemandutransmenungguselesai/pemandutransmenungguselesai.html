@@ -125,8 +125,8 @@
     
     <ion-list *ngSwitchCase="'produk'">
       <ion-card  class ="full-card" *ngFor="let data of dataTransStatusBarang">
-        <button ion-item (click)="navDetailTransProduk(data?.transaction_id)"> 
-          <div>
+        <!-- <button ion-item (click)="navDetailTransProduk(data?.transaction_id)">  -->
+          <div padding>
             <ion-row>
               <ion-row>
               <ion-col col-2>
@@ -171,14 +171,18 @@
             </ion-row>   
             <ion-row>
               <ion-col>
-                  <a class ="smallfont blackfont">Transaksi Sedang Berjalan</a>
+                <a *ngIf="data?.transaction_status == 5" class ="smallfont blackfont">Pesanan Diterima</a>
+                <a *ngIf="data?.transaction_status == 6" class ="smallfont blackfont">Uang Sudah Ditransfer Ke Rek. Anda</a>
               </ion-col>
-              <ion-col class="button-detail">
-                <button ion-button small class="align-right">Detail</button>
+              <ion-col>
+                <button *ngIf="data?.transaction_status == 6" ion-button small class="align-right" (click)="navDetailTransProduk(data?.transaction_id)">Detail</button>
+                <!-- <button href="http://wa.me/081218449962" *ngIf="data?.transaction_status == 5" ion-button small class="smallfont">Hubungi Admin</button> -->
+                <a *ngIf="data?.transaction_status == 5" href="http://wa.me/081318449962" class="align-right smallfont">Hubungi Admin</a> 
               </ion-col>
             </ion-row>                 
           </div>                                                                                   
-        </button>                  
+        <!-- </button> -->
+        
       </ion-card>
       <ion-card *ngIf="dataTransStatusBarang.length <= 0 "> 
         <ion-row>
