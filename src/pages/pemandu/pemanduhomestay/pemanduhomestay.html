@@ -30,13 +30,13 @@
 
               <ion-item> 
                 <ion-label stacked color="primary">Pilih Wilayah</ion-label>
-                <ion-select [(ngModel)]="homestay.alamat_id" name="kecamatan" placeholder="Lokasi Kecamatan" required  >
+                <ion-select [(ngModel)]="homestay.alamat_id" name="kecamatan" placeholder="Kecamatan Homestay" required  >
                   <ion-option *ngFor="let kecamatan of kecamatans" value="{{kecamatan?.alamatcategory_id}}">{{kecamatan?.kecamatan}}</ion-option>
                 </ion-select>
               </ion-item>
 
               <ion-item> 
-                <ion-label stacked color="primary">Pilih Wilayah Terdekat</ion-label>
+                <ion-label stacked color="primary">Pilih Wisata Terdekat</ion-label>
                 <ion-select [(ngModel)]="homestay.wisata_id" name="wisata_id" placeholder="Wisata Terdekat" required  >
                   <ion-option *ngFor="let wisata of wisatas" value="{{wisata?.wisatacategory_id}}">{{wisata?.nama_wisata}}</ion-option>
                 </ion-select>

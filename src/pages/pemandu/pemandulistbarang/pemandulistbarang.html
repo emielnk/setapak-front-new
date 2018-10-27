@@ -1,18 +1,138 @@
-<!--
-  Generated template for the PemandulistbarangPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Pemandulistbarang</ion-title>
+  <ion-navbar color="primary">
+    <ion-row>
+      <ion-col>
+        <ion-title>Detail Barang</ion-title>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card class="full-card">
+      <ion-card-header>
+        <a class="textfont"><b>Informasi Barang</b></a>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-avatar item-start>
+          <img class="smaller-img" *ngIf="!currentbarang?.mainphoto"  src="assets/imgs/logo/usericon.png">
+          <img class="smaller-img" *ngIf="currentbarang?.mainphoto" src="{{BASE_URL+currentbarang?.mainphoto}}">
+        </ion-avatar>
+        &nbsp;
+        <a class="textfont">{{currentbarang?.nama_barang}}</a>
+        <ion-row>
+          <ion-col>
+              <a class="smallfont">Harga</a>
+          </ion-col>
+          <ion-col>
+              <a class="textfont align-right">{{currentbarang?.harga}}</a>
+          </ion-col>
+        </ion-row>
+          <ion-row>
+            <ion-col>
+                <a class="smallfont">Deskripsi</a>
+            </ion-col>
+            <ion-col>
+                <a class="textfont  align-right">{{currentbarang?.deskripsi}}</a>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+    </ion-card>
+    &nbsp;
+    <ion-card class="full-card">
+      <ion-card-header>
+        <a class="textfont"><b>Jumlah</b></a>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+              <a class="smallfont">Berat</a>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <a class="textfont  align-right">{{currentbarang?.berat_gram}}</a>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <a class="smallfont">Jumlah</a>
+          </ion-col>
+          <ion-col>
+          <ion-list>
+              <a class="textfont  align-right">{{currentbarang?.kuantitas}}</a>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+    &nbsp;
+    <!-- <ion-card class="full-card">
+      <ion-card-header>
+        <a class="textfont"><b>Kurir</b></a>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col class="smallfont">
+            JNE
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card> -->
 
+    <!-- <ion-card class="full-card">
+      <ion-card-header>
+        <a class="textfont"><b>Fasilitas</b></a>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+              <a class ="smallfont" color="primary">AC</a>
+          </ion-col>
+          <ion-col>
+              <a class="textfont  align-right">{{fasilitas?.ac}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a class ="smallfont" color="primary">Wifi</a>
+          </ion-col>
+          <ion-col> 
+            <a class="textfont  align-right">{{fasilitas?.wifi}}</a> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a class ="smallfont" color="primary">Parkir</a>
+          </ion-col>
+          <ion-col> 
+            <a class="textfont  align-right">{{fasilitas?.parkir_mobil}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a class ="smallfont " color="primary">Kamar Tidur</a>
+          </ion-col>
+          <ion-col>
+            <a class="textfont  align-right">{{fasilitas?.kamar_tidur}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <a class ="smallfont" color="primary">Kamar Mandi</a> 
+          </ion-col>
+          <ion-col>
+              <a class="textfont  align-right">{{fasilitas?.kamar_mandi}}</a> 
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card> -->
+    &nbsp;
+    <button ion-button icon-start block no-margin color="primary" (click)="touchEditHomestay()">
+        Edit Barang
+    </button>
 </ion-content>

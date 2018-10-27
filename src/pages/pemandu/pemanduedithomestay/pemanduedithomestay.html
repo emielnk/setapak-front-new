@@ -6,13 +6,130 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>pemanduedithomestay</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Edit Fasilitas Homestay</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button icon-only color="white" (click)="saveUpdate(editFasilitas)">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
+&nbsp;
 
+<ion-content>
+  <ion-card *ngIf="whatEdited == 'fasilitas'" class="full-card">
+    <ion-card-header>
+      Masukkan Informasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editFasilitas="ngForm">
+        <ion-list>
+          <ion-item>
+            <!-- <ion-checkbox  [(ngModel)]="new_fasilitas.ac" name="ac" checked="true"  required></ion-checkbox> -->
+            <!-- <ion-checkbox  [(ngModel)]="new_fasilitas.ac" name="ac" checked="false"  required></ion-checkbox> -->
+            <ion-select class="label-form" [(ngModel)]="new_fasilitas.ac" name="ac" required  >
+              <ion-option value="yes">Ada</ion-option>
+              <ion-option value="no">Tidak Ada</ion-option>
+            </ion-select>
+            <ion-label stacked color="primary" class="align-right">AC</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-select class="label-form" [(ngModel)]="new_fasilitas.wifi" name="ac" required  >
+              <ion-option value="yes">Ada</ion-option>
+              <ion-option value="no">Tidak Ada</ion-option>
+            </ion-select>
+            <ion-label stacked color="primary" class="align-right">Wifi</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" color="primary">Jumlah Parkir</ion-label>
+            <ion-input class="label-form align-right" [(ngModel)]="new_fasilitas.parkir" name="parkir" type="number"  placeholder="{{fasilitas?.parkir_mobil}}" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" color="primary">Jumlah Kamar Mandi</ion-label>
+            <ion-input class="label-form align-right" type="number" [(ngModel)]="new_fasilitas.kamar_mandi" name="kamar_mandi"  placeholder="{{fasilitas?.kamar_mandi}}" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" color="primary">JumlahKamar Tidur</ion-label>
+            <ion-input class="label-form align-right" type="number" [(ngModel)]="new_fasilitas.kamar_tidur" name="kamar_tidur"  placeholder="{{fasilitas?.kamar_tidur}}" required></ion-input>
+          </ion-item>
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateFasilitas(editFasilitas)" block>Simpan</button>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-<ion-content padding>
+  <ion-card *ngIf="whatEdited == 'alamat'" class="full-card">
+    <ion-card-header>
+      Masukkan Informasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editAlamat="ngForm">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Pilih Kecamatan</ion-label>
+            <ion-select class="label-form" [(ngModel)]="new_alamatcat.id" name="kecamatan" placeholder="Kecamatan Homestay" required >
+              <ion-option *ngFor="let kecamatan of kecamatans" value="{{kecamatan?.alamatcategory_id}}">{{kecamatan?.kecamatan}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Kabupaten</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_alamatcat.kabupaten" name="kabupaten" type="text" disabled></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label class="label-form" stacked color="primary">Provinsi</ion-label>
+              <ion-input class="label-form" [(ngModel)]="new_alamatcat.provinsi" name="provinsi" type="text" disabled></ion-input>
+            </ion-item>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Alamat</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_alamathomestay.alamat" name="alamat" type="textarea" required></ion-input>
+          </ion-item>
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateAlamat(editFasilitas)" block>Simpan</button>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-card *ngIf="whatEdited == 'identitas'" class="full-card">
+    <ion-card-header>
+      Masukkan Iformasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editIdentitas>
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Nama Homestay</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitashomestay.nama_homestay" name="nama_homestay" type="text" #nama_homestay="ngModel" maxlength="50" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="nama_homestay.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+            </p>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Harga Perhari</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitashomestay.harga_perhari" name="harga_perhari" #harga_perhari="ngModel" type="number" min="0" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="harga_perhari.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+            </p>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Deskripsi</ion-label>
+            <ion-input class="label-form input-text" [(ngModel)]="new_identitashomestay.deskripsi" name="deskripsi" #deskripsi="ngModel" type="text" maxlength="100" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="deskripsi.valid || submitted == false" color="danger" padding-left>
+            Deskripsi harus diisi, maksimal 100 karakter
+          </p>
+          <!-- <span *ngIf="deskripsi.errors">
+            <span [hidden]="!name.errors.required">
+                <ion-label style="color: red; margin-left: 16px;"> wajib diisi </ion-label>
+            </span>
+          </span> -->
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateIdentitas(editIdentitas)" block>Simpan</button>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

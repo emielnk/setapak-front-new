@@ -21,22 +21,35 @@
     </ion-refresher>
     <ion-card class="full-card">
       <ion-card-header>
-        <a class="textfont"><b>Identitas Homestay</b></a>
+        <ion-row>
+          <ion-col>
+            <a class="textfont"><b>Identitas Homestay</b></a>
+          </ion-col>
+          <ion-col >
+            <button ion-button small class="align-right" (click)="editIdentitasHs(currenthomestay?.homestay_id)">
+              Edit
+            </button>
+          </ion-col>
+        </ion-row>
+        
       </ion-card-header>
       <ion-card-content>
-        <button ion-item>
-          <ion-avatar item-start>
-            <img *ngIf="!currenthomestay?.mainphoto"  src="assets/imgs/logo/usericon.png">
-            <img *ngIf="currenthomestay?.data?.mainphoto" src="{{BASE_URL+detail_homestay?.mainphoto}}">
-          </ion-avatar>
-          <a class="textfont">{{currenthomestay?.nama_homestay}}</a>
-        </button>
+        <ion-avatar item-start>
+          <img class="smaller-img"*ngIf="!currenthomestay?.mainphoto"  src="assets/imgs/logo/usericon.png">
+          <img class="smaller-img" *ngIf="currenthomestay?.mainphoto" src="{{BASE_URL+curenthomestay?.mainphoto}}">
+        </ion-avatar>
+        &nbsp;
+        <ion-row>
+          <ion-col>
+            <h2 class="textfont  align-left">{{currenthomestay?.nama_homestay}}</h2>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
               <a class="smallfont">Harga Perhari</a>
           </ion-col>
           <ion-col>
-              <a class="textfont">{{currenthomestay?.harga_perhari}}</a>
+              <a class="textfont align-right">{{currenthomestay?.harga_perhari | currency:'IDR ': true}}</a>
           </ion-col>
         </ion-row>
           <ion-row>
@@ -44,54 +57,80 @@
                 <a class="smallfont">Deskripsi Homestay</a>
             </ion-col>
             <ion-col>
-                <a class="textfont">{{currenthomestay?.deskripsi}}</a>
+                <a class="textfont  align-right">{{currenthomestay?.deskripsi}}</a>
             </ion-col>
           </ion-row>
       </ion-card-content>
     </ion-card>
+    <ion-card class="full-card">
+      <ion-row> 
+          <ion-col text-center (click)="navReviewPage(currenthomestay?.homestay_id)">
+              <ion-icon *ngIf= "currenthomestay?.bintang >=  1" class ="centerlogo" name="star" color="bright"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang >=  2" class ="centerlogo" name="star" color="bright"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang >=  3" class ="centerlogo" name="star" color="bright"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang >=  4" class ="centerlogo" name="star" color="bright"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang == 5"class ="centerlogo" name="star" color="bright"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang < 1" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang < 2" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang < 3" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang < 4" class ="centerlogo" name="star" color="darkgrey"></ion-icon>
+              <ion-icon *ngIf= "currenthomestay?.bintang < 5" class ="centerlogo" name="star" color="darkgrey"></ion-icon> 
+              <h3 class="centerlogo">Lihat Review Pelanggan </h3>                  
+          </ion-col>                                                   
+        </ion-row>
+    </ion-card>
     &nbsp;
     <ion-card class="full-card">
       <ion-card-header>
-        <a class="textfont"><b>Alamat Homestay</b></a>
+        <ion-row>
+          <ion-col>
+            <a class="textfont"><b>Alamat Homestay</b></a>
+          </ion-col>
+          <ion-col>
+            <button ion-button small class="align-right" (click)="editAlamatHs(currenthomestay?.homestay_id)">
+              Edit
+            </button>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
       <ion-card-content>
         <ion-row>
           <ion-col>
-            Provinsi
+              <a class="smallfont">Provinsi</a>
           </ion-col>
           <ion-col>
             <ion-list>
-              <a class="textfont">{{alamatcategory?.provinsi}}</a>
+              <a class="textfont  align-right">{{alamatcategory?.provinsi}}</a>
             </ion-list>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            Kabupaten
+              <a class="smallfont">Kabupaten</a>
           </ion-col>
           <ion-col>
           <ion-list>
-              <a class="textfont">{{alamatcategory?.kabupaten}}</a>
+              <a class="textfont  align-right">{{alamatcategory?.kabupaten}}</a>
             </ion-list>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            Kecamatan
+              <a class="smallfont"> Kecamatan</a>
           </ion-col>
           <ion-col>
             <ion-list>
-              <a class="textfont">{{alamatcategory?.kecamatan}}</a>
+              <a class="textfont  align-right">{{alamatcategory?.kecamatan}}</a>
             </ion-list>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            Alamat 
+              <a class="smallfont">Alamat </a>
           </ion-col>
           <ion-col>
             <ion-list>
-              <a class="textfont">{{currenthomestay?.alamat}}</a>
+              <a class="textfont  align-right">{{currenthomestay?.alamat}}</a>
             </ion-list>
           </ion-col>
         </ion-row>
@@ -100,51 +139,62 @@
       &nbsp;
     <ion-card class="full-card">
       <ion-card-header>
-        <a class="textfont"><b>Fasilitas</b></a>
+        <ion-row>
+          <ion-col>
+            <a class="textfont"><b>Fasilitas</b></a>
+          </ion-col>
+          <ion-col>
+            <button ion-button small class="align-right" (click)="editFasilitasHs(currenthomestay?.homestay_id)">
+              Edit
+            </button>
+          </ion-col>
+        </ion-row>
       </ion-card-header>
       <ion-card-content>
         <ion-row>
           <ion-col>
-            <a class ="smallfont" color="primary">AC</a>
+              <a class ="smallfont" color="primary">AC</a>
           </ion-col>
+          <ion-col>
+              <a class="textfont  align-right">{{fasilitas?.ac}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col>
             <a class ="smallfont" color="primary">Wifi</a>
           </ion-col>
-          <ion-col>
-            <a class ="smallfont" color="primary">Parkir Mobil</a>
+          <ion-col> 
+            <a class="textfont  align-right">{{fasilitas?.wifi}}</a> 
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <a class="textfont">{{fasilitas?.ac}}</a> 
+            <a class ="smallfont" color="primary">Parkir</a>
           </ion-col>
-          <ion-col>
-            <a class="textfont">{{fasilitas?.wifi}}</a> 
-          </ion-col>
-          <ion-col>
-            <a class="textfont">{{fasilitas?.parking}}</a> 
+          <ion-col> 
+            <a class="textfont  align-right">{{fasilitas?.parkir_mobil}}</a>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <a class ="smallfont" color="primary">Kamar Tidur</a>
+            <a class ="smallfont " color="primary">Kamar Tidur</a>
           </ion-col>
           <ion-col>
-            <a class ="smallfont" color="primary">Kamar Mandi</a>
+            <a class="textfont  align-right">{{fasilitas?.kamar_tidur}}</a>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-              <a class="textfont">{{fasilitas?.bedroom_int}}</a> 
+              <a class ="smallfont" color="primary">Kamar Mandi</a> 
           </ion-col>
           <ion-col>
-              <a class="textfont">{{fasilitas?.bathroom_int}}</a> 
+              <a class="textfont  align-right">{{fasilitas?.kamar_mandi}}</a> 
           </ion-col>
         </ion-row>
       </ion-card-content>
     </ion-card>
     &nbsp;
-    <button ion-button icon-start block no-margin color="primary" (click)="touchEditHomestay()">
+    <!-- <button ion-button icon-start block no-margin color="primary" (click)="touchEditHomestay()">
         Edit Homestay
-    </button>
+    </button> -->
 </ion-content>

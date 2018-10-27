@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
 import { PemanduDataProvider } from '../../../providers/pemandu-data/pemandu-data';
+
+// import { PemanduedithomestayPage } from '../pemanduedithomestay/pemanduedithomestay';
 /**
  * Generated class for the PemandulisthomestayPage page.
  *
@@ -29,7 +31,15 @@ export class PemandulisthomestayPage {
   fasilitas: any;
   alamatcategory: any;
   currenthomestay: any;
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public http: Http, public userData: UserData, public pemanduData: PemanduDataProvider) {
+  constructor(
+    public alertCtrl: AlertController, 
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public http: Http, 
+    public userData: UserData, 
+    public pemanduData: PemanduDataProvider,
+    public modalCtrl: ModalController  
+  ) {
     this.currenthomestay_id = navParams.data.homestay_id
   }
 
@@ -59,7 +69,8 @@ export class PemandulisthomestayPage {
         this.alamat_id = this.currenthomestay.alamatcategory_id;
         this.fasilitas_id = this.currenthomestay.fasilitas_id;
         this.getAlamatDetail(this.alamat_id);
-        this.getFasilitasDetail(this.fasilitas_id);
+        this.getFasilitasDetail(this.currenthomestay_id);
+        this.getReview(this.currenthomestay_id);
         // console.log("ini data detailnya", this.currenthomestay);
       }
     })
@@ -68,19 +79,37 @@ export class PemandulisthomestayPage {
   getAlamatDetail(id: number) {
     this.http.get(this.userData.BASE_URL+'api/alamat/category/'+id, this.options).subscribe(data => {
       let response = data.json();
-      this.alamatcategory = response.data[0];
-      // console.log(response);
-      // console.log(this.alamatcategory);
+      if(response.data != null) {
+        this.alamatcategory = response.data[0];
+      }
     })
   }
 
   getFasilitasDetail(id: number) {
     this.http.get(this.userData.BASE_URL+'api/homestay/fasilitas/'+id, this.options).subscribe(data => {
       let response = data.json();
-      this.fasilitas = response.data[0];
+      if(response.status == true){
+        this.fasilitas = response.data[0];
+      }
+      else {
+        this.fasilitas = null;
+      }
       // console.log(response);
       console.log("fasilitas",this.fasilitas);
     })
+  }
+
+  getReview(id: number) {
+    let jenis_p = 'Homestay'
+    this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id+'/'+jenis_p, this.options).subscribe(data => {
+      let response = data.json();
+      if(response.status == 200) {
+        this.currenthomestay.bintang = response.average;
+        console.log("response masseeeee", response)
+      }
+      else
+        this.currenthomestay.bintang = 0;
+    });
   }
 
   touchEditHomestay(){
@@ -91,4 +120,24 @@ export class PemandulisthomestayPage {
     });
     alert.present();
   }
+
+  navReviewPage(id: number) {
+    this.navCtrl.push("PemandureviewPage", {homestay_id: id})
+  }
+
+  editFasilitasHs(id: number) {
+    let editing = "fasilitas"
+    this.navCtrl.push("PemanduedithomestayPage", {homestay_id: id, edit: editing})
+  }
+
+  editAlamatHs(id: number) {
+    let editing = "alamat"
+    this.navCtrl.push("PemanduedithomestayPage", {homestay_id: id, edit: editing})
+  }
+
+  editIdentitasHs(id: number) {
+    let editing = "identitas"
+    this.navCtrl.push("PemanduedithomestayPage", {homestay_id: id, edit: editing})
+  }
 }
+

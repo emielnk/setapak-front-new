@@ -86,7 +86,7 @@
         </ion-card>
       <ion-col col-6 col-md-4 col-xl-3 *ngFor="let data of products">
         <ion-card name="content-hs"  class ="full-card" >
-          <button ion-item (click)="navDetailBarang(data?.product_id)" >                     
+          <button ion-item (click)="navDetailBarang(data?.barang_id)" >                     
             <img class = "photoavatar" *ngIf="data?.mainphoto" src="{{BASE_URL+data?.mainphoto}}"/>
             <img src=img class = "photoavatar" *ngIf="!data?.mainphoto" src="assets/imgs/logo/usericon.png"/>
             <ion-icon *ngIf= "data?.bintang >=  1" class ="kecilin" name="star" color="bright"></ion-icon>

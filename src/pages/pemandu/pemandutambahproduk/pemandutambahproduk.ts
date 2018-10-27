@@ -140,22 +140,25 @@ export class PemandutambahprodukPage {
     });
   }
 
-  getReviewHs(id_hs: number, i: number, jenis_p: any = 'Homestay') {
+  getReviewHs(id_hs: number, i: number) {
+    let jenis_p = 'Homestay'
     this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_hs+'/'+jenis_p, this.options).subscribe(data => {
       let response = data.json();
-      if(response.status == true) {
-        this.homestays[i].bintang = response.data[i].jumlah_star;
+      if(response.status == 200) {
+        this.homestays[i].bintang = response.average;
+        console.log("response masseeeee", response)
       }
       else
         this.homestays[i].bintang = 0;
     });
   }
 
-  getReviewB(id_b: number, i: number, jenis_p: any = 'Barang') {
+  getReviewB(id_b: number, i: number) {
+    let jenis_p: any = 'Barang'
     this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_b+'/'+jenis_p, this.options).subscribe(data => {
       let response = data.json();
-      if(response.status == true) {
-        this.products[i].bintang = response.data[0].jumlah_star;
+      if(response.status == 200) {
+        this.products[i].bintang = response.average;
         console.log("niiih bintang produk", this.products[i].bintang)
       }
       else
@@ -163,11 +166,12 @@ export class PemandutambahprodukPage {
     })
   }
 
-  getReviewJ(id_j: number, i: number, jenis_p: any = 'Barang') {
+  getReviewJ(id_j: number, i: number) {
+    let jenis_p: any = 'Jasa'
     this.http.get(this.userData.BASE_URL+'api/layanan/review/'+id_j+'/'+jenis_p, this.options).subscribe(data => {
       let response = data.json();
-      if(response.status == true) {
-        this.services[i].bintang = response.data[0].jumlah_star;
+      if(response.status == 200) {
+        this.services[i].bintang = response.average;
       }
       else
       this.services[i].bintang = 0;

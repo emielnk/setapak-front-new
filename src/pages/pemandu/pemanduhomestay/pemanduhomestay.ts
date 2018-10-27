@@ -47,7 +47,7 @@ export class PemanduhomestayPage {
       content: 'Tunggu sebentar...'
     });
     this.pemanduData.getPemanduId().then((id) => {
-      this,this.pemandu_id = id
+      this.pemandu_id = id
       loading.present();
       let inpuths = JSON.stringify({
         nama_hs: this.homestay.nama_hs,
