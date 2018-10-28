@@ -15,7 +15,14 @@
     </ion-refresher>
     <ion-card class="full-card">
       <ion-card-header>
-        <a class="textfont"><b>Informasi Barang</b></a>
+        <ion-col>
+          <a class="textfont"><b>Informasi Barang</b></a>
+        </ion-col>
+        <ion-col >
+          <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+            Edit
+          </button>
+        </ion-col>
       </ion-card-header>
       <ion-card-content>
         <ion-avatar item-start>
@@ -45,7 +52,14 @@
     &nbsp;
     <ion-card class="full-card">
       <ion-card-header>
-        <a class="textfont"><b>Jumlah</b></a>
+        <ion-col>
+          <a class="textfont"><b>Jumlah</b></a>
+        </ion-col>
+        <ion-col >
+          <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+            Edit
+          </button>
+        </ion-col>
       </ion-card-header>
       <ion-card-content>
         <ion-row>
@@ -132,7 +146,4 @@
       </ion-card-content>
     </ion-card> -->
     &nbsp;
-    <button ion-button icon-start block no-margin color="primary" (click)="touchEditHomestay()">
-        Edit Barang
-    </button>
 </ion-content>

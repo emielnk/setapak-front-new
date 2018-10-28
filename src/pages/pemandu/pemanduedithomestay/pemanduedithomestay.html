@@ -36,7 +36,7 @@
             <ion-label stacked color="primary" class="align-right">AC</ion-label>
           </ion-item>
           <ion-item>
-            <ion-select class="label-form" [(ngModel)]="new_fasilitas.wifi" name="ac" required  >
+            <ion-select class="label-form" [(ngModel)]="new_fasilitas.wifi" name="wifi" required  >
               <ion-option value="yes">Ada</ion-option>
               <ion-option value="no">Tidak Ada</ion-option>
             </ion-select>
@@ -44,15 +44,15 @@
           </ion-item>
           <ion-item>
             <ion-label class="label-form" color="primary">Jumlah Parkir</ion-label>
-            <ion-input class="label-form align-right" [(ngModel)]="new_fasilitas.parkir" name="parkir" type="number"  placeholder="{{fasilitas?.parkir_mobil}}" required></ion-input>
+            <ion-input class="label-form align-right" (ionChange)="transform($event)" [(ngModel)]="new_fasilitas.parkir" name="parkir" type="number" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label class="label-form" color="primary">Jumlah Kamar Mandi</ion-label>
-            <ion-input class="label-form align-right" type="number" [(ngModel)]="new_fasilitas.kamar_mandi" name="kamar_mandi"  placeholder="{{fasilitas?.kamar_mandi}}" required></ion-input>
+            <ion-input class="label-form align-right" type="number" (ionChange)="transform($event)" [(ngModel)]="new_fasilitas.kamar_mandi" name="kamar_mandi" required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label class="label-form" color="primary">JumlahKamar Tidur</ion-label>
-            <ion-input class="label-form align-right" type="number" [(ngModel)]="new_fasilitas.kamar_tidur" name="kamar_tidur"  placeholder="{{fasilitas?.kamar_tidur}}" required></ion-input>
+            <ion-label class="label-form" color="primary">Jumlah Kamar Tidur</ion-label>
+            <ion-input class="label-form align-right" type="number" (ionChange)="transform($event)" [(ngModel)]="new_fasilitas.kamar_tidur" name="kamar_tidur" required></ion-input>
           </ion-item>
           &nbsp;
           <button ion-button type="submit" (click)="saveUpdateFasilitas(editFasilitas)" block>Simpan</button>

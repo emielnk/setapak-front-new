@@ -86,7 +86,7 @@ export class PemandujasaPage {
         deskripsi: this.jasa.deskripsi,
         lokasi_wisata: this.jasa.lokasi_wisata,
         status_avail: 1,
-        photo: "this.jasa.photo"
+        photo: null
       });
       console.log("ini inputan", input);
       this.http.post(this.userData.BASE_URL+"api/pemandu/jasa/create",input,this.options).subscribe(data => {

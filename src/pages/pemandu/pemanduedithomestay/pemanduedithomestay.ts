@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 
 import { Http,Headers,RequestOptions } from '@angular/http';
 import { UserData } from '../../../providers/user-data';
@@ -45,7 +45,8 @@ export class PemanduedithomestayPage {
     public navParams: NavParams,
     public http: Http,
     public userData: UserData,
-    public loadCtrl: LoadingController
+    public loadCtrl: LoadingController,
+    public toastCtrl: ToastController
   ) {
     this.currenthomestay_id = navParams.data.homestay_id
     this.whatEdited = navParams.data.edit
@@ -140,20 +141,37 @@ export class PemanduedithomestayPage {
     }
   }
 
+  transform(event) {
+    this.new_fasilitas.kamar_mandi * 1;
+    this.new_fasilitas.parkir * 1;
+    this.new_fasilitas.kamar_tidur * 1;
+
+  }
+
   saveUpdateFasilitas(form: NgForm) {
     let loading = this.loadCtrl.create({
       content: 'Tunggu sebentar...'
     });
     loading.present();
     let newValue = JSON.stringify({
+      id_hs: this.currenthomestay_id,
       ac: this.new_fasilitas.ac,
       wifi: this.new_fasilitas.wifi,
       parkir_mobil: this.new_fasilitas.parkir,
       kamar_tidur: this.new_fasilitas.kamar_tidur,
       kamar_mandi: this.new_fasilitas.kamar_mandi
     })
-    console.log("inputan baru geeeeeeeeeeeeees", newValue);
-    loading.dismiss();
+    this.http.post(this.userData.BASE_URL+'api/pemandu/homestay/fasilitas/update',newValue,this.options).subscribe(data => {
+      console.log("inputan baru geeeeeeeeeeeeees", newValue);
+      let response = data.json();
+      if(response.success == true){
+        loading.dismiss();
+        this.showAlert("Sukses Update Informasi")
+        console.log("resnponse update f hs", response);
+      }
+    })
+    // loading.dismiss();
+    this.navCtrl.pop();
   }
 
   saveUpdateAlamat(from: NgForm) {
@@ -162,15 +180,20 @@ export class PemanduedithomestayPage {
     });
     loading.present();
     let newValueAlamatCat = JSON.stringify({
+      id_hs: this.currenthomestay_id,
       id: this.new_alamatcat.id,
-      // kecamatan: this.new_alamatcat.kecamatan
-    })
-    let newValueAlamat = JSON.stringify({
       alamat: this.new_alamathomestay.alamat,
     })
+    this.http.post(this.userData.BASE_URL+'api/pemandu/homestay/alamat/category/update',newValueAlamatCat,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.success == true){
+        loading.dismiss();
+        this.showAlert("Sukses Update Informasi")
+        console.log("resnponse update ac hs", response);
+        this.navCtrl.pop();
+      }
+    })
     console.log("alamat cat baruuuuu", newValueAlamatCat);
-    console.log("alamat baru", newValueAlamat);
-    loading.dismiss();
   }
 
   saveUpdateIdentitas(form: NgForm) {
@@ -178,8 +201,30 @@ export class PemanduedithomestayPage {
       content: 'Tunggu sebentar...'
     });
     loading.present();
-    console.log("wkwkwkwkwkwkwkwkw")
-    loading.dismiss(0);
+    let newValue = JSON.stringify({
+      id_hs: this.currenthomestay_id,
+      nama_hs: this.new_identitashomestay.nama_homestay,
+      harga: this.new_identitashomestay.harga_perhari,
+      deskripsi: this.new_identitashomestay.deskripsi
+    })
+    this.http.post(this.userData.BASE_URL+'api/pemandu/homestay/identitas/update',newValue,this.options).subscribe(data => {
+      let response = data.json();
+      if(response.success == true){
+        loading.dismiss();
+        this.showAlert("Sukses Update Informasi")
+        console.log(response);
+        this.navCtrl.pop();
+      }
+    })
+    // loading.dismiss(0);
+  }
+
+  showAlert(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000
+    });
+    toast.present();
   }
 
 }

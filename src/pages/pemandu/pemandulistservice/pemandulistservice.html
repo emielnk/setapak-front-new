@@ -1,26 +1,58 @@
 <ion-header>
+  <ion-navbar color="primary">
+    <ion-row>
+      <ion-col>
+        <ion-title>Detail Jasa</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+  
+  <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-card class="full-card">
+      <ion-card-header>
+        <ion-row>
+          <ion-col>
+            <a class="textfont"><b>Identitas Jasa</b></a>
+          </ion-col>
+          <ion-col >
+            <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+              Edit
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>  
+        <ion-avatar item-start>
+          <img class="smaller-img"*ngIf="!currentjasa?.mainphoto"  src="assets/imgs/logo/usericon.png">
+          <img class="smaller-img" *ngIf="currentjasa?.mainphoto" src="{{BASE_URL+currentjasa?.mainphoto}}">
+        </ion-avatar>
+        &nbsp;
+        <ion-row>
+          <ion-col>
+            <h2 class="textfont  align-left">{{currentjasa?.nama_jasa}}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <a class="smallfont">Harga</a>
+          </ion-col>
+          <ion-col>
+              <a class="textfont align-right">{{currentjasa?.harga_jasa | currency:'IDR ': true}}</a>
+          </ion-col>
+        </ion-row>
+          <ion-row>
+            <ion-col>
+                <a class="smallfont">Deskripsi Homestay</a>
+            </ion-col>
+            <ion-col>
+                <a class="textfont  align-right">{{currentjasa?.deskripsi}}</a>
+            </ion-col>
+          </ion-row>
+      </ion-card-content>
+    </ion-card>
 
-    <ion-navbar>
-      <ion-title>Jasa saya</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content padding>
-      <ion-card>
-        <img src="../../../assets/imgs/contoh-3.jpg"/>
-        <ion-card-content>
-          <ion-card-title>
-            Nine Inch Nails Live
-            </ion-card-title>
-          <p>
-            The most popular industrial group ever, and largely
-            responsible for bringing the music to a mass audience.
-          </p>
-          <button ion-button (click)="navEditServiceById()">
-            Edit
-          </button>
-        </ion-card-content>
-      </ion-card>
   </ion-content>
