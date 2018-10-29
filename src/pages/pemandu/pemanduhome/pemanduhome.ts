@@ -45,6 +45,7 @@ export class PemanduhomePage {
   pemesan_homestay: any = [];
   pemesan_nomor: any = [];
   start_tabs: any;
+  rekening: any;
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -135,6 +136,7 @@ export class PemanduhomePage {
             console.log(this.tanggal)
             this.profile_pemandu.created_at = this.tanggal;
             this.pemanduData.setPemanduStorage(response.data);
+            this.getRekeningPemandu(this.user_id);
             this.getTransaksiHomestay();
             this.getTransaksiJasa();
             this.getTransaksiProduk();
@@ -187,7 +189,16 @@ export class PemanduhomePage {
     })
   }
 
-
+  getRekeningPemandu(id: number) {
+    this.http.get(this.userData.BASE_URL+'api/pemandu/rekening/'+id, this.options).subscribe(data => {
+      let response = data.json();
+      console.log("ahahahah",response.data)
+      if(response.status == true) {
+        this.rekening = response.data[0];
+        console.log("rekeninggggg", this.rekening)
+      }
+    })
+  }
   
   getTransaksiJasa() {
     this.pemanduData.getPemanduId().then((id) => {
@@ -328,5 +339,22 @@ export class PemanduhomePage {
 
   navDetailTransJasa(id: number) {
     this.app.getRootNav().push('PemandupesananservicePage', {transaction_id: id});
+  }
+
+  editRekening(id: number) {
+    let alert = this.alertCtrl.create({
+      title: "Perhatian",
+      message: "Fitur ini masih dalam pengembangan",
+      buttons: [
+        {
+          text: 'Oke',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    })
+    alert.present()
   }
 }

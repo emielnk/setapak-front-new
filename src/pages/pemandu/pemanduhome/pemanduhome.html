@@ -32,23 +32,67 @@
         </button> 
       </ion-card>
 
-        <ion-col>
-          <ion-item>
-              <ion-avatar item-start>
-                  <img *ngIf="profile_pemandu?.photo" src="{{BASE_URL+profile_pemandu?.photo}}">
-                  <img *ngIf="!profile_pemandu?.photo" src="assets/imgs/logo/usericon.png">
-              </ion-avatar>
-              <h2>{{profile_pemandu?.nama_company}}</h2>
-              <p>Since: {{tanggal}}</p>
-              <p>{{profile_pemandu?.alamat}}</p>
-          </ion-item>
-        </ion-col>
-        <ion-card-content>
+      <ion-col>
+        <ion-item>
+          <ion-avatar item-start>
+            <img *ngIf="profile_pemandu?.photo" src="{{BASE_URL+profile_pemandu?.photo}}">
+            <img *ngIf="!profile_pemandu?.photo" src="assets/imgs/logo/usericon.png">
+          </ion-avatar>
+          <h2>{{profile_pemandu?.nama_company}}</h2>
+          <p>Since: {{tanggal}}</p>
+          <p>{{profile_pemandu?.alamat}}</p>
+        </ion-item>
+        <ion-item>
           <p>{{profile_pemandu?.deskripsi}}</p>
-        </ion-card-content>
+        </ion-item>
+      </ion-col>
+    </ion-card>
+    <ion-card class="full-card">
+      <ion-card-header>
+        <ion-row>
+          <ion-col>
+            <a class="textfont"><b>Rekening Anda</b></a>
+          </ion-col>
+          <ion-col >
+            <button ion-button small class="align-right" (click)="editRekening(profile_pemandu?.pemandu_id)">
+              Edit
+            </button>
+          </ion-col>
+            </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <ion-col>
+            <a class="smallfont">Bank</a>
+          </ion-col>
+          <ion-col>
+              <a class="textfont align-right">{{rekening?.bank}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a class="smallfont">No Rek</a>
+          </ion-col>
+          <ion-col>
+              <a class="textfont align-right">{{rekening?.no_rek}}</a>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <a class="smallfont">Nama</a>
+          </ion-col>
+          <ion-col>
+            <a class="textfont align-right">{{rekening?.nama_rek}}</a>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
     </ion-card>
   </div>
-  
+  <div>
+    <ion-card>
+
+    </ion-card>
+  </div>  
   <div>
     <ion-card class="full-card" >
       <ion-row>

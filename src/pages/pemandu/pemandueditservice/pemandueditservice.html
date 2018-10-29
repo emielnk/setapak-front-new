@@ -6,13 +6,37 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>pemandueditservice</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Edit Jasa Anda</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-card class="full-card">
+    <ion-card-header>
+      Masukkan Informasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editIdentitas="ngForm">
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-form" color="primary">Nama Jasa</ion-label>
+            <ion-input [(ngModel)]="new_identitas.nama" class="label-form align-right"  name="nama" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" color="primary">Harga</ion-label>
+            <ion-input  [(ngModel)]="new_identitas.harga" class="label-form align-right" type="number"  name="harga" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="label-form" color="primary">Deskripsi</ion-label>
+            <ion-input [(ngModel)]="new_identitas.deskripsi" class="label-form align-right" type="text" name="deskripsi" required></ion-input>
+          </ion-item>
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateIdentitas(editIdentitas)" block>Simpan</button>
+        </ion-list>
+          </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

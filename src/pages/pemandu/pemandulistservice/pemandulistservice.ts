@@ -60,7 +60,7 @@ export class PemandulistservicePage {
         this.fasilitas_id = this.currentjasa.fasilitas_id;
         this.getAlamatDetail(this.alamat_id);
         this.getFasilitasDetail(this.currentjasa_id);
-        // console.log("ini data detailnya", this.currenthomestay);
+        console.log("ini data detailnya", this.currentjasa);
       }
     })
   }
@@ -77,10 +77,48 @@ export class PemandulistservicePage {
   getFasilitasDetail(id: number) {
     this.http.get(this.userData.BASE_URL+'api/jasa/fasilitas/'+id, this.options).subscribe(data => {
       let response = data.json();
-      this.fasilitas = response.data[0];
+      this.fasilitas = response.data;
       // console.log(response);
       console.log("fasilitassssss",this.fasilitas);
     })
+  }
+
+  editFasilitasJasa(id: number) {
+    let alert = this.alertCtrl.create({
+      title: "Perhatian",
+      message: "Fitur ini masih dalam pengembangan",
+      buttons: [
+        {
+          text: 'Oke',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    })
+    alert.present()
+  }
+
+  editIdentitasJasa(id: number) {
+    this.navCtrl.push('PemandueditservicePage', {id: id});
+  }
+
+  editMeetPoint() {
+    let alert = this.alertCtrl.create({
+      title: "Perhatian",
+      message: "Fitur ini masih dalam pengembangan",
+      buttons: [
+        {
+          text: 'Oke',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    })
+    alert.present()
   }
 
 }

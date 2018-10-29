@@ -8,11 +8,6 @@
 
   <ion-navbar color="primary">
     <ion-title>Edit Fasilitas Homestay</ion-title>
-    <!-- <ion-buttons end>
-      <button ion-button icon-only color="white" (click)="saveUpdate(editFasilitas)">
-        <ion-icon name="checkmark"></ion-icon>
-      </button>
-    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -27,8 +22,6 @@
       <form #editFasilitas="ngForm">
         <ion-list>
           <ion-item>
-            <!-- <ion-checkbox  [(ngModel)]="new_fasilitas.ac" name="ac" checked="true"  required></ion-checkbox> -->
-            <!-- <ion-checkbox  [(ngModel)]="new_fasilitas.ac" name="ac" checked="false"  required></ion-checkbox> -->
             <ion-select class="label-form" [(ngModel)]="new_fasilitas.ac" name="ac" required  >
               <ion-option value="yes">Ada</ion-option>
               <ion-option value="no">Tidak Ada</ion-option>

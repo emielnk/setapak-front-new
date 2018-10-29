@@ -18,43 +18,40 @@
 
 
 <ion-content>
+    <div padding-top text-center>
+      <div class="pemanduPohot">
+          <img class="profpic" src="assets/imgs/logo/usericon.png"  (click)="updatePicture()" >
+          <!-- <img class="profpic" [src]="user?.userphoto" (click)="updatePicture()"  *ngIf="tempProfPict"> -->
+        <h6 (click)="updatePicture()">Ubah foto profile</h6>          
+      </div> 
+   </div>
     <ion-card class="full-card">
         <ion-card-header>
           Edit Profile Anda
         </ion-card-header>
         <ion-card-content>
           <form #saveEdit="ngForm">
-              <ion-list no-lines padding-right>
+              <ion-list no-lines>
                 <ion-item>
                   <ion-label stacked color="primary">Nama Perusahaan</ion-label>
-                  <ion-input placeholder="{{nama_company}}" name="nama" type="text" disabled="true">
+                  <ion-input [(ngModel)]="new_profile.nama_company" name="nama_company" type="text" required>
                   </ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label stacked color="primary">Nomor Telepon</ion-label>
-                  <ion-input placeholder="{{no_telp}}" [(ngModel)]="phoneNumber" name="telepon" type="tel" pattern="[0]{1}[0-9]{9}[0-9]{1,}" maxlength="15" required>
+                  <ion-input [(ngModel)]="new_profile.nomor_telepon" name="nomor_telepon" type="tel" #nomor_telepon="ngModel" pattern="[0]{1}[0-9]{9}[0-9]{1,}" maxlength="15" required>
                   </ion-input>
                 </ion-item> 
                 <ion-item> 
                   <ion-label stacked color="primary">Alamat Perusahaan</ion-label>
-                  <ion-textarea placeholder="{{alamat}}" name="nama" type="text" required>
+                  <ion-textarea [(ngModel)]="new_profile.alamat" name="alamat" type="text" required>
                   </ion-textarea>
                 </ion-item>
                 <ion-item> 
                   <ion-label stacked color="primary">Deskripsi Perusahaan</ion-label>
-                    <ion-textarea placeholder="{{deskripsi}}" name="nama" type="text" required>
+                    <ion-textarea [(ngModel)] = "new_profile.deskripsi" name="deskripsi" type="text" required>
                     </ion-textarea>
-                </ion-item>
-                <div>
-                  <ion-item>
-                    <ion-label stacked color="primary">Pilih Foto</ion-label>
-                  </ion-item>
-                  
-                  <ion-item>
-                    <p>lokasi/file/photo.jpg</p>
-                    <button ion-button color="secondary" (click)="getImage()" disabled>Get Image</button>
-                  </ion-item>
-                </div>        
+                </ion-item>      
               </ion-list>
               <!-- <div padding>
                 <button ion-button block type="submit" (click)="onSignup(signupForm)" block>Simpan</button>

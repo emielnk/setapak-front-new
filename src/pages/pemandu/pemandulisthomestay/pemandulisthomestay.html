@@ -155,15 +155,17 @@
               <a class ="smallfont" color="primary">AC</a>
           </ion-col>
           <ion-col>
-              <a class="textfont  align-right">{{fasilitas?.ac}}</a>
+              <a *ngIf="fasilitas?.ac == null" class="textfont  align-right">Belum anda isi</a>
+              <a  *ngIf="!(fasilitas?.ac == null)" class="textfont  align-right">{{fasilitas?.ac}}</a>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <a class ="smallfont" color="primary">Wifi</a>
+            <a class  ="smallfont" color="primary">Wifi</a>
           </ion-col>
           <ion-col> 
-            <a class="textfont  align-right">{{fasilitas?.wifi}}</a> 
+              <a *ngIf="fasilitas?.wifi == null" class="textfont  align-right" danger>Belum anda isi</a>
+            <a *ngIf="!(fasilitas?.wifi == null)" class="textfont  align-right">{{fasilitas?.wifi}}</a> 
           </ion-col>
         </ion-row>
         <ion-row>
@@ -171,7 +173,8 @@
             <a class ="smallfont" color="primary">Parkir</a>
           </ion-col>
           <ion-col> 
-            <a class="textfont  align-right">{{fasilitas?.parkir_mobil}}</a>
+            <a *ngIf="fasilitas?.parkir_mobil == null" class="textfont  align-right">Belum anda isi</a>
+            <a *ngIf="!(fasilitas?.parkir_mobil == null)" class="textfont  align-right">{{fasilitas?.parkir_mobil}}</a>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -179,15 +182,17 @@
             <a class ="smallfont " color="primary">Kamar Tidur</a>
           </ion-col>
           <ion-col>
-            <a class="textfont  align-right">{{fasilitas?.kamar_tidur}}</a>
+            <a *ngIf="fasilitas?.kamar_tidur == null" class="textfont  align-right">Belum anda isi</a>
+            <a *ngIf="!(fasilitas?.kamar_tidur == null)" class="textfont  align-right">{{fasilitas?.kamar_tidur}}</a>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-              <a class ="smallfont" color="primary">Kamar Mandi</a> 
+              <a  class ="smallfont" color="primary">Kamar Mandi</a> 
           </ion-col>
           <ion-col>
-              <a class="textfont  align-right">{{fasilitas?.kamar_mandi}}</a> 
+              <a *ngIf="fasilitas?.kamar_mandi == null" class="textfont  align-right">Belum anda isi</a> 
+              <a *ngIf="!(fasilitas?.kamar_mandi == null)" class="textfont  align-right">{{fasilitas?.kamar_mandi}}</a> 
           </ion-col>
         </ion-row>
       </ion-card-content>

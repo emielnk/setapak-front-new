@@ -19,7 +19,7 @@
             <a class="textfont"><b>Identitas Jasa</b></a>
           </ion-col>
           <ion-col >
-            <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+            <button ion-button small class="align-right" (click)="editIdentitasJasa(currentjasa?.jasa_id)">
               Edit
             </button>
           </ion-col>
@@ -54,5 +54,84 @@
           </ion-row>
       </ion-card-content>
     </ion-card>
-
+    &nbsp;
+    <ion-card class="full-card">
+        <ion-card-header>
+          <ion-row>
+            <ion-col>
+              <a class="textfont"><b>Fasilitas</b></a>
+            </ion-col>
+            <ion-col>
+              <button ion-button small class="align-right" (click)="editFasilitasJasa(currentjasa?.jasa_id)">
+                Edit
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+                <a class ="smallfont" color="primary">AC</a>
+            </ion-col>
+            <ion-col>
+                <a *ngIf="fasilitas?.makan == null" class="textfont  align-right">Belum anda isi</a>
+                <a  *ngIf="!(fasilitas?.makan == null)" class="textfont  align-right">{{fasilitas?.makan}}</a>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <a class  ="smallfont" color="primary">Wifi</a>
+            </ion-col>
+            <ion-col> 
+                <a *ngIf="fasilitas?.p3k == null" class="textfont  align-right" danger>Belum anda isi</a>
+              <a *ngIf="!(fasilitas?.p3k == null)" class="textfont  align-right">{{fasilitas?.p3k}}</a> 
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <a class ="smallfont" color="primary">Parkir</a>
+            </ion-col>
+            <ion-col> 
+              <a *ngIf="fasilitas?.kendaraan == null" class="textfont  align-right">Belum anda isi</a>
+              <a *ngIf="!(fasilitas?.kendaraan == null)" class="textfont  align-right">{{fasilitas?.kendaraan}}</a>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <a class ="smallfont " color="primary">Kamar Tidur</a>
+            </ion-col>
+            <ion-col>
+              <a *ngIf="fasilitas?.homestay == null" class="textfont  align-right">Belum anda isi</a>
+              <a *ngIf="!(fasilitas?.homestay == null)" class="textfont  align-right">{{fasilitas?.homestay}}</a>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <a  class ="smallfont" color="primary">Kamar Mandi</a> 
+            </ion-col>
+            <ion-col>
+                <a *ngIf="fasilitas?.tiket_wahana == null" class="textfont  align-right">Belum anda isi</a> 
+                <a *ngIf="!(fasilitas?.tiket_wahana == null)" class="textfont  align-right">{{fasilitas?.tiket_wahana}}</a> 
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      &nbsp;
+      <ion-card class="full-card">
+          <ion-card-header>
+            <ion-row>
+              <ion-col>
+                <a class="textfont"><b>Meet Point</b></a>
+              </ion-col>
+              <ion-col>
+                <button ion-button small class="align-right" (click)="editMeetPoint()">
+                  Edit
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+          <ion-card-content>
+            <img src="https://images.mentalfloss.com/sites/default/files/styles/mf_image_16x9/public/traffic_primary.jpg?itok=6hVRNcu_&resize=1100x1100">
+          </ion-card-content>
+        </ion-card>
   </ion-content>

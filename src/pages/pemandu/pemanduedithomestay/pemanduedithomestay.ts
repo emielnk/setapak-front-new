@@ -71,12 +71,12 @@ export class PemanduedithomestayPage {
 
   setFirstEnterPage(edited: string) {
     if(edited == "fasilitas") {
-      this.new_fasilitas.ac = this.fasilitas.ac;
-      this.new_fasilitas.wifi = this.fasilitas.wifi;
-      this.new_fasilitas.parkir = this.fasilitas.parkir_mobil;
-      this.new_fasilitas.kamar_mandi = this.fasilitas.kamar_mandi;
-      this.new_fasilitas.kamar_tidur = this.fasilitas.kamar_tidur;
-      console.log("fasilitas object", this.new_fasilitas);
+        this.new_fasilitas.ac = this.fasilitas.ac;
+        this.new_fasilitas.wifi = this.fasilitas.wifi;
+        this.new_fasilitas.parkir = this.fasilitas.parkir_mobil;
+        this.new_fasilitas.kamar_mandi = this.fasilitas.kamar_mandi;
+        this.new_fasilitas.kamar_tidur = this.fasilitas.kamar_tidur;
+        console.log("fasilitas object", this.new_fasilitas);
     }
     if(edited == "alamat") {
       this.new_alamatcat.id = this.alamat_id;
@@ -103,7 +103,11 @@ export class PemanduedithomestayPage {
           this.fasilitas = response.data[0];
         }
         else {
-          this.fasilitas = null;
+          this.fasilitas.ac = null;
+          this.fasilitas.wifi = null;
+          this.fasilitas.parkir_mobil = null;
+          this.fasilitas.kamar_mandi = null;
+          this.fasilitas.kamar_tidur = null;
         }
         // console.log(response);
         console.log("fasilitas",this.fasilitas);

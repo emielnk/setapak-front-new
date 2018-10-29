@@ -1,3 +1,108 @@
 page-pemandueditservice {
+    .full-card{
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 1px solid #f1f2f6;   
+    }
 
+    .profpic{
+        width: 100% !important;  
+        height : 100% !important;  
+        max-width: 75px !important;  //any size
+        max-height: 75px !important; //any size 
+        border-radius: 50% !important;
+        //box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+    }
+    .headerprofile{
+        margin-top: 20px;
+    }
+    .full-card-homenamecard-padding-left{
+        margin: 0px !important;    
+        width: 100% !important;
+        background-color: white;
+        border-radius: 0px !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+        border-bottom: 2px solid #f1f2f6;
+        padding-left:11px !important;
+    }
+    .full-card-info{
+        margin: 0px auto !important;    
+        width: 100% !important;
+        border-radius: 0px !important;           
+
+    }
+    .button-history{
+        margin :7.5px 0 !important;
+        top: 0px;
+        right: -52px;
+    }
+    .logosegment{        
+        width: 25%;
+    }
+    .buttoncenter{
+        text-align: center;
+    }
+    h6,h5{
+       color:#488aff !important;
+    }
+    .namaprofile{
+        color: #488aff!important;
+    }
+    .textfont{
+        color: #488aff!important;
+    }
+    .smallfont{
+        color: #000!important;
+        font-size: 12px;
+    }
+    .positionbottomright{        
+       margin: 0 auto;
+    }
+    .nopaddingbottom{
+        padding-bottom: 0 !important;
+    }
+    .paddingtoptoolbar{
+        padding-top:5px;;
+    }
+    .fontsizesmall{
+        font-size :10px;          
+    }
+    .notif-badge{
+        background-color: red;
+        position: absolute;
+        top: 2px;
+        right: 7px;
+        border-radius: 100%;
+    }
+    .button-add-new{
+        top:-8px;
+        right: -100px;
+    }
+    .align-right {
+        float: right;
+    }
+    .align-left {
+        float: left;
+    }
+    .smaller-img {
+        max-width: 100%;
+        max-height: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .centerlogobutton {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+    }
+    .label-form {
+        font-size: 13px;
+    }
 }
