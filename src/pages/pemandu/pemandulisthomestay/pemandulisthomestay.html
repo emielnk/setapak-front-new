@@ -35,8 +35,9 @@
       <ion-card-content>
         <ion-avatar item-start>
           <img class="smaller-img"*ngIf="!currenthomestay?.mainphoto"  src="assets/imgs/logo/usericon.png">
-          <img class="smaller-img" *ngIf="currenthomestay?.mainphoto" src="{{BASE_URL+curenthomestay?.mainphoto}}">
+          <img class="smaller-img" *ngIf="currenthomestay?.mainphoto" src="{{BASE_URL+currenthomestay?.mainphoto}}">
         </ion-avatar>
+        <h6 class="aligncenter" (click)="updatePicture()">Ubah foto Homestay</h6> 
         &nbsp;
         <ion-row>
           <ion-col>

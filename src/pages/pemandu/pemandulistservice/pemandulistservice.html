@@ -30,6 +30,7 @@
           <img class="smaller-img"*ngIf="!currentjasa?.mainphoto"  src="assets/imgs/logo/usericon.png">
           <img class="smaller-img" *ngIf="currentjasa?.mainphoto" src="{{BASE_URL+currentjasa?.mainphoto}}">
         </ion-avatar>
+        <h6 class="aligncenter" (click)="updatePicture()">Ubah foto jasa</h6>
         &nbsp;
         <ion-row>
           <ion-col>

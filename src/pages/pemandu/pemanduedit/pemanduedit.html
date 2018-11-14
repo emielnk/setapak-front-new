@@ -19,9 +19,9 @@
 
 <ion-content>
     <div padding-top text-center>
-      <div class="pemanduPohot">
-          <img class="profpic" src="assets/imgs/logo/usericon.png"  (click)="updatePicture()" >
-          <!-- <img class="profpic" [src]="user?.userphoto" (click)="updatePicture()"  *ngIf="tempProfPict"> -->
+      <div class="pemanduPhoto">
+          <img *ngIf="!photo_pemandu" class="profpic" src="assets/imgs/logo/usericon.png"  (click)="updatePicture()" >
+          <img *ngIf="photo_pemandu" class="profpic" src="{{BASE_URL+photo_pemandu}}" (click)="updatePicture()">
         <h6 (click)="updatePicture()">Ubah foto profile</h6>          
       </div> 
    </div>

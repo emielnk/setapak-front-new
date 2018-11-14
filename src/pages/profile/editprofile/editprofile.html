@@ -28,7 +28,7 @@
          <div class="profilePict">
             
             <img class="profpic" src="assets/imgs/logo/usericon.png"  (click)="updatePicture()"  *ngIf="!tempProfPict">
-            <img class="profpic" [src]="user?.userphoto" (click)="updatePicture()"  *ngIf="tempProfPict">
+            <img class="profpic" [src]="user?.photo" (click)="updatePicture()"  *ngIf="tempProfPict">
           <h6 (click)="updatePicture()">Ubah foto profile</h6>          
 
         </div> 

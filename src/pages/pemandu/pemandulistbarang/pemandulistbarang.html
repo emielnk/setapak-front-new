@@ -19,7 +19,7 @@
           <a class="textfont"><b>Informasi Barang</b></a>
         </ion-col>
         <ion-col >
-          <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+          <button ion-button small class="align-right" (click)="editIdentitasB(currentbarang?.barang_id)">
             Edit
           </button>
         </ion-col>
@@ -29,6 +29,7 @@
           <img class="smaller-img" *ngIf="!currentbarang?.mainphoto"  src="assets/imgs/logo/usericon.png">
           <img class="smaller-img" *ngIf="currentbarang?.mainphoto" src="{{BASE_URL+currentbarang?.mainphoto}}">
         </ion-avatar>
+        <h6 class="aligncenter" (click)="updatePicture()">Ubah foto barang</h6>
         &nbsp;
         <a class="textfont">{{currentbarang?.nama_barang}}</a>
         <ion-row>
@@ -56,7 +57,7 @@
           <a class="textfont"><b>Jumlah</b></a>
         </ion-col>
         <ion-col >
-          <button ion-button small class="align-right" (click)="editIdentitasJ(currentjasaa?.jasa_id)">
+          <button ion-button small class="align-right" (click)="editJumlahB(currentbarang?.barang_id)">
             Edit
           </button>
         </ion-col>

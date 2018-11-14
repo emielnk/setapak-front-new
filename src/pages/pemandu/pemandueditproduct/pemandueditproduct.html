@@ -6,13 +6,84 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>pemandueditproduct</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Edit Produk Anda</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  
+<ion-content>
+  <ion-card *ngIf="edited == 'identitas'" class="full-card">
+    <ion-card-header>
+      Masukkan Iformasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editIdentitas>
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Nama Barang</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitasbarang.nama_barang" name="nama_barang" type="text" #nama_barang="ngModel" maxlength="50" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="nama_barang.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+            </p>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Harga</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitasbarang.harga" name="harga" #harga="ngModel" type="number" min="0" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="harga.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+            </p>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Deskripsi</ion-label>
+            <ion-input class="label-form input-text" [(ngModel)]="new_identitasbarang.deskripsi" name="deskripsi" #deskripsi="ngModel" type="text" maxlength="100" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="deskripsi.valid || submitted == false" color="danger" padding-left>
+            Deskripsi harus diisi, maksimal 100 karakter
+          </p>
+          <!-- <span *ngIf="deskripsi.errors">
+            <span [hidden]="!name.errors.required">
+                <ion-label style="color: red; margin-left: 16px;"> wajib diisi </ion-label>
+            </span>
+          </span> -->
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateIdentitas(editIdentitas)" block>Simpan</button>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="edited == 'jumlah'" class="full-card">
+    <ion-card-header>
+      Masukkan Iformasi Baru
+    </ion-card-header>
+    <ion-card-content>
+      <form #editJumlah>
+        <ion-list>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Berat Item (gram)</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitasbarang.berat" name="berat" type="number" #berat="ngModel"  required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="berat.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+            </p>
+          <ion-item>
+            <ion-label class="label-form" stacked color="primary">Harga</ion-label>
+            <ion-input class="label-form" [(ngModel)]="new_identitasbarang.kuantitas" name="kuantitas" #kuantitas="ngModel" type="number" min="0" required></ion-input>
+          </ion-item>
+          <p ion-text [hidden]="kuantitas.valid || submitted == false" color="danger" padding-left>
+              Deskripsi harus diisi
+          </p>
+          <!-- <span *ngIf="deskripsi.errors">
+            <span [hidden]="!name.errors.required">
+                <ion-label style="color: red; margin-left: 16px;"> wajib diisi </ion-label>
+            </span>
+          </span> -->
+          &nbsp;
+          <button ion-button type="submit" (click)="saveUpdateJumlah(editJumlah)" block>Simpan</button>
+        </ion-list>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
