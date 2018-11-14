@@ -21,6 +21,7 @@ export class PemandulistservicePage {
   headers = new Headers({ 
     'Content-Type': 'application/json'});
   options = new RequestOptions({ headers: this.headers});
+  BASE_URL: 'http://setapakbogor.site/'
   
   user_id: number;
   pemandu_id: number;
